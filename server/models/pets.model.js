@@ -1,36 +1,37 @@
 const { Schema, model } = require("mongoose");
 
-const clientSchema = new Schema({
-  firstName: {
+const petSchema = new Schema({
+  name: {
     type: String,
     required: true,
   },
-  lastName: {
+  type: {
     type: String,
     required: true,
   },
-  email: {
+  age: {
+    type: Number,
+    required: true,
+  },
+  weight: {
+    type: Number,
+    required: true,
+  },
+  species: {
     type: String,
     required: true,
   },
-  password: {
-    type: String,
-    required: true,
-  },
-  pets: {
+  previousMedicalHistory: {
     type: [String],
     required: true,
   },
-  prescriptions: {
-    type: [String],
-    required: true,
-  },
-  appointments: {
-    type: [String],
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: "Client",
     required: true,
   },
 });
 
-const Client = model("Client", clientSchema);
+const Pet = model("Pet", petSchema);
 
-module.exports = Client;
+module.exports = Pet;
