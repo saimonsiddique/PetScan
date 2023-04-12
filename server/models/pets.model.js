@@ -17,6 +17,10 @@ const petSchema = new Schema({
     type: String,
     required: true,
   },
+  neutered: {
+    type: Boolean,
+    required: true,
+  },
   previousMedicalHistory: {
     type: [String],
     required: true,
