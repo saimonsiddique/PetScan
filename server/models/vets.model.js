@@ -25,6 +25,9 @@ const vetSchema = new Schema({
     type: [String],
     required: true,
   },
+  appointments: {
+    type: [String],
+  },
 });
 
 const Vet = model("Vet", vetSchema);

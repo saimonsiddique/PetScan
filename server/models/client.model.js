@@ -18,7 +18,8 @@ const clientSchema = new Schema({
     required: true,
   },
   pets: {
-    type: [String],
+    type: Schema.Types.ObjectId,
+    ref: "Pet",
     required: true,
   },
   prescriptions: {
@@ -27,7 +28,6 @@ const clientSchema = new Schema({
   },
   appointments: {
     type: [String],
-    required: true,
   },
 });
 

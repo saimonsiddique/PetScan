@@ -1,0 +1,39 @@
+.pet-container {
+  border: 2px solid red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../../../public/PetInfo/pet-info-dog.jpg");
+  background-repeat: no-repeat;
+  background-size: 30% 80%;
+  background-position: top left;
+  margin-top: 0;
+}
+
+.pet-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40vw;
+  height: 80vh;
+  margin: 3rem 0;
+  padding: 2rem 0rem 2rem 0rem;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.pet-form {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.submit-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem 0;
+}

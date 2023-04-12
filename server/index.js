@@ -17,7 +17,7 @@ app.use(router);
 (async () => {
   try {
     await mongoose.connect(URI).then(() => {
-      console.log(`🦆 Database (JWT) connected @ port ${DB_PORT}!`);
+      console.log(`🦆 Database connected @ port ${DB_PORT}!`);
     });
     app.listen(PORT, () => {
       console.log(`🚀 Server running on port http://localhost:${PORT}`);

@@ -1,0 +1,77 @@
+.vet-container {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  padding: 0rem 1rem 0rem 0rem;
+  height: 100vh;
+  background-color: #ffffff;
+  background-image: url("../../../assets/signup/signupvet-bg.jpg");
+  background-size: 70% 100%;
+  background-repeat: no-repeat;
+  background-position: right;
+  margin: 0;
+}
+
+.logo {
+  width: 100px;
+  height: 100px;
+  margin: 0 12px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.signup-form {
+  border: 2px solid white;
+  padding: 1rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+  height: 100vh;
+  background-color: #ffffff;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.vet-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  border-bottom: 1rem;
+}
+
+.vet-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 0.3rem;
+  padding: 0;
+}
+
+.vet-header a {
+  text-decoration: none;
+}
+
+.auth-account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem 0;
+  background-color: #ffffff;
+}
+
+.auth-account span {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #000000;
+  margin-bottom: 0.3rem;
+  padding: 0;
+}
+
+.form {
+  display: flex;
+  padding: 1rem;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+}
