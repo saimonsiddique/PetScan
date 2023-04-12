@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const authClient = {};
 
 authClient.signUp = async (req, res) => {
+  console.log("req.body", req.body);
   const { firstName, lastName, email, password } = req.body;
   if (!firstName || !lastName || !email || !password) {
     return res.status(400).json({ msg: "Please enter all fields" });
@@ -28,10 +29,17 @@ authClient.signUp = async (req, res) => {
     password: hash,
   });
   try {
+    console.log("newClient", newClient);
     const savedClient = await newClient.save();
-    res.status(201).send({
+    const sendData = {
+      id: savedClient._id,
+      firstName: savedClient.firstName,
+      lastName: savedClient.lastName,
+      email: savedClient.email,
       accessToken: generateToken(savedClient),
-    });
+    };
+    console.log("sendData", sendData);
+    res.status(201).send(sendData);
   } catch (err) {
     res.status(400).json({ err });
   }

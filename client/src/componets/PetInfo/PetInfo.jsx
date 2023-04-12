@@ -32,6 +32,7 @@ const petSpecies = ["Dog", "Cat", "Bird", "Fish", "Farm Animal", "Other"];
 const PetInfo = () => {
   const [state, setState] = useState(initialState);
   const [prevMed, setPrevMed] = useState(false);
+  const [neutered, setNeutered] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -50,7 +51,12 @@ const PetInfo = () => {
     <>
       <section className="pet-container">
         <div className="pet-info">
-          <h1>Pet Info</h1>
+          <h3>Tell us about your pet</h3>
+          <p>
+            We are all present for that reason, after all. We want to meet your
+            pet.
+          </p>
+
           <div className="pet-form">
             <Box
               component="form"
@@ -170,13 +176,17 @@ const PetInfo = () => {
               noValidate
             >
               <Button
-                variant="outlined"
+                value={neutered}
+                onClick={() => setNeutered(true)}
+                variant={neutered ? "contained" : "outlined"}
                 style={{ width: "1ch", marginTop: "1rem", marginLeft: "1rem" }}
               >
                 Yes
               </Button>
               <Button
-                variant="outlined"
+                value={neutered}
+                onClick={() => setNeutered(false)}
+                variant={neutered ? "outlined" : "contained"}
                 style={{
                   width: "1ch",
                   marginTop: "1rem",

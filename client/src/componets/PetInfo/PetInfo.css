@@ -4,6 +4,8 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
+  overflow-y: scroll;
   background-image: url("../../../public/PetInfo/pet-info-dog.jpg");
   background-repeat: no-repeat;
   background-size: 30% 80%;
@@ -26,6 +28,22 @@
   background-size: 15%;
   border-radius: 10px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.pet-info h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #161e2e;
+  margin-bottom: 0.3rem;
+  padding: 0;
+}
+
+.pet-info p {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #6b7280;
+  margin: 0;
+  padding: 0;
 }
 
 .pet-form {

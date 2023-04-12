@@ -4,6 +4,7 @@ const BASE_URL = "http://localhost:3001";
 const apiClient = {};
 
 apiClient.signup = async (user) => {
+  console.log("user", user);
   try {
     const response = await axios.post(`${BASE_URL}/signup`, user);
     return response.data;

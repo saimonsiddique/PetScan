@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Stack, Button, Box, Divider, TextField } from "@mui/material";
 import { InputAdornment, IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -18,7 +18,7 @@ const initialState = {
 };
 
 const SignUp = () => {
-  // let navigate = useNavigate();
+  let navigate = useNavigate();
   const [state, setState] = useState(initialState);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -44,16 +44,18 @@ const SignUp = () => {
       email,
       password,
     };
-
     // send the user data to the server
     try {
-      const response = await apiClient.createUser(newUser);
+      const response = await apiClient.signup(newUser);
       console.log("response", response);
+      // extract the token from the response
+      const { accessToken } = response;
       // save the token in the local storage
-      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("accessToken", accessToken);
 
-      // navigate to the login page
-      // navigate("/welcome");
+      console.log("Now you can navigate to the pet info page");
+      // redirect the user to the pet info page
+      navigate("/petinfo");
     } catch (error) {
       console.log(error);
     }
