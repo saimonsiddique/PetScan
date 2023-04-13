@@ -29,7 +29,6 @@ authClient.signUp = async (req, res) => {
     password: hash,
   });
   try {
-    console.log("newClient", newClient);
     const savedClient = await newClient.save();
     const sendData = {
       id: savedClient._id,
@@ -38,7 +37,6 @@ authClient.signUp = async (req, res) => {
       email: savedClient.email,
       accessToken: generateToken(savedClient),
     };
-    console.log("sendData", sendData);
     res.status(201).send(sendData);
   } catch (err) {
     res.status(400).json({ err });
