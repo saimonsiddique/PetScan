@@ -1,0 +1,80 @@
+.parent-profile {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  overflow: hidden;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.sidebar {
+  width: 20%;
+  height: 100%;
+  position: relative;
+  color: white;
+  overflow: hidden;
+  background-color: #42389d;
+  padding: 20px;
+}
+
+.side-logo-parent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  max-width: 25%;
+  border-radius: 10px;
+}
+
+.main-content {
+  width: 80%;
+  height: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+  background-color: #f5f5f5;
+}
+
+.profile-dashboard {
+  display: flex;
+  /* border: 2px solid red; */
+  flex-direction: column;
+  width: 95%;
+  height: 100vh;
+  margin: 1.5rem 1.5rem 0rem 2rem;
+}
+
+.appointment {
+  display: flex;
+  flex-direction: row;
+  width: 60%;
+  /* border: 2px solid green; */
+  margin: 2rem 1.5rem 0rem 2rem;
+}
+
+.my-pets {
+  display: flex;
+  flex-direction: column;
+  /* border: 2px solid green; */
+  margin: 2rem 1.5rem 0rem 2rem;
+}
+
+.pet-card {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 0.5rem 0rem;
+}
+
+.appointment-lists {
+  display: flex;
+  flex-direction: column;
+  /* border: 2px solid green; */
+  margin: 2rem 1.5rem 0rem 2rem;
+}
+
+.appointment-cards {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 0.5rem 0rem;
+}
