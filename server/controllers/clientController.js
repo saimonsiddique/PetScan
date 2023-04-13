@@ -63,7 +63,7 @@ authClient.signIn = async (req, res) => {
     }
     // Create token
     const accessToken = generateToken(client);
-    res.status(200).send({ accessToken });
+    res.status(200).send({ accessToken, user: "petParent" });
   } catch (error) {
     res.status(401).send({ error: "Invalid credentials" });
   }

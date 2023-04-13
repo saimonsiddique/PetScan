@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import apiService from "../../ApiServices/ApiService";
 import {
   Stack,
   Button,
@@ -13,7 +15,6 @@ import {
   Checkbox,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import apiService from "../../ApiServices/ApiService";
 import userWithPet from "../../assets/signup/user-with-pet.svg";
 import "./SignIn.css";
 
@@ -23,6 +24,7 @@ const initialState = {
 };
 
 const SignIn = () => {
+  const navigate = useNavigate();
   const [state, setState] = useState(initialState);
   const [checked, setChecked] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -60,6 +62,18 @@ const SignIn = () => {
       alert(`${res.msg}`);
       setState(initialState);
     } else {
+      // save the token in the local storage
+      localStorage.setItem("accessToken", response.accessToken);
+      // redirect to the profile page upon successful login
+
+      //check if the user is a pet parent or a vet
+      if (response.user === "petParent") {
+        // redirect to the pet parent profile page
+        navigate("/me/profile");
+      } else {
+        // redirect to the vet profile page
+        navigate("/vet/profile");
+      }
     }
   };
 

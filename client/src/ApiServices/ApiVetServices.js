@@ -30,6 +30,8 @@ apiVet.profile = async (token) => {
       });
   } catch (error) {
     const { data } = error.response;
-    return data.msg.json();
+    return data.msg;
   }
 };
+
+export default apiVet;

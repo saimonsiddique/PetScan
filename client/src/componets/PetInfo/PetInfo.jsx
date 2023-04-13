@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import apiClient from "../../ApiServices/ApiClientService";
 import {
   Box,
   TextField,
@@ -45,6 +46,43 @@ const PetInfo = () => {
 
   const handleCheckbox = (e) => {
     setPrevMed(!prevMed);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const {
+      petName,
+      petSpecies,
+      petAge,
+      ageUnit,
+      petWeight,
+      weightUnit,
+      petGender,
+      neutered,
+      previousMedicalHistory,
+      petPhoto,
+    } = state;
+
+    const newPet = {
+      petName,
+      petWeight,
+      weightUnit,
+      petAge,
+      ageUnit,
+      petSpecies,
+      petGender,
+      neutered,
+      previousMedicalHistory,
+      petPhoto,
+    };
+
+    try {
+      console.log(newPet);
+      alert("Pet added");
+    } catch (error) {
+      console.log(error);
+      alert("Something went wrong");
+    }
   };
 
   return (
@@ -245,6 +283,7 @@ const PetInfo = () => {
               <Button
                 variant="contained"
                 style={{ marginTop: "1rem", marginLeft: "1rem", width: "20%" }}
+                onClick={handleSubmit}
               >
                 Next
               </Button>

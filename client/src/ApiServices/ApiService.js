@@ -6,18 +6,17 @@ const apiService = {};
 
 apiService.signin = async (user) => {
   try {
-    await axios
-      .post(`${BASE_URL}/signin`, user, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((res) => {
-        console.log("res", res);
-        return res.data.json();
-      });
+    const response = await axios.post(`${BASE_URL}/signin`, user, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
   } catch (error) {
-    const { data } = error.response;
-    return data.msg.json();
+    console.log(error);
+    const { data } = response;
+    return data.msg;
   }
 };
+
+export default apiService;

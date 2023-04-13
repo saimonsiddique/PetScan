@@ -9,11 +9,24 @@ const petSchema = new Schema({
     type: Number,
     required: true,
   },
+  weightUnit: {
+    type: String,
+    required: true,
+  },
   age: {
     type: Number,
     required: true,
   },
+  ageUnit: {
+    type: String,
+    required: true,
+  },
   species: {
+    type: String,
+    required: true,
+  },
+
+  gender: {
     type: String,
     required: true,
   },
@@ -23,7 +36,6 @@ const petSchema = new Schema({
   },
   previousMedicalHistory: {
     type: [String],
-    required: true,
   },
   owner: {
     type: Schema.Types.ObjectId,
