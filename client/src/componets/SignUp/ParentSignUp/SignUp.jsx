@@ -55,7 +55,7 @@ const SignUp = () => {
 
       console.log("Now you can navigate to the pet info page");
       // redirect the user to the pet info page
-      navigate("/petinfo");
+      navigate("/pet/add");
     } catch (error) {
       console.log(error);
     }

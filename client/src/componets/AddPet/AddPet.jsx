@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import apiClient from "../../ApiServices/ApiClientService";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   TextField,
@@ -13,7 +14,7 @@ import {
   FormControlLabel,
   Stack,
 } from "@mui/material";
-import "./PetInfo.css";
+import "./AddPet.css";
 
 const initialState = {
   petName: "",
@@ -23,7 +24,7 @@ const initialState = {
   petWeight: "",
   weightUnit: "kg",
   petGender: "",
-  neutered: Boolean,
+  neutered: false,
   previousMedicalHistory: "",
   petPhoto: "",
 };
@@ -31,6 +32,7 @@ const initialState = {
 const petSpecies = ["Dog", "Cat", "Bird", "Fish", "Farm Animal", "Other"];
 
 const PetInfo = () => {
+  let navigate = useNavigate();
   const [state, setState] = useState(initialState);
   const [prevMed, setPrevMed] = useState(false);
   const [neutered, setNeutered] = useState(false);
@@ -48,7 +50,7 @@ const PetInfo = () => {
     setPrevMed(!prevMed);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const {
       petName,
@@ -58,9 +60,7 @@ const PetInfo = () => {
       petWeight,
       weightUnit,
       petGender,
-      neutered,
       previousMedicalHistory,
-      petPhoto,
     } = state;
 
     const newPet = {
@@ -71,14 +71,18 @@ const PetInfo = () => {
       ageUnit,
       petSpecies,
       petGender,
-      neutered,
       previousMedicalHistory,
-      petPhoto,
+      neutered,
     };
-
     try {
-      console.log(newPet);
-      alert("Pet added");
+      // get accessToken from local storage
+      const token = localStorage.getItem("accessToken");
+
+      // send newPet to the backend
+      await apiClient.addPet(newPet, token);
+
+      // redirect to the ParentProfile page
+      navigate("/me/profile");
     } catch (error) {
       console.log(error);
       alert("Something went wrong");
@@ -149,6 +153,7 @@ const PetInfo = () => {
                   value={state.ageUnit}
                   onChange={handleChange}
                   autoWidth
+                  label="Age unit"
                 >
                   <MenuItem value={"years"}>years</MenuItem>
                   <MenuItem value={"months"}>months</MenuItem>
@@ -215,7 +220,7 @@ const PetInfo = () => {
             >
               <Button
                 value={neutered}
-                onClick={() => setNeutered(true)}
+                onClick={() => setNeutered(!neutered)}
                 variant={neutered ? "contained" : "outlined"}
                 style={{ width: "1ch", marginTop: "1rem", marginLeft: "1rem" }}
               >
@@ -223,7 +228,7 @@ const PetInfo = () => {
               </Button>
               <Button
                 value={neutered}
-                onClick={() => setNeutered(false)}
+                onClick={() => setNeutered(!neutered)}
                 variant={neutered ? "outlined" : "contained"}
                 style={{
                   width: "1ch",

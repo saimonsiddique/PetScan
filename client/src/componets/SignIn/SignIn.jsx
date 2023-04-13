@@ -62,8 +62,9 @@ const SignIn = () => {
       alert(`${res.msg}`);
       setState(initialState);
     } else {
-      // save the token in the local storage
+      // save the token and usetype in the local storage
       localStorage.setItem("accessToken", response.accessToken);
+      localStorage.setItem("userType", response.user);
       // redirect to the profile page upon successful login
 
       //check if the user is a pet parent or a vet

@@ -9,6 +9,7 @@ const router = express.Router();
 // client routes
 router.post("/signup/petParent", clientController.signUp);
 router.get("/me", authMiddleware.client, clientController.profile);
+router.post("/pet/add", authMiddleware.client, clientController.addPet);
 
 // Common routes
 router.post("/signin", signInMiddleware);

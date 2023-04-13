@@ -5,8 +5,8 @@ import SignIn from "./componets/SignIn/SignIn";
 import VetSignUp from "./componets/SignUp/VetSignUp/VetSignUp";
 import Home from "./Pages/Home";
 import "./App.css";
-import PetInfo from "./componets/PetInfo/PetInfo";
-import ParetProfile from "./componets/Profile/ParentProfile/ParetProfile";
+import AddPet from "./componets/AddPet/AddPet";
+import ParetProfile from "./componets/Profile/ParentProfile/ParentProfile";
 import VetProfile from "./componets/Profile/VetProfile/VetProfile";
 
 function App() {
@@ -20,7 +20,9 @@ function App() {
         <Route path="petParent" element={<SignUp />} />
         <Route path="vet" element={<VetSignUp />} />
       </Route>
-      <Route path="/petinfo" element={<PetInfo />} />
+      <Route path="/pet">
+        <Route path="add" element={<AddPet />} />
+      </Route>
       <Route path="/me/profile" element={<ParetProfile />} />
       <Route path="/vet/profile" element={<VetProfile />} />
     </Routes>

@@ -18,8 +18,7 @@ const clientSchema = new Schema({
     required: true,
   },
   pets: {
-    type: Schema.Types.ObjectId,
-    ref: "Pet",
+    type: [String],
     // required: true,
   },
   prescriptions: {

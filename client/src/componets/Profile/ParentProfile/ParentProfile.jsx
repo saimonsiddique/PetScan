@@ -32,7 +32,7 @@ const ParetProfile = () => {
     getUser(accessToken);
   }, []);
 
-  return <div>ParetProfile</div>;
+  return <div>ParentProfile</div>;
 };
 
 export default ParetProfile;

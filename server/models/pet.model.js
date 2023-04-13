@@ -1,11 +1,11 @@
 const { Schema, model } = require("mongoose");
 
 const petSchema = new Schema({
-  petname: {
+  petName: {
     type: String,
     required: true,
   },
-  weight: {
+  petWeight: {
     type: Number,
     required: true,
   },
@@ -13,7 +13,7 @@ const petSchema = new Schema({
     type: String,
     required: true,
   },
-  age: {
+  petAge: {
     type: Number,
     required: true,
   },
@@ -21,21 +21,21 @@ const petSchema = new Schema({
     type: String,
     required: true,
   },
-  species: {
+  petSpecies: {
     type: String,
     required: true,
   },
 
-  gender: {
+  petGender: {
     type: String,
-    required: true,
-  },
-  neutered: {
-    type: Boolean,
     required: true,
   },
   previousMedicalHistory: {
     type: [String],
+  },
+  neutered: {
+    type: Boolean,
+    required: true,
   },
   owner: {
     type: Schema.Types.ObjectId,

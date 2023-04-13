@@ -5,38 +5,45 @@ const apiClient = {};
 
 apiClient.signup = async (user) => {
   try {
-    await axios
-      .post(`${BASE_URL}/signup/petParent`, user, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((res) => {
-        console.log("res", res);
-        return res.data;
-      });
+    const response = await axios.post(`${BASE_URL}/signup/petParent`, user, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
   } catch (error) {
-    const { data } = error.response;
+    const { data } = response;
     return data.msg;
   }
 };
 
 apiClient.profile = async (token) => {
   try {
-    await axios
-      .get(`${BASE_URL}/me`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        console.log("res", res);
-        return res.data.json();
-      });
+    const response = await axios.get(`${BASE_URL}/me`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
   } catch (error) {
-    const { data } = error.response;
-    return data.msg.json();
+    const { data } = response;
+    return data.msg;
+  }
+};
+
+apiClient.addPet = async (pet, token) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/pet/add`, pet, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    const { data } = response;
+    return data.msg;
   }
 };
 

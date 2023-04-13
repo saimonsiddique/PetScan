@@ -6,7 +6,7 @@ const Client = require("../models/client.model");
 const authMiddleware = {};
 
 authMiddleware.client = async (req, res, next) => {
-  let token = req.headers["x-access-token"] || req.headers["authorization"];
+  let token = req.headers["authorization"];
   if (token && token.startsWith("Bearer ")) {
     try {
       // Get token from header

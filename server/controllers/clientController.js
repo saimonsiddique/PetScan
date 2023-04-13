@@ -1,4 +1,5 @@
 const Client = require("../models/client.model");
+const Pet = require("../models/pet.model");
 const jwt = require("jsonwebtoken");
 const { generateToken } = require("../config/generateToken");
 const bcrypt = require("bcrypt");
@@ -73,6 +74,47 @@ authClient.profile = async (req, res) => {
   try {
     const client = await Client.findById(req.client.id).select("-password");
     res.status(200).json(client);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error });
+  }
+};
+
+authClient.addPet = async (req, res) => {
+  try {
+    const {
+      petName,
+      petWeight,
+      weightUnit,
+      petAge,
+      ageUnit,
+      petSpecies,
+      petGender,
+      previousMedicalHistory,
+    } = req.body;
+    if (
+      !petName ||
+      !petWeight ||
+      !weightUnit ||
+      !petAge ||
+      !ageUnit ||
+      !petSpecies ||
+      !petGender
+    ) {
+      return res
+        .status(400)
+        .json({ msg: "Please enter all fields of petinfo" });
+    }
+
+    const newPet = new Pet({
+      ...req.body,
+      owner: req.client.id,
+    });
+    const savedPet = await newPet.save();
+    const client = await Client.findById(req.client.id);
+    client.pets.push(newPet);
+    await client.save();
+    res.status(201).json(savedPet);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error });
