@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Stack, Button, Box, Divider, TextField } from "@mui/material";
 import { InputAdornment, IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import apiClient from "../../../ApiClientService/ApiService";
+import apiClient from "../../../ApiServices/ApiClientService";
 import userWithPet from "../../../assets/signup/user-with-pet.svg";
 import "./SignUp.css";
 const PASS_MIN_LENGTH = 8;

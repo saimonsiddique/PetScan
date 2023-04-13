@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Stack, Button, Box, Divider, TextField } from "@mui/material";
 import { InputAdornment, IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import apiClient from "../../../ApiClientService/ApiService";
+// import apiClient from "../../../ApiServices/ApiVetServices";
 import userWithPet from "../../../assets/signup/user-with-pet.svg";
 import "./VetSignUp.css";
 
@@ -48,7 +48,7 @@ const VetSignUp = () => {
 
     // send the user data to the server
     try {
-      const response = await apiClient.createUser(newUser);
+      // const response = await apiClient.createUser(newUser);
       console.log("response", response);
       // save the token in the local storage
       localStorage.setItem("token", response.data.token);

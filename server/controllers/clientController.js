@@ -6,7 +6,6 @@ const bcrypt = require("bcrypt");
 const authClient = {};
 
 authClient.signUp = async (req, res) => {
-  console.log("req.body", req.body);
   const { firstName, lastName, email, password } = req.body;
   if (!firstName || !lastName || !email || !password) {
     return res.status(400).json({ msg: "Please enter all fields" });

@@ -19,11 +19,11 @@ const vetSchema = new Schema({
   },
   specializedIn: {
     type: [String],
-    required: true,
+    // required: true,
   },
   topRatedFor: {
     type: [String],
-    required: true,
+    // required: true,
   },
   appointments: {
     type: [String],

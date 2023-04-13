@@ -6,6 +6,13 @@
   margin-bottom: 10px;
 }
 
+.signin-container {
+  background-image: url("../../assets/signin/signinpg.jpg");
+  background-repeat: no-repeat;
+  background-size: 60vw 100vh;
+  background-position: right;
+}
+
 .signin-form {
   border: 2px solid white;
   padding: 1rem;
@@ -65,7 +72,23 @@
 .form {
   display: flex;
   padding: 2rem;
-  margin: 1rem 0;
+  margin: 1rem 2rem 0rem 2rem;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
+}
+
+.forgot-password {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0.5rem 0;
+}
+
+.forgot-password a {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #252f3f;
+  margin-bottom: 0.3rem;
+  padding: 0;
+  text-decoration: none;
 }
