@@ -77,7 +77,7 @@ authVet.signIn = async (req, res) => {
 authVet.profile = async (req, res) => {
   try {
     const vetUser = await Vet.findById(req.vet.id).select("-password");
-    res.status(200).json(vetUser);
+    res.status(200).send(vetUser);
   } catch (error) {
     console.log(error);
     res.status(500).json({ msg: "Server error" });

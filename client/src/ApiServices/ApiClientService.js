@@ -19,7 +19,7 @@ apiClient.signup = async (user) => {
 
 apiClient.profile = async (token) => {
   try {
-    const response = await axios.get(`${BASE_URL}/me`, {
+    const response = await axios.get(`${BASE_URL}/profile/me`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,

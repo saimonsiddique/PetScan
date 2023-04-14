@@ -19,7 +19,7 @@ const ProfileNavBar = () => {
           position="sticky"
           style={{
             backgroundColor: "#FFFFFF",
-            boxShadow: 1,
+            boxShadow: 0,
           }}
           className="app-bar"
         >

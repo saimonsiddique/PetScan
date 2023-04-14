@@ -1,19 +1,22 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import "./App.css";
+import Error from "./Pages/Error";
 import SignUp from "./componets/SignUp/ParentSignUp/SignUp";
 import SignIn from "./componets/SignIn/SignIn";
 import VetSignUp from "./componets/SignUp/VetSignUp/VetSignUp";
 import Home from "./Pages/Home";
-import "./App.css";
 import AddPet from "./componets/AddPet/AddPet";
 import ParetProfile from "./componets/Profile/ParentProfile/ParentProfile";
 import VetProfile from "./componets/Profile/VetProfile/VetProfile";
-
+import NewsFeed from "./componets/NewsFeed/NewsFeed";
+import Dashboard from "./Pages/Dashboard";
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <Routes>
+      <Route path="/error" element={<Error />} />
       <Route path="/" element={<Home />} />
       <Route path="/signin" element={<SignIn />}></Route>
       <Route path="/signup">
@@ -23,8 +26,8 @@ function App() {
       <Route path="/pet">
         <Route path="add" element={<AddPet />} />
       </Route>
-      <Route path="/me/profile" element={<ParetProfile />} />
-      <Route path="/vet/profile" element={<VetProfile />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/feed" element={<NewsFeed />} />
     </Routes>
   );
 }

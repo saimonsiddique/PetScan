@@ -17,7 +17,7 @@ apiVet.signup = async (user) => {
 
 apiVet.profile = async (token) => {
   try {
-    const response = await axios.get(`${BASE_URL}/vet`, {
+    const response = await axios.get(`${BASE_URL}/profile/vet`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,

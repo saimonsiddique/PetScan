@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
-import apiVet from "../../../ApiServices/ApiClientService";
+import apiVet from "../../../ApiServices/ApiVetServices";
 import "./VetProfile.css";
+import ProfileSideBar from "../../SideBar/ProfileSideBar/ProfileSideBar";
+import ProfileNavBar from "../../NavBar/ProfileNavBar/ProfileNavBar";
+import DashboardContainer from "../../Dashboard/DashboardContainer";
 
 const initialState = {
   firstName: "",
@@ -12,27 +15,21 @@ const initialState = {
 const VetProfile = () => {
   const [state, setState] = useState(initialState);
 
-  useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-    const getVet = async () => {
-      const vetInfo = await apiVet.profile(accessToken);
-      if (vetInfo) {
-        const { firstName, lastName, email, specializedIn } = vetInfo;
-        setState((prevState) => ({
-          ...prevState,
-          firstName,
-          lastName,
-          email,
-          specializedIn,
-        }));
-      } else {
-        alert("Something went wrong");
-      }
-    };
-    getVet(accessToken);
-  }, []);
-
-  return <div>VetProfile</div>;
+  return (
+    <section className="vet-dashboard-container">
+      <div className="vet-dash-side-bar">
+        <ProfileSideBar />
+      </div>
+      <div className="vet-dash-main">
+        <div className="vet-dash-main-header">
+          <ProfileNavBar />
+        </div>
+        <div className="vet-dash-main-content">
+          <DashboardContainer />
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default VetProfile;

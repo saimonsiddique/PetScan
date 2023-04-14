@@ -11,94 +11,98 @@ import MedicationRoundedIcon from "@mui/icons-material/MedicationRounded";
 import SettingsApplicationsSharpIcon from "@mui/icons-material/SettingsApplicationsSharp";
 import AddLocationSharpIcon from "@mui/icons-material/AddLocationSharp";
 import navLogo from "../../../../public/Homepage/parent-nav.jpg";
+import "./ProfileSideBar.css";
 
 const ProfileSideBar = () => {
   return (
-    <nav className="sidebar-content">
-      <List>
-        <ListItemButton
-          sx={{
-            borderRadius: "10px",
-          }}
-        >
-          <LayersIcon />
-          <ListItemText
+    <section className="side-bar">
+      <img src={navLogo} alt="" className="side-logo" />
+      <nav className="sidebar-content">
+        <List>
+          <ListItemButton
             sx={{
-              paddingLeft: "4%",
+              borderRadius: "10px",
             }}
-            primaryTypographyProps={{
-              fontSize: "1.2rem",
-              fontFamily: "Roboto",
-            }}
-            primary="Dashboard"
-          />
-        </ListItemButton>
-        <ListItemButton
-          sx={{
-            borderRadius: "10px",
-          }}
-        >
-          <PetsIcon />
-          <ListItemText
+          >
+            <LayersIcon />
+            <ListItemText
+              sx={{
+                paddingLeft: "4%",
+              }}
+              primaryTypographyProps={{
+                fontSize: "1.2rem",
+                fontFamily: "Roboto",
+              }}
+              primary="Dashboard"
+            />
+          </ListItemButton>
+          <ListItemButton
             sx={{
-              paddingLeft: "4%",
+              borderRadius: "10px",
             }}
-            primaryTypographyProps={{
-              fontSize: "1.2rem",
-              fontFamily: "Roboto",
-            }}
-            primary="Pets"
-          />
-        </ListItemButton>
-        <ListItemButton
-          sx={{
-            borderRadius: "10px",
-          }}
-        >
-          <MedicationRoundedIcon />
-          <ListItemText
+          >
+            <PetsIcon />
+            <ListItemText
+              sx={{
+                paddingLeft: "4%",
+              }}
+              primaryTypographyProps={{
+                fontSize: "1.2rem",
+                fontFamily: "Roboto",
+              }}
+              primary="Pets"
+            />
+          </ListItemButton>
+          <ListItemButton
             sx={{
-              paddingLeft: "4%",
+              borderRadius: "10px",
             }}
-            primaryTypographyProps={{
-              fontSize: "1.2rem",
-              fontFamily: "Roboto",
-            }}
-            primary="Appointments"
-          />
-        </ListItemButton>
-        <ListItemButton
-          sx={{
-            borderRadius: "10px",
-          }}
-        >
-          <AddLocationSharpIcon />
-          <ListItemText
+          >
+            <MedicationRoundedIcon />
+            <ListItemText
+              sx={{
+                paddingLeft: "4%",
+              }}
+              primaryTypographyProps={{
+                fontSize: "1.2rem",
+                fontFamily: "Roboto",
+              }}
+              primary="Appointments"
+            />
+          </ListItemButton>
+          <ListItemButton
             sx={{
-              paddingLeft: "4%",
+              borderRadius: "10px",
             }}
-            primaryTypographyProps={{
-              fontSize: "1.2rem",
-              fontFamily: "Roboto",
-            }}
-            primary="Book vet appointmnent"
-          />
-        </ListItemButton>
-        <ListItemButton>
-          <SettingsApplicationsSharpIcon />
-          <ListItemText
-            sx={{
-              paddingLeft: "4%",
-            }}
-            primaryTypographyProps={{
-              fontSize: "1.2rem",
-              fontFamily: "Roboto",
-            }}
-            primary="Settings"
-          />
-        </ListItemButton>
-      </List>
-    </nav>
+          >
+            <AddLocationSharpIcon />
+            <ListItemText
+              sx={{
+                paddingLeft: "4%",
+              }}
+              primaryTypographyProps={{
+                fontSize: "1.2rem",
+                fontFamily: "Roboto",
+              }}
+              primary="Book vet appointmnent"
+            />
+          </ListItemButton>
+          <ListItemButton>
+            <SettingsApplicationsSharpIcon />
+            <ListItemText
+              sx={{
+                paddingLeft: "4%",
+              }}
+              primaryTypographyProps={{
+                fontSize: "1.2rem",
+                fontFamily: "Roboto",
+              }}
+              primary="Settings"
+            />
+          </ListItemButton>
+        </List>
+      </nav>
+    </section>
   );
 };
 

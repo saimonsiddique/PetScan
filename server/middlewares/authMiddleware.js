@@ -2,10 +2,12 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.JWT_SECRET || "is this a secret?";
 const bcrypt = require("bcrypt");
 const Client = require("../models/client.model");
+const Vet = require("../models/vet.model");
 
 const authMiddleware = {};
 
 authMiddleware.client = async (req, res, next) => {
+  console.log("I am in the auth client middleware");
   let token = req.headers["authorization"];
   if (token && token.startsWith("Bearer ")) {
     try {
@@ -30,7 +32,7 @@ authMiddleware.client = async (req, res, next) => {
 };
 
 authMiddleware.vet = async (req, res, next) => {
-  let token = req.headers["x-access-token"] || req.headers["authorization"];
+  let token = req.headers["authorization"];
   if (token && token.startsWith("Bearer ")) {
     try {
       // Get token from header

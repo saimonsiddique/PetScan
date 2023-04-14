@@ -71,7 +71,7 @@ authClient.signIn = async (req, res) => {
 authClient.profile = async (req, res) => {
   try {
     const client = await Client.findById(req.client.id).select("-password");
-    res.status(200).json(client);
+    res.status(200).send(client);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error });
@@ -112,7 +112,7 @@ authClient.addPet = async (req, res) => {
     const client = await Client.findById(req.client.id);
     client.pets.push(newPet);
     await client.save();
-    res.status(201).json(savedPet);
+    res.status(201).send(savedPet);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error });

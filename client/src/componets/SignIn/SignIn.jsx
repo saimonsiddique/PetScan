@@ -67,14 +67,8 @@ const SignIn = () => {
       localStorage.setItem("userType", response.user);
       // redirect to the profile page upon successful login
 
-      //check if the user is a pet parent or a vet
-      if (response.user === "petParent") {
-        // redirect to the pet parent profile page
-        navigate("/me/profile");
-      } else {
-        // redirect to the vet profile page
-        navigate("/vet/profile");
-      }
+      // navigate("/dashboard");
+      navigate("/dashboard");
     }
   };
 
