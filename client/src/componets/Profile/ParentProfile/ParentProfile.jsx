@@ -5,16 +5,7 @@ import ProfileNavBar from "../../NavBar/ProfileNavBar/ProfileNavBar";
 import "./ParentProfile.css";
 import DashboardContainer from "../../Dashboard/DashboardContainer";
 
-const initialState = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  pets: [],
-};
-
-const ParetProfile = () => {
-  const [state, setState] = useState(initialState);
-
+const ParentProfile = () => {
   return (
     <section className="parent-profile">
       <div className="sidebar">
@@ -32,4 +23,4 @@ const ParetProfile = () => {
   );
 };
 
-export default ParetProfile;
+export default ParentProfile;

@@ -49,9 +49,10 @@ const SignUp = () => {
       const response = await apiClient.signup(newUser);
       console.log("response", response);
       // extract the token from the response
-      const { accessToken } = response;
+      const { accessToken, user } = response;
       // save the token in the local storage
       localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("userType", user);
 
       console.log("Now you can navigate to the pet info page");
       // redirect the user to the pet info page

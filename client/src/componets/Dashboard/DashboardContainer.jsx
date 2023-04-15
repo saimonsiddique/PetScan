@@ -53,9 +53,9 @@ const DashboardContainer = () => {
             {state.pets.length > 0 ? (
               state.pets.map((pet) => {
                 {
-                  // console.log("map func", pet);
+                  console.log("map func", pet);
                 }
-                return <PetCard key={pet} pet={pet} />;
+                return <PetCard key={pet._id} pet={pet} />;
               })
             ) : (
               <div className="no-pets">

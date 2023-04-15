@@ -22,18 +22,14 @@ const initialState = {
 
 const PetCard = (props) => {
   const [state, setState] = useState(initialState);
-  // console.log("Before useEffeect", props.pet);
-  useEffect(() => {
-    setState({});
-  }, []);
-
-  const { petName, petSpecies, petAge, ageUnit, petWeight, weightUnit } = state;
+  const { pet } = props;
+  const { petName, petSpecies, petAge, ageUnit, petWeight, weightUnit } = pet;
 
   return (
     <section className="pet-card">
       <Card
         sx={{
-          minWidth: 355,
+          minWidth: 250,
         }}
       >
         <CardActionArea>
