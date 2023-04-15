@@ -82,7 +82,7 @@ const PetInfo = () => {
       await apiClient.addPet(newPet, token);
 
       // redirect to the ParentProfile page
-      navigate("/me/profile");
+      navigate("/dashboard");
     } catch (error) {
       console.log(error);
       alert("Something went wrong");

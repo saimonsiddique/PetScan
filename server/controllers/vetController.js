@@ -35,6 +35,7 @@ authVet.signUp = async (req, res) => {
     const accessToken = generateToken(savedVet);
     const sendData = {
       accessToken,
+      user: "vet",
     };
     res.status(201).send(sendData);
   } catch (error) {

@@ -7,28 +7,35 @@ import SignIn from "./componets/SignIn/SignIn";
 import VetSignUp from "./componets/SignUp/VetSignUp/VetSignUp";
 import Home from "./Pages/Home";
 import AddPet from "./componets/AddPet/AddPet";
-import ParetProfile from "./componets/Profile/ParentProfile/ParentProfile";
-import VetProfile from "./componets/Profile/VetProfile/VetProfile";
 import NewsFeed from "./componets/NewsFeed/NewsFeed";
 import Dashboard from "./Pages/Dashboard";
+
+// Test
+import Meet from "./Pages/Meet";
+import Success from "./componets/Success/Success";
+
 function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <Routes>
-      <Route path="/error" element={<Error />} />
-      <Route path="/" element={<Home />} />
-      <Route path="/signin" element={<SignIn />}></Route>
-      <Route path="/signup">
-        <Route path="petParent" element={<SignUp />} />
-        <Route path="vet" element={<VetSignUp />} />
-      </Route>
-      <Route path="/pet">
-        <Route path="add" element={<AddPet />} />
-      </Route>
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/feed" element={<NewsFeed />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/error" element={<Error />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/signin" element={<SignIn />}></Route>
+        <Route path="/signup">
+          <Route path="petParent" element={<SignUp />} />
+          <Route path="vet" element={<VetSignUp />} />
+        </Route>
+        <Route path="/pet">
+          <Route path="add" element={<AddPet />} />
+        </Route>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/feed" element={<NewsFeed />} />
+        <Route path="/book-appointment" element={<Meet />} />
+        <Route path="/success" element={<Success />} />
+      </Routes>
+    </>
   );
 }
 

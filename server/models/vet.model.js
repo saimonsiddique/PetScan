@@ -26,7 +26,7 @@ const vetSchema = new Schema({
     // required: true,
   },
   appointments: {
-    type: [String],
+    type: [Schema.Types.Object],
   },
 });
 

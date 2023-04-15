@@ -1,10 +1,5 @@
-import {
-  Box,
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
+import { Link } from "react-router-dom";
+import { Box, List, ListItemButton, ListItemText } from "@mui/material";
 import LayersIcon from "@mui/icons-material/Layers";
 import PetsIcon from "@mui/icons-material/Pets";
 import MedicationRoundedIcon from "@mui/icons-material/MedicationRounded";
@@ -70,23 +65,25 @@ const ProfileSideBar = () => {
               primary="Appointments"
             />
           </ListItemButton>
-          <ListItemButton
-            sx={{
-              borderRadius: "10px",
-            }}
-          >
-            <AddLocationSharpIcon />
-            <ListItemText
+          <Link to="/book-appointment">
+            <ListItemButton
               sx={{
-                paddingLeft: "4%",
+                borderRadius: "10px",
               }}
-              primaryTypographyProps={{
-                fontSize: "1.2rem",
-                fontFamily: "Roboto",
-              }}
-              primary="Book vet appointmnent"
-            />
-          </ListItemButton>
+            >
+              <AddLocationSharpIcon />
+              <ListItemText
+                sx={{
+                  paddingLeft: "4%",
+                }}
+                primaryTypographyProps={{
+                  fontSize: "1.2rem",
+                  fontFamily: "Roboto",
+                }}
+                primary="Book vet appointmnent"
+              />
+            </ListItemButton>
+          </Link>
           <ListItemButton>
             <SettingsApplicationsSharpIcon />
             <ListItemText

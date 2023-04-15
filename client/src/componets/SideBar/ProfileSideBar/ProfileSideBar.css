@@ -16,6 +16,11 @@
   padding: 20px;
 }
 
+.side-bar a {
+  color: white;
+  text-decoration: none;
+}
+
 .side-logo {
   display: flex;
   flex-direction: column;

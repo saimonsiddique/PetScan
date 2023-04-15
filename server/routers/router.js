@@ -10,6 +10,12 @@ const router = express.Router();
 router.post("/signup/petParent", clientController.signUp);
 router.get("/profile/me", authMiddleware.client, clientController.profile);
 router.post("/pet/add", authMiddleware.client, clientController.addPet);
+router.get("/pet/info", authMiddleware.client, clientController.petInfo);
+router.post(
+  "/appointment/book",
+  authMiddleware.client,
+  clientController.createAppointment
+);
 
 // Common routes
 router.post("/signin", signInMiddleware);

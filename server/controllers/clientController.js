@@ -1,6 +1,6 @@
 const Client = require("../models/client.model");
 const Pet = require("../models/pet.model");
-const jwt = require("jsonwebtoken");
+const Booking = require("../models/book.appointment");
 const { generateToken } = require("../config/generateToken");
 const bcrypt = require("bcrypt");
 
@@ -36,6 +36,7 @@ authClient.signUp = async (req, res) => {
       lastName: savedClient.lastName,
       email: savedClient.email,
       accessToken: generateToken(savedClient),
+      user: "petParent",
     };
     res.status(201).send(sendData);
   } catch (err) {
@@ -113,6 +114,35 @@ authClient.addPet = async (req, res) => {
     client.pets.push(newPet);
     await client.save();
     res.status(201).send(savedPet);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error });
+  }
+};
+
+authClient.petInfo = async (req, res) => {
+  try {
+    const client = await Client.findById(req.client.id).populate("pets");
+    res.status(200).send(client);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error });
+  }
+};
+
+authClient.createAppointment = async (req, res) => {
+  try {
+    console.log("Create new Booking", req.body);
+    const newBooking = new Booking({
+      ...req.body,
+      client: req.client.id,
+    });
+    const savedBooking = await newBooking.save();
+    const client = await Client.findById(req.client.id);
+    console.log("client", client.email);
+    client.bookedAppointments.push(newBooking);
+    await client.save();
+    res.status(201).send(savedBooking);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error });

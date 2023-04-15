@@ -59,3 +59,38 @@ body {
   margin-top: 1.5rem;
   text-decoration: none;
 }
+
+.meet-container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: max-content;
+  background-color: #faf8f8;
+}
+
+.meet-nav-bar {
+  position: sticky;
+  margin-bottom: 4rem;
+  background-color: #ffffff;
+}
+
+.meet-step-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  height: 100vh;
+  margin: 0 auto;
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+.meet-steps {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 4rem auto;
+  width: 50%;
+  height: 100%;
+  background-color: #ffffff;
+}

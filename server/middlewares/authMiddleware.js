@@ -1,13 +1,12 @@
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.JWT_SECRET || "is this a secret?";
-const bcrypt = require("bcrypt");
 const Client = require("../models/client.model");
 const Vet = require("../models/vet.model");
 
 const authMiddleware = {};
 
 authMiddleware.client = async (req, res, next) => {
-  console.log("I am in the auth client middleware");
+  console.log("authMiddleware.client");
   let token = req.headers["authorization"];
   if (token && token.startsWith("Bearer ")) {
     try {

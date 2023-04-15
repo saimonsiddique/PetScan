@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const Pet = require("./pet.model");
 
 const clientSchema = new Schema({
   firstName: {
@@ -18,15 +19,18 @@ const clientSchema = new Schema({
     required: true,
   },
   pets: {
-    type: [String],
+    type: [Schema.Types.Object],
     // required: true,
   },
   prescriptions: {
-    type: [String],
+    type: [Schema.Types.Object],
     // required: true,
   },
   appointments: {
-    type: [String],
+    type: [Schema.Types.Object],
+  },
+  bookedAppointments: {
+    type: [Schema.Types.Object],
   },
 });
 

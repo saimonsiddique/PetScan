@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import {
   Box,
   Paper,
@@ -12,6 +14,10 @@ import VideocamIcon from "@mui/icons-material/Videocam";
 import appointmentImg from "../images/appointment.jpg";
 
 const BookAppointment = () => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/book-appointment");
+  };
   return (
     <section className="appointment-card">
       <Card
@@ -60,6 +66,7 @@ const BookAppointment = () => {
               },
               textTransform: "none",
             }}
+            onClick={handleClick}
           >
             Book appointment
           </Button>

@@ -26,7 +26,7 @@ const DashboardContainer = () => {
     });
   }, [parent]);
 
-  console.log("parent", state.pets.length);
+  // console.log("parent", state.pets.length);
 
   return (
     <Box
@@ -52,7 +52,10 @@ const DashboardContainer = () => {
           <div className="pet-card">
             {state.pets.length > 0 ? (
               state.pets.map((pet) => {
-                return <PetCard key={pet} />;
+                {
+                  // console.log("map func", pet);
+                }
+                return <PetCard key={pet} pet={pet} />;
               })
             ) : (
               <div className="no-pets">

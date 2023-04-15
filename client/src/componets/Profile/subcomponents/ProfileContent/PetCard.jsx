@@ -22,21 +22,10 @@ const initialState = {
 
 const PetCard = (props) => {
   const [state, setState] = useState(initialState);
-
-  // get petinfo from context
-  const { parent } = useContext(UserContext);
-  console.log("pets", parent.pets);
-
+  // console.log("Before useEffeect", props.pet);
   useEffect(() => {
-    setState({
-      petName: parent.pets[0].petName,
-      petSpecies: parent.pets[0].petSpecies,
-      petAge: parent.pets[0].petAge,
-      ageUnit: parent.pets[0].ageUnit,
-      petWeight: parent.pets[0].petWeight,
-      weightUnit: parent.pets[0].weightUnit,
-    });
-  }, [parent]);
+    setState({});
+  }, []);
 
   const { petName, petSpecies, petAge, ageUnit, petWeight, weightUnit } = state;
 

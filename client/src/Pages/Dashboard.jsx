@@ -33,7 +33,6 @@ const Dashboard = () => {
   useEffect(() => {
     // get accessToken and userType from local storage
     const accessToken = localStorage.getItem("accessToken");
-
     // if the user is a parent
     if (userType === "petParent") {
       // get the parent profile
