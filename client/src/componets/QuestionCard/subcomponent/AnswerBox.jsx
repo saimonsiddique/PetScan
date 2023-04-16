@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import apiVet from "../../../ApiServices/ApiVetServices";
 import {
   Box,
@@ -10,47 +10,48 @@ import {
   ToggleButton,
   IconButton,
   Divider,
+  TextField,
 } from "@mui/material";
-import Textarea from "@mui/joy/Textarea";
 import "../subcomponent/AnswerBox/AnswerBox.css";
-const AnswerBox = () => {
+import { NewsFeedContext } from "../../NewsFeed/NewsFeed";
+const AnswerBox = (props) => {
+  const { value } = props;
   const [answer, setAnswer] = useState("");
+  const [answered, setAnswered] = useState(false);
   const accessToken = localStorage.getItem("accessToken");
+
+  const { setNotAnsweredQuestions } = useContext(NewsFeedContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // update the question with the answer
     const newAnswer = {
-      questionId: "643b2a568a222ecd7a177b78",
+      questionId: value._id,
       answer: answer,
-      answerDate: new Date(),
     };
-
+    // update the state
+    setAnswered(true);
+    // post the answer to the database
     const response = await apiVet.postAnswer(accessToken, newAnswer);
-    console.log(response);
+    console.log("response from answerbox postanswer", response);
+    // update the state of answered questions
+
     // reset the form
     setAnswer("");
+    setNotAnsweredQuestions(response);
   };
   return (
     <section className="answer-box">
       <div className="answer-area">
-        <FormControl
-          sx={{
-            m: "1rem",
-            width: "60%",
-            justifyContent: "center",
-          }}
-        >
-          <Textarea
-            sx={{
-              width: "28vw",
-              height: "5rem",
-              justifyContent: "center",
-            }}
-            placeholder="Answer the question here...."
-            value={answer}
-            onChange={(e) => setAnswer(e.target.value)}
-          />
-        </FormControl>
+        <TextField
+          sx={{ width: "40vw", mt: 2, mb: 1 }}
+          label="Answer the question"
+          variant="outlined"
+          value={answer}
+          multiline
+          maxRows={4}
+          onChange={(e) => setAnswer(e.target.value)}
+        />
       </div>
       <div className="button-submit-answer">
         <Button

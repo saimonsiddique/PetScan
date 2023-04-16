@@ -23,7 +23,7 @@ const questionSchema = new Schema({
 
   postDate: {
     type: Date,
-    default: Date.now,
+    default: null,
   },
   answer: {
     type: String,
@@ -33,7 +33,7 @@ const questionSchema = new Schema({
   },
   answeredDate: {
     type: Date,
-    default: Date.now,
+    default: null,
   },
   isAnswered: {
     type: Boolean,
@@ -54,19 +54,6 @@ const questionSchema = new Schema({
     type: Boolean,
     default: false,
   },
-  aiSuggestion: {
-    type: Boolean,
-    default: false,
-  },
-
-  // aiSuggestedAnswer: {
-  //   type: String,
-  // },
-
-  // verifiedAiAnswer: {
-  //   type: Boolean,
-  //   default: false,
-  // },
 });
 
 const Question = model("Question", questionSchema);

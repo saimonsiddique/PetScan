@@ -4,6 +4,7 @@ const Question = require("../models/question.model");
 const Booking = require("../models/book.appointment");
 const { generateToken } = require("../config/generateToken");
 const bcrypt = require("bcrypt");
+const openai = require("../index");
 
 const authClient = {};
 
@@ -171,7 +172,6 @@ authClient.postQuestion = async (req, res) => {
 authClient.feed = async (req, res) => {
   try {
     const allQuestions = await Question.find({}).sort({ postDate: "desc" });
-    console.log("allQuestions", allQuestions);
     res.status(200).send(allQuestions);
   } catch (error) {
     console.log(error);

@@ -12,6 +12,7 @@ export const NewsFeedContext = createContext();
 
 const NewsFeed = () => {
   const [allQuestions, setAllQuestions] = useState([]);
+  const [notAnsweredQuestions, setNotAnsweredQuestions] = useState([]);
   const [latestQuestion, setLatestQuestion] = useState([]);
   const [prevQuestion, setPrevQuestion] = useState([]);
   const [answerBox, setAnswerBox] = useState(false);
@@ -20,7 +21,6 @@ const NewsFeed = () => {
 
   useEffect(() => {
     getAllQuestions();
-
     // check if user is logged in
     if (localStorage.getItem("accessToken")) {
       // check if user is a vet or not
@@ -35,21 +35,31 @@ const NewsFeed = () => {
 
   const getAllQuestions = async () => {
     // get all questions
-    const allQuestions = await apiClient.getFeedQuestions();
+    const allQuestionsfromDB = await apiClient.getFeedQuestions();
     // set latest question
-    setLatestQuestion(allQuestions[0]);
+    setLatestQuestion(allQuestionsfromDB[0]);
     // set previous questions
-    setPrevQuestion(allQuestions.slice(1));
+    setPrevQuestion(allQuestionsfromDB.slice(1));
     // set all questions
-    setAllQuestions(allQuestions);
+    setAllQuestions(allQuestionsfromDB);
+    // set all answered questions
+    const answrNotFound = allQuestionsfromDB.filter(
+      (question) => question.isAnswered === false
+    );
+    setNotAnsweredQuestions(answrNotFound);
   };
 
   return (
     <NewsFeedContext.Provider
       value={{
         allQuestions,
+        setAllQuestions,
         latestQuestion,
+        setLatestQuestion,
         prevQuestion,
+        setPrevQuestion,
+        notAnsweredQuestions,
+        setNotAnsweredQuestions,
         answerBox,
         postCard,
       }}
@@ -65,12 +75,12 @@ const NewsFeed = () => {
               {!answerBox && <BookAppointment />}
             </div>
             <div className="latest-question">
-              {!answerBox && <LatestQuestion />}
+              {!answerBox && <LatestQuestion question={latestQuestion} />}
             </div>
           </div>
           <div className="feed-questions">
             {answerBox
-              ? allQuestions.map((question) => (
+              ? notAnsweredQuestions.map((question) => (
                   <QuestionCard
                     key={question._id}
                     question={question}

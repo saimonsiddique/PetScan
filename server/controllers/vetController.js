@@ -96,18 +96,17 @@ authVet.postAnswer = async (req, res) => {
     }
 
     // Update question with answer
-    console.log("I am here before update");
-    const updatedQuestion = await Question.findByIdAndUpdate(questionId, {
+    await Question.findByIdAndUpdate(questionId, {
       $set: {
-        answer: answer,
-        vetId: vetId,
+        ...req.body,
+        vetId,
         vetName: `${req.vet.firstName} ${req.vet.lastName}`,
-        answerDate: Date.now(),
+        answeredDate: Date.now(),
         isAnswered: true,
       },
     });
-    console.log(updatedQuestion);
-    res.status(200).send(updatedQuestion);
+    const sendUpdatedAnsweredInfo = await Question.find({ isAnswered: false });
+    res.status(200).send(sendUpdatedAnsweredInfo);
   } catch (error) {
     console.log(error);
     res.status(500).json({ msg: "Server error" });

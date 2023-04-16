@@ -23,6 +23,7 @@ import moment from "moment";
 
 const LatestQuestion = () => {
   const { latestQuestion, answerBox } = useContext(NewsFeedContext);
+  const answered = latestQuestion.isAnswered;
   const date = moment(latestQuestion.postDate).format("MMMM Do YYYY, h:mm a");
 
   return (
@@ -52,11 +53,11 @@ const LatestQuestion = () => {
             <Divider />
             <div className="latest-answer-section">
               <div className="latest-answerText">
-                <AnswerText answer={latestQuestion} />
-              </div>
-              <div className="latest-answerBox">
-                <Divider />
-                {answerBox ? <AnswerBox /> : null}
+                {answered ? (
+                  <AnswerText answerText={latestQuestion} />
+                ) : (
+                  <h4>Not Answered Yet....</h4>
+                )}
               </div>
             </div>
             <div className="latest-helpful-section">

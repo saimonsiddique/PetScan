@@ -23,15 +23,17 @@ import { NewsFeedContext } from "../NewsFeed/NewsFeed";
 const QuestionCard = (props) => {
   const { answerBox } = useContext(NewsFeedContext);
   const { question, date } = props;
-  const [upVote, setUpVote] = useState(false);
-  const [downVote, setDownVote] = useState(false);
+  const answered = question.isAnswered;
+  const [upVote, setUpVote] = useState(question.upVotes);
+  const [downVote, setDownVote] = useState(question.downVotes);
 
   const handleUpVote = () => {
-    setUpVote(!upVote);
+    setUpVote(!voted);
+    setUpVote(upVote + 1);
   };
 
   const handleDownVote = () => {
-    setDownVote(!downVote);
+    setDownVote(upVote - 1);
   };
 
   const handleSubmit = async () => {
@@ -73,11 +75,15 @@ const QuestionCard = (props) => {
             <Divider />
             <div className="answer-section">
               <div className="answerText">
-                <AnswerText />
+                {answered ? (
+                  <AnswerText answerText={question} />
+                ) : (
+                  <h4>Not Answered Yet....</h4>
+                )}
               </div>
               <div className="answerBox">
                 <Divider />
-                {answerBox ? <AnswerBox /> : null}
+                {answerBox ? <AnswerBox value={question} /> : null}
               </div>
             </div>
             <div className="helpful-section">
