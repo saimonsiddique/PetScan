@@ -22,12 +22,12 @@ const BookAppointment = () => {
     <section className="appointment-card">
       <Card
         sx={{
-          maxWidth: 400,
+          maxWidth: 340,
         }}
       >
         <CardMedia
           component="img"
-          height="150"
+          height="140"
           image={appointmentImg}
           sx={{ objectFit: "contain" }}
           alt="Meet your vet"

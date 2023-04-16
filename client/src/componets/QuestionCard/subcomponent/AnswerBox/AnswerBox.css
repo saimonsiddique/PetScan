@@ -1,0 +1,6 @@
+.button-submit-answer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-right: 2rem;
+}

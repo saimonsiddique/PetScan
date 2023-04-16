@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: left;
   padding: 0.5rem;
-  border-bottom: 1px solid #e0e0e0;
+  /* border-bottom: 2px solid #e0e0e0; */
 }
 
 .question-card-header span {
@@ -18,6 +18,23 @@
   margin: 0.2rem 0;
   color: #001952;
   font-weight: 550;
+}
+
+.answer-section {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.answerBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  margin: 0.3rem 0;
+  /* border: 2px solid red; */
 }
 
 .voting {

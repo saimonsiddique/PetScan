@@ -15,47 +15,26 @@ import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownOffAltOutlinedIcon from "@mui/icons-material/ThumbDownOffAltOutlined";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
-import "./QuestionCard.css";
-import AnswerBox from "./subcomponent/AnswerBox";
-import AnswerText from "./subcomponent/AnswerText";
-const QuestionCard = () => {
-  const [upVote, setUpVote] = useState(false);
-  const [downVote, setDownVote] = useState(false);
+import AnswerBox from "./AnswerBox";
+import "./LatestQuestion/LatestQuestion.css";
+import AnswerText from "./AnswerText";
 
-  const handleUpVote = () => {
-    setUpVote(!upVote);
-  };
-
-  const handleDownVote = () => {
-    setDownVote(!downVote);
-  };
-
-  const handleSubmit = async () => {
-    e.preventDefault();
-  };
-
+const LatestQuestion = () => {
   return (
-    <section className="question-card-container">
-      <div className="question-card">
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            flexGrow: 1,
-          }}
-        >
+    <section className="latest-question-card-container">
+      <div className="latest-question-card">
+        <Box sx={{ flexGrow: 1 }}>
           <Paper
-            elevation={3}
+            elevation={2}
             sx={{
-              p: 3,
+              p: 2,
               display: "flex",
               flexDirection: "column",
-              alignItems: "left",
-              width: "58vw",
+              width: "35vw",
               height: "max-content",
             }}
           >
-            <div className="question-card-header">
+            <div className="latest-question-card-header">
               <h2>Question</h2>
               <h4>Should cats with kidney disease be fed a specific diet?</h4>
               <span>
@@ -64,21 +43,21 @@ const QuestionCard = () => {
               <span>Posted on Date</span>
             </div>
             <Divider />
-            <div className="answer-section">
-              <div className="answerText">
+            <div className="latest-answer-section">
+              <div className="latest-answerText">
                 <AnswerText />
               </div>
-              <div className="answerBox">
+              <div className="latest-answerBox">
                 <Divider />
                 <AnswerBox />
               </div>
             </div>
-            <div className="helpful-section">
+            <div className="latest-helpful-section">
               <ThumbUpIcon />
               <div className="people">108 people found this answer helpful</div>
             </div>
-            <div className="voting-section">
-              <div className="voting">
+            <div className="latest-voting-section">
+              <div className="latest-voting">
                 <div>WAS THIS ANSWER HELPFUL?</div>
                 <div>
                   <IconButton>
@@ -97,4 +76,4 @@ const QuestionCard = () => {
   );
 };
 
-export default QuestionCard;
+export default LatestQuestion;

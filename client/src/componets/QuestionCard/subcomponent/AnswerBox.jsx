@@ -8,10 +8,11 @@ import {
   FormControl,
   Checkbox,
   ToggleButton,
-  Input,
   IconButton,
   Divider,
 } from "@mui/material";
+import Textarea from "@mui/joy/Textarea";
+import "../subcomponent/AnswerBox/AnswerBox.css";
 const AnswerBox = () => {
   const [answer, setAnswer] = useState("");
   const accessToken = localStorage.getItem("accessToken");
@@ -30,39 +31,42 @@ const AnswerBox = () => {
     setAnswer("");
   };
   return (
-    <div>
-      <FormControl
-        sx={{
-          m: "1rem",
-          width: "80%",
-          justifyContent: "center",
-        }}
-      >
-        <Input
+    <section className="answer-box">
+      <div className="answer-area">
+        <FormControl
           sx={{
-            width: "100%",
-            height: "100%",
-            fontSize: "1.25rem",
-            textAlign: "center",
+            m: "1rem",
+            width: "60%",
+            justifyContent: "center",
           }}
-          value={answer}
-          onChange={(e) => setAnswer(e.target.value)}
-          placeholder="Answer the question..."
-        />
-      </FormControl>
-      <Button
-        sx={{
-          m: "1rem",
-          width: "30%",
-          justifyContent: "center",
-        }}
-        variant="contained"
-        color="success"
-        onClick={handleSubmit}
-      >
-        Answer
-      </Button>
-    </div>
+        >
+          <Textarea
+            sx={{
+              width: "28vw",
+              height: "5rem",
+              justifyContent: "center",
+            }}
+            placeholder="Answer the question here...."
+            value={answer}
+            onChange={(e) => setAnswer(e.target.value)}
+          />
+        </FormControl>
+      </div>
+      <div className="button-submit-answer">
+        <Button
+          sx={{
+            m: "0.5rem",
+            width: "25%",
+            justifyContent: "center",
+          }}
+          variant="contained"
+          color="success"
+          onClick={handleSubmit}
+        >
+          Answer
+        </Button>
+      </div>
+    </section>
   );
 };
 
