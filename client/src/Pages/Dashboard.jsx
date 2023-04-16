@@ -3,7 +3,7 @@ import { createContext } from "react";
 import { CircularProgress } from "@mui/material";
 import apiClient from "../ApiServices/ApiClientService";
 import apiVet from "../ApiServices/ApiVetServices";
-import ParetProfile from "../componets/Profile/ParentProfile/ParentProfile";
+import ParentProfile from "../componets/Profile/ParentProfile/ParentProfile";
 import VetProfile from "../componets/Profile/VetProfile/VetProfile";
 
 export const UserContext = createContext(null);
@@ -97,7 +97,7 @@ const Dashboard = () => {
   }
   return (
     <UserContext.Provider value={{ parent, vet }}>
-      {userType === "petParent" && <ParetProfile />}
+      {userType === "petParent" && <ParentProfile />}
       {userType === "vet" && <VetProfile />}
     </UserContext.Provider>
   );

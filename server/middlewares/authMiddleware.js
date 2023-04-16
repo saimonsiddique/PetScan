@@ -31,6 +31,7 @@ authMiddleware.client = async (req, res, next) => {
 };
 
 authMiddleware.vet = async (req, res, next) => {
+  console.log("I am in authMiddleware.vet");
   let token = req.headers["authorization"];
   if (token && token.startsWith("Bearer ")) {
     try {

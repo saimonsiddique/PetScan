@@ -30,4 +30,19 @@ apiVet.profile = async (token) => {
   }
 };
 
+apiVet.postAnswer = async (token, answer) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/vet/postAnswer`, answer, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    const { data } = response;
+    return data.msg;
+  }
+};
+
 export default apiVet;

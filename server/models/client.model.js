@@ -1,5 +1,4 @@
 const { Schema, model } = require("mongoose");
-const Pet = require("./pet.model");
 
 const clientSchema = new Schema({
   firstName: {
@@ -30,6 +29,9 @@ const clientSchema = new Schema({
     type: [Schema.Types.Object],
   },
   bookedAppointments: {
+    type: [Schema.Types.Object],
+  },
+  askedQuestions: {
     type: [Schema.Types.Object],
   },
 });

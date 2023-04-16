@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Stack, Button, Box, Divider, TextField } from "@mui/material";
 import { InputAdornment, IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-// import apiClient from "../../../ApiServices/ApiVetServices";
+import apiVet from "../../../ApiServices/ApiVetServices";
 import userWithPet from "../../../assets/signup/user-with-pet.svg";
 import "./VetSignUp.css";
 
@@ -19,7 +19,7 @@ const initialState = {
 };
 
 const VetSignUp = () => {
-  // let navigate = useNavigate();
+  let navigate = useNavigate();
   const [state, setState] = useState(initialState);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -39,7 +39,7 @@ const VetSignUp = () => {
     e.preventDefault();
     // extract the user data from the state
     const { firstName, lastName, email, password, confirmPassword } = state;
-    const newUser = {
+    const newVet = {
       firstName,
       lastName,
       email,
@@ -48,13 +48,14 @@ const VetSignUp = () => {
 
     // send the user data to the server
     try {
-      // const response = await apiClient.createUser(newUser);
-      console.log("response", response);
+      const response = await apiVet.signup(newVet);
       // save the token in the local storage
-      localStorage.setItem("token", response.data.token);
+      console.log("response", response);
+      // localStorage.setItem("acessToken", response.data.acessToken);
+      // localStorage.setItem("userType", response.data.user);
 
-      // navigate to the login page
-      // navigate("/welcome");
+      // navigate to the dashboard
+      navigate("/dashboard");
     } catch (error) {
       console.log(error);
     }

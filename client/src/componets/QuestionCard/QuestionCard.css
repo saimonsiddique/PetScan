@@ -1,0 +1,46 @@
+.question-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  padding: 0.5rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.question-card-header span {
+  font-size: 0.8rem;
+  margin: 0.2rem 0;
+  color: #001952;
+  font-weight: 450;
+}
+
+.question-card-header h4 {
+  font-size: 1.2rem;
+  margin: 0.2rem 0;
+  color: #001952;
+  font-weight: 550;
+}
+
+.voting {
+  display: flex;
+  align-items: center;
+  margin: 0 1rem;
+  padding: 0.5rem;
+  color: #ffff;
+  background-color: #3a87ad;
+  border-radius: 0.2rem;
+}
+
+.helpful-section {
+  display: flex;
+  align-items: center;
+  margin: 0 1rem;
+  padding: 0.5rem;
+  color: #001952;
+  border-radius: 0.2rem;
+}
+.people {
+  color: #001952;
+  margin-left: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 550;
+}

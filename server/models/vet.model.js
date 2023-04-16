@@ -28,6 +28,9 @@ const vetSchema = new Schema({
   appointments: {
     type: [Schema.Types.Object],
   },
+  answeredQuestions: {
+    type: [Schema.Types.Object],
+  },
 });
 
 const Vet = model("Vet", vetSchema);

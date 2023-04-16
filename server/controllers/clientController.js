@@ -1,5 +1,6 @@
 const Client = require("../models/client.model");
 const Pet = require("../models/pet.model");
+const Question = require("../models/question.model");
 const Booking = require("../models/book.appointment");
 const { generateToken } = require("../config/generateToken");
 const bcrypt = require("bcrypt");
@@ -139,10 +140,28 @@ authClient.createAppointment = async (req, res) => {
     });
     const savedBooking = await newBooking.save();
     const client = await Client.findById(req.client.id);
-    console.log("client", client.email);
     client.bookedAppointments.push(newBooking);
     await client.save();
     res.status(201).send(savedBooking);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error });
+  }
+};
+
+authClient.postQuestion = async (req, res) => {
+  console.log("req.body", req.body);
+  try {
+    const newQuestion = new Question({
+      ...req.body,
+      clietId: req.client.id,
+      clientName: `${req.client.firstName} ${req.client.lastName}`,
+    });
+    const savedQuestion = await newQuestion.save();
+    const client = await Client.findById(req.client.id);
+    client.askedQuestions.push(newQuestion);
+    await client.save();
+    res.status(201).send(savedQuestion);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error });

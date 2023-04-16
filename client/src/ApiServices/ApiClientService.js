@@ -82,4 +82,20 @@ apiClient.createAppointment = async (accessToken, appointment) => {
   }
 };
 
+apiClient.postQuestion = async (accessToken, question) => {
+  try {
+    console.log("I am from apiClient", question);
+    const response = await axios.post(`${BASE_URL}/question/add`, question, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    const { data } = response;
+    return data.msg;
+  }
+};
+
 export default apiClient;

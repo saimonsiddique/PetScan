@@ -5,33 +5,57 @@ import {
   IconButton,
   Tooltip,
   Avatar,
+  TextField,
 } from "@mui/material";
+
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import "./ProfileNavBar.css";
+import SearchIcon from "@mui/icons-material/Search";
+import "./HomeNavBar.css";
 
-const ProfileNavBar = () => {
+const HomeNavBar = () => {
   return (
     <section className="profile-app-bar">
       <Box>
         <AppBar
           position="sticky"
           style={{
-            backgroundColor: "#FFFFFF",
+            backgroundColor: "#42389D",
             boxShadow: 0,
           }}
           className="app-bar"
         >
           <Toolbar>
-            <Box sx={{ flexGrow: 1 }} />
+            <Box sx={{ flexGrow: 1 }}>
+              <TextField
+                sx={{
+                  width: 300,
+                  backgroundColor: "white",
+                  borderRadius: "10px",
+                  "& label.Mui-focused": {
+                    color: "black",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "white",
+                  },
+                }}
+                id="outlined-basic"
+                label="Search"
+                variant="outlined"
+                size="small"
+                InputProps={{
+                  endAdornment: <SearchIcon />,
+                }}
+              />
+            </Box>
             <Tooltip title="News">
               <IconButton size="larger">
-                <NewspaperIcon style={{ color: "grey" }} />
+                <NewspaperIcon style={{ color: "white" }} />
               </IconButton>
             </Tooltip>
             <Tooltip title="Notifications">
               <IconButton size="large">
-                <NotificationsIcon style={{ color: "grey" }} />
+                <NotificationsIcon style={{ color: "white" }} />
               </IconButton>
             </Tooltip>
             <Tooltip title="Profile">
@@ -58,4 +82,4 @@ const ProfileNavBar = () => {
   );
 };
 
-export default ProfileNavBar;
+export default HomeNavBar;

@@ -16,6 +16,11 @@ router.post(
   authMiddleware.client,
   clientController.createAppointment
 );
+router.post(
+  "/question/add",
+  authMiddleware.client,
+  clientController.postQuestion
+);
 
 // Common routes
 router.post("/signin", signInMiddleware);
@@ -23,4 +28,5 @@ router.post("/signin", signInMiddleware);
 // vet routes
 router.post("/signup/vet", vetController.signUp);
 router.get("/profile/vet", authMiddleware.vet, vetController.profile);
+router.post("/vet/postAnswer", authMiddleware.vet, vetController.postAnswer);
 module.exports = router;
