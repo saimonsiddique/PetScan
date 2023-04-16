@@ -86,7 +86,6 @@ authVet.profile = async (req, res) => {
 };
 
 authVet.postAnswer = async (req, res) => {
-  console.log("I am in postAnswer", req.body);
   try {
     const { answer, questionId } = req.body;
     const vetId = req.vet.id;

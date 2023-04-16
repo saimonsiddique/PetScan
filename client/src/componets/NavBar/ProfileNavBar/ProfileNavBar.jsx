@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import {
   AppBar,
   Box,
@@ -11,6 +12,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import "./ProfileNavBar.css";
 
 const ProfileNavBar = () => {
+  const navigate = useNavigate();
   return (
     <section className="profile-app-bar">
       <Box>
@@ -25,7 +27,7 @@ const ProfileNavBar = () => {
           <Toolbar>
             <Box sx={{ flexGrow: 1 }} />
             <Tooltip title="News">
-              <IconButton size="larger">
+              <IconButton size="larger" onClick={() => navigate("/feed")}>
                 <NewspaperIcon style={{ color: "grey" }} />
               </IconButton>
             </Tooltip>

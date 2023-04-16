@@ -10,3 +10,10 @@
   font-weight: 350;
   margin: 0.5rem 0rem 0.5rem 0rem;
 }
+
+.latest-answerText {
+  font-size: 2rem;
+  font-weight: 440;
+  justify-content: center;
+  margin: 0 auto;
+}

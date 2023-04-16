@@ -37,7 +37,7 @@ const LatestQuestion = () => {
               display: "flex",
               flexDirection: "column",
               width: "35vw",
-              height: "max-content",
+              height: "72vh",
             }}
           >
             <div className="latest-question-card-header">
@@ -62,7 +62,9 @@ const LatestQuestion = () => {
             </div>
             <div className="latest-helpful-section">
               <ThumbUpIcon />
-              <div className="people">108 people found this answer helpful</div>
+              <div className="people">
+                {latestQuestion.upVotes} people found this answer helpful
+              </div>
             </div>
             <div className="latest-voting-section">
               <div className="latest-voting">

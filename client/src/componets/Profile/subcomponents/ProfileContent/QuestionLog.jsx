@@ -1,7 +1,7 @@
 import { Box, List, ListItemButton, ListItemText } from "@mui/material";
 
 const QuestionLog = (props) => {
-  const { question } = props;
+  const { question, index } = props;
   return (
     <Box
       sx={{
@@ -27,7 +27,7 @@ const QuestionLog = (props) => {
               fontSize: "1.2rem",
               fontFamily: "Roboto",
             }}
-            primary={question.question}
+            primary={`${index + 1}. ${question.question}`}
           />
         </ListItemButton>
       </List>

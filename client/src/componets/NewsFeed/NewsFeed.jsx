@@ -17,7 +17,6 @@ const NewsFeed = () => {
   const [prevQuestion, setPrevQuestion] = useState([]);
   const [answerBox, setAnswerBox] = useState(false);
   const [postCard, setPostCard] = useState(false);
-  // const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getAllQuestions();
@@ -36,12 +35,12 @@ const NewsFeed = () => {
   const getAllQuestions = async () => {
     // get all questions
     const allQuestionsfromDB = await apiClient.getFeedQuestions();
+    // set all questions
+    setAllQuestions(allQuestionsfromDB);
     // set latest question
     setLatestQuestion(allQuestionsfromDB[0]);
     // set previous questions
     setPrevQuestion(allQuestionsfromDB.slice(1));
-    // set all questions
-    setAllQuestions(allQuestionsfromDB);
     // set all answered questions
     const answrNotFound = allQuestionsfromDB.filter(
       (question) => question.isAnswered === false

@@ -179,4 +179,30 @@ authClient.feed = async (req, res) => {
   }
 };
 
+authClient.vote = async (req, res) => {
+  try {
+    const { questionId, vote } = req.body;
+    const updateVote = await Question.findByIdAndUpdate(questionId, {
+      $inc: { votes: vote },
+    });
+    res.status(200).send(updateVote);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error });
+  }
+};
+
+authClient.search = async (req, res) => {
+  try {
+    const { search } = req.body;
+    const searchResult = await Question.find({
+      $text: { $search: search },
+    }).sort({ postDate: "desc" });
+    res.status(200).send(searchResult);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error });
+  }
+};
+
 module.exports = authClient;

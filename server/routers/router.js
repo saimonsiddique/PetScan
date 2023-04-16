@@ -21,6 +21,7 @@ router.post(
   authMiddleware.client,
   clientController.postQuestion
 );
+router.put("/vote", authMiddleware.client, clientController.vote);
 
 // Common routes
 router.post("/signin", signInMiddleware);

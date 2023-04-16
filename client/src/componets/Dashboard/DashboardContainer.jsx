@@ -76,10 +76,16 @@ const DashboardContainer = () => {
             {userType === "petParent" ? (
               <>
                 <div className="heading-question-list">
-                  <h3>My Questions</h3>
+                  <h3>{parent.firstName}'s Questions</h3>
                 </div>
-                {parent.askedQuestions.map((question) => {
-                  return <QuestionLog key={question._id} question={question} />;
+                {parent.askedQuestions.map((question, index) => {
+                  return (
+                    <QuestionLog
+                      key={question._id}
+                      question={question}
+                      index={index}
+                    />
+                  );
                 })}
               </>
             ) : (

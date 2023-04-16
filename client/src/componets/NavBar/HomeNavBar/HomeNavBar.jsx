@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import { NewsFeedContext } from "../../NewsFeed/NewsFeed";
+import { useNavigate } from "react-router-dom";
 import {
   AppBar,
   Box,
@@ -7,13 +10,14 @@ import {
   Avatar,
   TextField,
 } from "@mui/material";
-
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import SearchIcon from "@mui/icons-material/Search";
 import "./HomeNavBar.css";
 
 const HomeNavBar = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="profile-app-bar">
       <Box>
@@ -39,9 +43,8 @@ const HomeNavBar = () => {
                     borderColor: "white",
                   },
                 }}
-                id="outlined-basic"
                 label="Search"
-                variant="outlined"
+                variant="filled"
                 size="small"
                 InputProps={{
                   endAdornment: <SearchIcon />,
@@ -49,7 +52,7 @@ const HomeNavBar = () => {
               />
             </Box>
             <Tooltip title="News">
-              <IconButton size="larger">
+              <IconButton size="larger" onClick={() => navigate("/feed")}>
                 <NewspaperIcon style={{ color: "white" }} />
               </IconButton>
             </Tooltip>
@@ -65,6 +68,7 @@ const HomeNavBar = () => {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 color="inherit"
+                onClick={() => navigate("/dashboard")}
               >
                 <Avatar
                   src="../../../../public/PetInfo/pet-info-dog.jpg"

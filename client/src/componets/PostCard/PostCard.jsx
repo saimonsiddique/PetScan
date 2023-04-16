@@ -20,7 +20,7 @@ const PostCard = () => {
   const [question, setQuestion] = useState("");
   const accessToken = localStorage.getItem("accessToken");
 
-  const { allQuestions, setAllQuestions, setLatestQuestion } =
+  const { allQuestions, setAllQuestions, setLatestQuestion, setPrevQuestion } =
     useContext(NewsFeedContext);
 
   const handleSubmit = async (e) => {
@@ -31,8 +31,10 @@ const PostCard = () => {
       postDate: new Date(),
     };
     const response = await apiClient.postQuestion(accessToken, newQuestion);
-    setAllQuestions([...allQuestions, newQuestion]);
+
     setLatestQuestion(newQuestion);
+    setPrevQuestion([...allQuestions]);
+    setAllQuestions([newQuestion, ...allQuestions]);
     // reset the form
     setQuestion("");
     setSelected(false);

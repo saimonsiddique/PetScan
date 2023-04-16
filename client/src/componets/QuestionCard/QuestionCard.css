@@ -28,6 +28,13 @@
   border-bottom: 1px solid #e0e0e0;
 }
 
+.answerText {
+  font-size: 2rem;
+  font-weight: 440;
+  justify-content: center;
+  margin: 0 auto;
+}
+
 .answerBox {
   display: flex;
   flex-direction: column;
