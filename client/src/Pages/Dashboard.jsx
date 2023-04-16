@@ -13,7 +13,10 @@ const initialParentState = {
   lastName: "",
   email: "",
   pets: [],
+  prescriptions: [],
   appointments: [],
+  bookedAppointments: [],
+  askedQuestions: [],
 };
 
 const initialVetState = {
@@ -22,11 +25,14 @@ const initialVetState = {
   email: "",
   specializedIn: [],
   appointments: [],
+  topRatedFor: [],
+  answeredQuestions: [],
 };
 
 const Dashboard = () => {
   const [parent, setParent] = useState(initialParentState);
   const [vet, setVet] = useState(initialVetState);
+  const [questionQuery, setQuestionQuery] = useState(false);
   const [loading, setLoading] = useState(true);
   const userType = localStorage.getItem("userType");
 
@@ -40,15 +46,26 @@ const Dashboard = () => {
         try {
           const parentInfo = await apiClient.profile(accessToken);
           if (parentInfo) {
-            const { firstName, lastName, email, pets, appointments } =
-              parentInfo;
+            const {
+              firstName,
+              lastName,
+              email,
+              pets,
+              prescriptions,
+              appointments,
+              bookedAppointments,
+              askedQuestions,
+            } = parentInfo;
             setParent((prevState) => ({
               ...prevState,
               firstName,
               lastName,
               email,
               pets,
+              prescriptions,
               appointments,
+              bookedAppointments,
+              askedQuestions,
             }));
             setLoading(false);
           } else {
@@ -69,8 +86,15 @@ const Dashboard = () => {
         try {
           const vetInfo = await apiVet.profile(accessToken);
           if (vetInfo) {
-            const { firstName, lastName, email, specializedIn, appointments } =
-              vetInfo;
+            const {
+              firstName,
+              lastName,
+              email,
+              specializedIn,
+              appointments,
+              topRatedFor,
+              answeredQuestions,
+            } = vetInfo;
             setVet((prevState) => ({
               ...prevState,
               firstName,
@@ -78,6 +102,8 @@ const Dashboard = () => {
               email,
               specializedIn,
               appointments,
+              topRatedFor,
+              answeredQuestions,
             }));
             setLoading(false);
           } else {
@@ -96,7 +122,9 @@ const Dashboard = () => {
     return <CircularProgress />;
   }
   return (
-    <UserContext.Provider value={{ parent, vet }}>
+    <UserContext.Provider
+      value={{ parent, vet, questionQuery, setQuestionQuery }}
+    >
       {userType === "petParent" && <ParentProfile />}
       {userType === "vet" && <VetProfile />}
     </UserContext.Provider>

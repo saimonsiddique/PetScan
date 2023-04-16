@@ -24,15 +24,17 @@ const QuestionCard = (props) => {
   const { answerBox } = useContext(NewsFeedContext);
   const { question, date } = props;
   const answered = question.isAnswered;
+  const [voted, setVoted] = useState(false);
   const [upVote, setUpVote] = useState(question.upVotes);
   const [downVote, setDownVote] = useState(question.downVotes);
 
   const handleUpVote = () => {
-    setUpVote(!voted);
+    setVoted(!voted);
     setUpVote(upVote + 1);
   };
 
   const handleDownVote = () => {
+    setVoted(!voted);
     setDownVote(upVote - 1);
   };
 
@@ -88,16 +90,18 @@ const QuestionCard = (props) => {
             </div>
             <div className="helpful-section">
               <ThumbUpIcon />
-              <div className="people">108 people found this answer helpful</div>
+              <div className="people">
+                {question.upVotes} people found this answer helpful
+              </div>
             </div>
             <div className="voting-section">
               <div className="voting">
                 <div>WAS THIS ANSWER HELPFUL?</div>
                 <div>
-                  <IconButton>
+                  <IconButton disabled={answerBox}>
                     <ThumbUpAltOutlinedIcon />
                   </IconButton>
-                  <IconButton>
+                  <IconButton disabled={answerBox}>
                     <ThumbDownOffAltOutlinedIcon />
                   </IconButton>
                 </div>

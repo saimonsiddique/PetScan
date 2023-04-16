@@ -96,7 +96,7 @@ authVet.postAnswer = async (req, res) => {
     }
 
     // Update question with answer
-    await Question.findByIdAndUpdate(questionId, {
+    const newAnswer = await Question.findByIdAndUpdate(questionId, {
       $set: {
         ...req.body,
         vetId,
@@ -105,6 +105,9 @@ authVet.postAnswer = async (req, res) => {
         isAnswered: true,
       },
     });
+    const findAnsweredVet = await Vet.findById(vetId);
+    findAnsweredVet.answeredQuestions.push(newAnswer);
+    await findAnsweredVet.save();
     const sendUpdatedAnsweredInfo = await Question.find({ isAnswered: false });
     res.status(200).send(sendUpdatedAnsweredInfo);
   } catch (error) {

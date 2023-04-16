@@ -1,32 +1,16 @@
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../Pages/Dashboard";
 import { Box, Paper } from "@mui/material";
 import BookAppointment from "../Profile/subcomponents/ProfileContent/BookAppointment";
 import PetCard from "../Profile/subcomponents/ProfileContent/PetCard";
 import AppointmentCard from "../Profile/subcomponents/ProfileContent/AppointmentCard";
-const initialState = {
-  email: "",
-  firstName: "",
-  lastName: "",
-  pets: [],
-  appointments: [],
-};
+import QuestionLog from "../Profile/subcomponents/ProfileContent/QuestionLog";
+import "./DashboardContainer.css";
 
 const DashboardContainer = () => {
-  const [state, setState] = useState(initialState);
-  const { parent } = useContext(UserContext);
-  // retrieve parent data from context
-  useEffect(() => {
-    setState({
-      email: parent.email,
-      firstName: parent.firstName,
-      lastName: parent.lastName,
-      pets: parent.pets,
-      appointments: parent.appointments,
-    });
-  }, [parent]);
-
-  // console.log("parent", state.pets.length);
+  const { parent, vet, questionQuery, setQuestionQuery } =
+    useContext(UserContext);
+  const userType = localStorage.getItem("userType");
 
   return (
     <Box
@@ -39,42 +23,78 @@ const DashboardContainer = () => {
         },
       }}
     >
-      <Paper elevation={2}>
-        <div className="appointment">
-          <BookAppointment />
-        </div>
-        <div className="my-pets">
-          <div>
-            <span>
-              <h3>{parent.firstName}'s Pets</h3>
-            </span>
-          </div>
-          <div className="pet-card">
-            {state.pets.length > 0 ? (
-              state.pets.map((pet) => {
-                {
-                  console.log("map func", pet);
-                }
-                return <PetCard key={pet._id} pet={pet} />;
-              })
+      {!questionQuery ? (
+        <Paper elevation={2}>
+          <div className="appointment">
+            {userType === "petParent" ? (
+              <BookAppointment />
             ) : (
-              <div className="no-pets">
-                <h3>You have no pets</h3>
+              <div className="no-appointment">
+                <h3>You have no appointments</h3>
               </div>
             )}
           </div>
-        </div>
-        <div className="appointment-lists">
-          <div>
-            <span>
-              <h3>Upcoming Appointments</h3>
-            </span>
+          <div className="my-pets">
+            <div>
+              <span>
+                <h3>
+                  {userType === "petParent"
+                    ? `${parent.firstName}'s Pets`
+                    : `${vet.firstName}'s Patients`}
+                </h3>
+              </span>
+            </div>
+            <div className="pet-card">
+              {parent.pets.length > 0 ? (
+                parent.pets.map((pet) => {
+                  {
+                    console.log("map func", pet);
+                  }
+                  return <PetCard key={pet._id} pet={pet} />;
+                })
+              ) : (
+                <div className="no-pets">
+                  <h3>You have no pets</h3>
+                </div>
+              )}
+            </div>
           </div>
-          <div className="appointment-cards">
-            <AppointmentCard />
+          <div className="appointment-lists">
+            <div>
+              <span>
+                <h3>Upcoming Appointments</h3>
+              </span>
+            </div>
+            <div className="appointment-cards">
+              <AppointmentCard />
+            </div>
           </div>
-        </div>
-      </Paper>
+        </Paper>
+      ) : (
+        <Paper elevation={2}>
+          <div className="list-of-question-query">
+            {userType === "petParent" ? (
+              <>
+                <div className="heading-question-list">
+                  <h3>My Questions</h3>
+                </div>
+                {parent.askedQuestions.map((question) => {
+                  return <QuestionLog key={question._id} question={question} />;
+                })}
+              </>
+            ) : (
+              <>
+                <div className="heading-question-list">
+                  <h3>My Answers</h3>
+                </div>
+                {vet.answeredQuestions.map((question) => {
+                  return <QuestionLog key={question._id} question={question} />;
+                })}
+              </>
+            )}
+          </div>
+        </Paper>
+      )}
     </Box>
   );
 };

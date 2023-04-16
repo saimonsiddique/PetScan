@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { UserContext } from "../../../Pages/Dashboard";
 import { Link } from "react-router-dom";
 import { Box, List, ListItemButton, ListItemText } from "@mui/material";
 import LayersIcon from "@mui/icons-material/Layers";
@@ -9,6 +11,14 @@ import navLogo from "../../../../public/Homepage/parent-nav.jpg";
 import "./ProfileSideBar.css";
 
 const ProfileSideBar = () => {
+  const user = localStorage.getItem("userType");
+
+  const { questionQuery, setQuestionQuery } = useContext(UserContext);
+
+  const handleClick = () => {
+    setQuestionQuery(!questionQuery);
+  };
+
   return (
     <section className="side-bar">
       <img src={navLogo} alt="" className="side-logo" />
@@ -80,11 +90,15 @@ const ProfileSideBar = () => {
                   fontSize: "1.2rem",
                   fontFamily: "Roboto",
                 }}
-                primary="Book vet appointmnent"
+                primary={
+                  user === "petParent"
+                    ? "Book Appointment"
+                    : "Previous Sessions"
+                }
               />
             </ListItemButton>
           </Link>
-          <ListItemButton>
+          <ListItemButton onClick={handleClick}>
             <SettingsApplicationsSharpIcon />
             <ListItemText
               sx={{
@@ -94,7 +108,9 @@ const ProfileSideBar = () => {
                 fontSize: "1.2rem",
                 fontFamily: "Roboto",
               }}
-              primary="Settings"
+              primary={
+                user === "petParent" ? "Asked Questions" : "Answered Questions"
+              }
             />
           </ListItemButton>
         </List>
