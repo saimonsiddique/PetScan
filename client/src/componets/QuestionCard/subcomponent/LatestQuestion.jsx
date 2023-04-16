@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   Box,
   Paper,
@@ -18,8 +18,13 @@ import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import AnswerBox from "./AnswerBox";
 import "./LatestQuestion/LatestQuestion.css";
 import AnswerText from "./AnswerText";
+import { NewsFeedContext } from "../../NewsFeed/NewsFeed";
+import moment from "moment";
 
 const LatestQuestion = () => {
+  const { latestQuestion, answerBox } = useContext(NewsFeedContext);
+  const date = moment(latestQuestion.postDate).format("MMMM Do YYYY, h:mm a");
+
   return (
     <section className="latest-question-card-container">
       <div className="latest-question-card">
@@ -36,20 +41,22 @@ const LatestQuestion = () => {
           >
             <div className="latest-question-card-header">
               <h2>Question</h2>
-              <h4>Should cats with kidney disease be fed a specific diet?</h4>
+              <h4>{latestQuestion.question}</h4>
               <span>
-                Asked by <strong>Saimon Siddique</strong>
+                Asked by <strong>{latestQuestion.clientName}</strong>
               </span>
-              <span>Posted on Date</span>
+              <span>
+                Posted on <strong>{date}</strong>
+              </span>
             </div>
             <Divider />
             <div className="latest-answer-section">
               <div className="latest-answerText">
-                <AnswerText />
+                <AnswerText answer={latestQuestion} />
               </div>
               <div className="latest-answerBox">
                 <Divider />
-                <AnswerBox />
+                {answerBox ? <AnswerBox /> : null}
               </div>
             </div>
             <div className="latest-helpful-section">

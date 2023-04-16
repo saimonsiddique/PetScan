@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   Box,
   Paper,
@@ -18,7 +18,11 @@ import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import "./QuestionCard.css";
 import AnswerBox from "./subcomponent/AnswerBox";
 import AnswerText from "./subcomponent/AnswerText";
-const QuestionCard = () => {
+import { NewsFeedContext } from "../NewsFeed/NewsFeed";
+
+const QuestionCard = (props) => {
+  const { answerBox } = useContext(NewsFeedContext);
+  const { question, date } = props;
   const [upVote, setUpVote] = useState(false);
   const [downVote, setDownVote] = useState(false);
 
@@ -42,6 +46,7 @@ const QuestionCard = () => {
             display: "flex",
             justifyContent: "center",
             flexGrow: 1,
+            mt: 2,
           }}
         >
           <Paper
@@ -57,11 +62,13 @@ const QuestionCard = () => {
           >
             <div className="question-card-header">
               <h2>Question</h2>
-              <h4>Should cats with kidney disease be fed a specific diet?</h4>
+              <h4 align="justify">{question.question}</h4>
               <span>
-                Asked by <strong>Saimon Siddique</strong>
+                Asked by <strong>{question.clientName}</strong>
               </span>
-              <span>Posted on Date</span>
+              <span>
+                Posted on <strong>{date}</strong>
+              </span>
             </div>
             <Divider />
             <div className="answer-section">
@@ -70,7 +77,7 @@ const QuestionCard = () => {
               </div>
               <div className="answerBox">
                 <Divider />
-                <AnswerBox />
+                {answerBox ? <AnswerBox /> : null}
               </div>
             </div>
             <div className="helpful-section">

@@ -1,7 +1,7 @@
-import React from "react";
+import { useContext } from "react";
 import "../subcomponent/AnswerText/AnswerText.css";
 
-const AnswerText = () => {
+const AnswerText = (props) => {
   return (
     <section className="answer-text-container">
       <div className="answer-text">

@@ -168,4 +168,15 @@ authClient.postQuestion = async (req, res) => {
   }
 };
 
+authClient.feed = async (req, res) => {
+  try {
+    const allQuestions = await Question.find({}).sort({ postDate: "desc" });
+    console.log("allQuestions", allQuestions);
+    res.status(200).send(allQuestions);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error });
+  }
+};
+
 module.exports = authClient;

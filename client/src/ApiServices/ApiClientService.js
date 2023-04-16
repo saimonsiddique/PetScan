@@ -98,4 +98,15 @@ apiClient.postQuestion = async (accessToken, question) => {
   }
 };
 
+apiClient.getFeedQuestions = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/feed`);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    const { data } = response;
+    return data.msg;
+  }
+};
+
 export default apiClient;

@@ -24,6 +24,7 @@ router.post(
 
 // Common routes
 router.post("/signin", signInMiddleware);
+router.get("/feed", clientController.feed);
 
 // vet routes
 router.post("/signup/vet", vetController.signUp);
