@@ -93,7 +93,7 @@ const DashboardContainer = () => {
                 <div className="heading-question-list">
                   <h3>My Answers</h3>
                 </div>
-                {vet.answeredQuestions.map((question) => {
+                {vet.answeredQuestions.map((question, index) => {
                   return <QuestionLog key={question._id} question={question} />;
                 })}
               </>
