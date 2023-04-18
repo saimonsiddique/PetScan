@@ -50,12 +50,13 @@ const VetSignUp = () => {
     try {
       const response = await apiVet.signup(newVet);
       // save the token in the local storage
-      console.log("response", response);
-      // localStorage.setItem("acessToken", response.data.acessToken);
-      // localStorage.setItem("userType", response.data.user);
-
+      const { accessToken, fullName, email, user } = response;
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("userType", user);
+      localStorage.setItem("fullName", fullName);
+      localStorage.setItem("email", email);
       // navigate to the dashboard
-      navigate("/dashboard");
+      navigate("/vet/details");
     } catch (error) {
       console.log(error);
     }

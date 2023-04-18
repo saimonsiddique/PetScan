@@ -40,14 +40,13 @@ const questionSchema = new Schema({
     default: false,
   },
 
-  upVotes: {
-    type: Number,
-    default: 0,
+  votedClients: {
+    type: [String],
+    default: [],
   },
-
-  downVotes: {
-    type: Number,
-    default: 0,
+  category: {
+    type: String,
+    default: "General",
   },
 
   isVoted: {

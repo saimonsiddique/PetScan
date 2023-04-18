@@ -1,4 +1,5 @@
 const Vet = require("../models/vet.model");
+const Client = require("../models/client.model");
 const Question = require("../models/question.model");
 const { generateToken } = require("../config/generateToken");
 const bcrypt = require("bcrypt");
@@ -35,7 +36,9 @@ authVet.signUp = async (req, res) => {
     const accessToken = generateToken(savedVet);
     const sendData = {
       accessToken,
-      user: "vet",
+      fullName: `${savedVet.firstName} ${savedVet.lastName}`,
+      email: savedVet.email,
+      user: "petParent",
     };
     res.status(201).send(sendData);
   } catch (error) {
@@ -105,10 +108,59 @@ authVet.postAnswer = async (req, res) => {
       },
     });
     const findAnsweredVet = await Vet.findById(vetId);
-    findAnsweredVet.answeredQuestions.push(newAnswer);
+    const answered = await Question.findById(questionId);
+    findAnsweredVet.answeredQuestions.push(answered);
     await findAnsweredVet.save();
+
+    // On client side, this will be used to update the state of the question
+    const findClient = await Client.findById(answered.clietId);
+    const findQuestionIndex = findClient.askedQuestions.findIndex(
+      (question) => question._id == questionId
+    );
+
+    findClient.askedQuestions[findQuestionIndex] = {
+      ...findClient.askedQuestions[findQuestionIndex],
+      answer,
+      vetId,
+      vetName: `${req.vet.firstName} ${req.vet.lastName}`,
+      answeredDate: Date.now(),
+      isAnswered: true,
+    };
+    await findClient.save();
     const sendUpdatedAnsweredInfo = await Question.find({ isAnswered: false });
     res.status(200).send(sendUpdatedAnsweredInfo);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Server error" });
+  }
+};
+
+authVet.vetInfo = async (req, res) => {
+  console.log("I am here with vetInfo", req.body);
+  try {
+    const {
+      postNominal,
+      specializedField,
+      licenseNumber,
+      education,
+      passingYear,
+      phone,
+    } = req.body;
+    const vetId = req.vet.id;
+    const addNewInfo = await Vet.findByIdAndUpdate(vetId, {
+      $set: {
+        ...req.body,
+        postNominal,
+        specializedField,
+        licenseNumber,
+        education,
+        passingYear,
+        phone,
+      },
+    });
+    // save new info
+    await addNewInfo.save();
+    res.status(200).send(addNewInfo);
   } catch (error) {
     console.log(error);
     res.status(500).json({ msg: "Server error" });

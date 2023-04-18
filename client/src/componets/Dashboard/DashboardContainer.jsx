@@ -1,6 +1,8 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "../../Pages/Dashboard";
 import { Box, Paper } from "@mui/material";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 import BookAppointment from "../Profile/subcomponents/ProfileContent/BookAppointment";
 import PetCard from "../Profile/subcomponents/ProfileContent/PetCard";
 import AppointmentCard from "../Profile/subcomponents/ProfileContent/AppointmentCard";
@@ -91,10 +93,16 @@ const DashboardContainer = () => {
             ) : (
               <>
                 <div className="heading-question-list">
-                  <h3>My Answers</h3>
+                  <h3>{vet.firstName}'s Answers</h3>
                 </div>
                 {vet.answeredQuestions.map((question, index) => {
-                  return <QuestionLog key={question._id} question={question} />;
+                  return (
+                    <QuestionLog
+                      key={question._id}
+                      question={question}
+                      index={index}
+                    />
+                  );
                 })}
               </>
             )}

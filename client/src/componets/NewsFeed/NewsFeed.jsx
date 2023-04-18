@@ -11,7 +11,7 @@ import BookAppointment from "../Profile/subcomponents/ProfileContent/BookAppoint
 export const NewsFeedContext = createContext();
 
 const NewsFeed = () => {
-  const [allQuestions, setAllQuestions] = useState([]);
+  // const [answeredQuestions, setAnsweredQuestions] = useState([]);
   const [notAnsweredQuestions, setNotAnsweredQuestions] = useState([]);
   const [latestQuestion, setLatestQuestion] = useState([]);
   const [prevQuestion, setPrevQuestion] = useState([]);
@@ -35,13 +35,17 @@ const NewsFeed = () => {
   const getAllQuestions = async () => {
     // get all questions
     const allQuestionsfromDB = await apiClient.getFeedQuestions();
-    // set all questions
-    setAllQuestions(allQuestionsfromDB);
     // set latest question
     setLatestQuestion(allQuestionsfromDB[0]);
+    // remove the first element of allQuestionfromDB
+
+    // sort all questions by voteClients length
+    let sortedQuestions = allQuestionsfromDB.slice(1).sort((a, b) => {
+      return b.votedClients.length - a.votedClients.length;
+    });
     // set previous questions
-    setPrevQuestion(allQuestionsfromDB.slice(1));
-    // set all answered questions
+    setPrevQuestion(sortedQuestions);
+    // set all not answered questions
     const answrNotFound = allQuestionsfromDB.filter(
       (question) => question.isAnswered === false
     );
@@ -51,8 +55,6 @@ const NewsFeed = () => {
   return (
     <NewsFeedContext.Provider
       value={{
-        allQuestions,
-        setAllQuestions,
         latestQuestion,
         setLatestQuestion,
         prevQuestion,
@@ -74,7 +76,7 @@ const NewsFeed = () => {
               {!answerBox && <BookAppointment />}
             </div>
             <div className="latest-question">
-              {!answerBox && <LatestQuestion question={latestQuestion} />}
+              {!answerBox && <LatestQuestion />}
             </div>
           </div>
           <div className="feed-questions">
@@ -83,14 +85,18 @@ const NewsFeed = () => {
                   <QuestionCard
                     key={question._id}
                     question={question}
-                    date={moment(question.postDate).format("MMM Do YY")}
+                    date={moment(question.postDate).format(
+                      "MMMM Do YYYY, h:mm a"
+                    )}
                   ></QuestionCard>
                 ))
               : prevQuestion.map((question) => (
                   <QuestionCard
                     key={question._id}
                     question={question}
-                    date={moment(question.postDate).format("MMM Do YY")}
+                    date={moment(question.postDate).format(
+                      "MMMM Do YYYY, h:mm a"
+                    )}
                   />
                 ))}
           </div>

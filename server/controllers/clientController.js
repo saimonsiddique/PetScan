@@ -1,10 +1,9 @@
 const Client = require("../models/client.model");
 const Pet = require("../models/pet.model");
 const Question = require("../models/question.model");
-const Booking = require("../models/book.appointment");
+const Booking = require("../models/appointment");
 const { generateToken } = require("../config/generateToken");
 const bcrypt = require("bcrypt");
-const openai = require("../index");
 
 const authClient = {};
 
@@ -65,7 +64,9 @@ authClient.signIn = async (req, res) => {
     }
     // Create token
     const accessToken = generateToken(client);
-    res.status(200).send({ accessToken, user: "petParent" });
+    res
+      .status(200)
+      .send({ accessToken, user: "petParent", userId: client._id });
   } catch (error) {
     res.status(401).send({ error: "Invalid credentials" });
   }
@@ -160,8 +161,9 @@ authClient.postQuestion = async (req, res) => {
     });
     const savedQuestion = await newQuestion.save();
     const client = await Client.findById(req.client.id);
-    client.askedQuestions.push(newQuestion);
+    client.askedQuestions.push(savedQuestion);
     await client.save();
+    // sende savedQuestion to the front end
     res.status(201).send(savedQuestion);
   } catch (error) {
     console.log(error);
@@ -172,6 +174,7 @@ authClient.postQuestion = async (req, res) => {
 authClient.feed = async (req, res) => {
   try {
     const allQuestions = await Question.find({}).sort({ postDate: "desc" });
+    // console.log("allQuestions", allQuestions);
     res.status(200).send(allQuestions);
   } catch (error) {
     console.log(error);
@@ -179,26 +182,71 @@ authClient.feed = async (req, res) => {
   }
 };
 
-authClient.vote = async (req, res) => {
+authClient.postVote = async (req, res) => {
+  console.log("I am here to update votes", req.body);
   try {
-    const { questionId, vote } = req.body;
-    const updateVote = await Question.findByIdAndUpdate(questionId, {
-      $inc: { votes: vote },
-    });
-    res.status(200).send(updateVote);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error });
-  }
-};
+    const { questionId, userId } = req.body;
+    // make userId a string
+    const userIdString = userId.toString();
+    // find the question
+    const updateQuestion = await Question.findOne({ _id: questionId });
+    // check if the user has already voted
+    const hasVoted = updateQuestion.votedClients.includes(userIdString);
+    // if the user not voted yet
+    if (!hasVoted) {
+      // update the question
+      updateQuestion.votedClients.push(userIdString);
+      await updateQuestion.save();
+      // find client and update the votedQuestions array in client askedQuestions
+      const client = await Client.findOne({ _id: userId });
+      console.log("client", client);
+      client.askedQuestions.map((question) => {
+        if (question._id.toString() === questionId) {
+          question.votedClients.push(userIdString);
+        }
+      });
+      // update votedQuestions array in client
+      client.votedQuestions.push(updateQuestion);
+      await client.save();
+      const sortQuestionByDate = await Question.find({}).sort({
+        postDate: "desc",
+      });
+      res.status(200).send(sortQuestionByDate);
+    }
+    // if the user has already voted
+    else {
+      //remove the user from the votedClients array
+      const index = updateQuestion.votedClients.indexOf(userIdString);
+      if (index > -1) {
+        updateQuestion.votedClients.splice(index, 1);
+      }
+      await updateQuestion.save();
+      // find client and update the votedQuestions array in client askedQuestions
+      const client = await Client.findOne({ _id: userId });
+      client.askedQuestions.map((question) => {
+        if (question._id.toString() === questionId) {
+          const index = question.votedClients.indexOf(userIdString);
+          if (index > -1) {
+            question.votedClients.splice(index, 1);
+          }
+        }
+      });
 
-authClient.search = async (req, res) => {
-  try {
-    const { search } = req.body;
-    const searchResult = await Question.find({
-      $text: { $search: search },
-    }).sort({ postDate: "desc" });
-    res.status(200).send(searchResult);
+      // remove the question from the votedQuestions array in client
+      client.votedQuestions.map((question) => {
+        if (question._id.toString() === questionId) {
+          const index = client.votedQuestions.indexOf(question);
+          if (index > -1) {
+            client.votedQuestions.splice(index, 1);
+          }
+        }
+      });
+      await client.save();
+      const sortQuestionByDate = await Question.find({}).sort({
+        postDate: "desc",
+      });
+      res.status(200).send(sortQuestionByDate);
+    }
   } catch (error) {
     console.log(error);
     res.status(500).json({ error });

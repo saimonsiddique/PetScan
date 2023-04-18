@@ -13,6 +13,7 @@ import Dashboard from "./Pages/Dashboard";
 // Test
 import Meet from "./Pages/Meet";
 import Success from "./componets/Success/Success";
+import VetSteps from "./componets/VetSteps/VetSteps";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -27,6 +28,7 @@ function App() {
           <Route path="petParent" element={<SignUp />} />
           <Route path="vet" element={<VetSignUp />} />
         </Route>
+        <Route path="/vet/details" element={<VetSteps />} />
         <Route path="/pet">
           <Route path="add" element={<AddPet />} />
         </Route>

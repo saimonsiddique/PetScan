@@ -1,7 +1,13 @@
 import { Box, Paper } from "@mui/material";
-import { InlineWidget } from "react-calendly";
+import { InlineWidget, useCalendlyEventListener } from "react-calendly";
 
 const StepThree = () => {
+  useCalendlyEventListener({
+    onProfilePageViewed: (e) => console.log("onProfilePageViewed", e),
+    onDateAndTimeSelected: (e) => console.log("onDateAndTimeSelected", e),
+    onEventTypeViewed: (e) => console.log("onEventTypeViewed", e),
+    onEventScheduled: (e) => console.log(e.data.payload),
+  });
   return (
     <Box
       sx={{

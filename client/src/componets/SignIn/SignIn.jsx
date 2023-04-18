@@ -65,6 +65,7 @@ const SignIn = () => {
       // save the token and usetype in the local storage
       localStorage.setItem("accessToken", response.accessToken);
       localStorage.setItem("userType", response.user);
+      localStorage.setItem("userId", response.userId);
       // redirect to the profile page upon successful login
 
       // navigate("/dashboard");

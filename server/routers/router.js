@@ -21,7 +21,7 @@ router.post(
   authMiddleware.client,
   clientController.postQuestion
 );
-router.put("/vote", authMiddleware.client, clientController.vote);
+router.post("/upvotes", clientController.postVote);
 
 // Common routes
 router.post("/signin", signInMiddleware);
@@ -29,6 +29,7 @@ router.get("/feed", clientController.feed);
 
 // vet routes
 router.post("/signup/vet", vetController.signUp);
+router.post("/vet/info", authMiddleware.vet, vetController.vetInfo);
 router.get("/profile/vet", authMiddleware.vet, vetController.profile);
 router.post("/vet/postAnswer", authMiddleware.vet, vetController.postAnswer);
 module.exports = router;

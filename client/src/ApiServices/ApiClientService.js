@@ -84,7 +84,6 @@ apiClient.createAppointment = async (accessToken, appointment) => {
 
 apiClient.postQuestion = async (accessToken, question) => {
   try {
-    console.log("I am from apiClient", question);
     const response = await axios.post(`${BASE_URL}/question/add`, question, {
       headers: {
         "Content-Type": "application/json",
@@ -101,6 +100,20 @@ apiClient.postQuestion = async (accessToken, question) => {
 apiClient.getFeedQuestions = async () => {
   try {
     const response = await axios.get(`${BASE_URL}/feed`);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    const { data } = response;
+    return data.msg;
+  }
+};
+
+apiClient.upVoter = async (questionId, userId) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/upvotes`, {
+      questionId,
+      userId,
+    });
     console.log(response.data);
     return response.data;
   } catch (error) {

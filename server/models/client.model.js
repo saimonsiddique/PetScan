@@ -17,6 +17,13 @@ const clientSchema = new Schema({
     type: String,
     required: true,
   },
+
+  profilePicture: {
+    type: String,
+    default:
+      "https://res.cloudinary.com/dru7kzv3i/image/upload/v1681601995/dog-photo_znt6lo.jpg",
+  },
+
   pets: {
     type: [Schema.Types.Object],
     // required: true,
@@ -32,6 +39,9 @@ const clientSchema = new Schema({
     type: [Schema.Types.Object],
   },
   askedQuestions: {
+    type: [Schema.Types.Object],
+  },
+  votedQuestions: {
     type: [Schema.Types.Object],
   },
 });

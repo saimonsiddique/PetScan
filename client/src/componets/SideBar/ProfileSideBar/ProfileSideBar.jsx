@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../Pages/Dashboard";
 import { Link } from "react-router-dom";
 import { Box, List, ListItemButton, ListItemText } from "@mui/material";
@@ -12,6 +13,7 @@ import "./ProfileSideBar.css";
 
 const ProfileSideBar = () => {
   const user = localStorage.getItem("userType");
+  const navigate = useNavigate();
 
   const { questionQuery, setQuestionQuery } = useContext(UserContext);
 
@@ -45,6 +47,7 @@ const ProfileSideBar = () => {
             sx={{
               borderRadius: "10px",
             }}
+            onClick={() => navigate("/pet/add")}
           >
             <PetsIcon />
             <ListItemText

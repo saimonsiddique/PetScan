@@ -17,7 +17,38 @@ const vetSchema = new Schema({
     type: String,
     required: true,
   },
-  specializedIn: {
+
+  postNominal: {
+    type: String,
+  },
+
+  licenseNumber: {
+    type: Number,
+    // required: true,
+  },
+
+  education: {
+    type: String,
+    // required: true,
+  },
+
+  passingYear: {
+    type: Number,
+    // required: true,
+  },
+
+  phone: {
+    type: String,
+    // required: true,
+  },
+
+  vetProfile: {
+    type: String,
+    default:
+      "https://res.cloudinary.com/dru7kzv3i/image/upload/v1681601995/dog-photo_znt6lo.jpg",
+  },
+
+  specializedField: {
     type: [String],
     // required: true,
   },

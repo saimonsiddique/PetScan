@@ -15,6 +15,21 @@ apiVet.signup = async (user) => {
   }
 };
 
+apiVet.vetInfo = async (accessToken, vetInfo) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/vet/info`, vetInfo, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    const { data } = response;
+    return data.msg;
+  }
+};
+
 apiVet.profile = async (token) => {
   try {
     const response = await axios.get(`${BASE_URL}/profile/vet`, {
