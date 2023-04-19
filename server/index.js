@@ -1,5 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const cloudinary = require("cloudinary").v2;
 const mongoose = require("mongoose");
 const router = require("./routers/router");
 const cors = require("cors");
@@ -9,6 +10,12 @@ const DB_PORT = process.env.DB_PORT;
 const URI = process.env.DB_URL + DB_PORT + "/PetScan";
 
 const app = express();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 app.use(cors());
 app.use(express.json());

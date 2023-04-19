@@ -22,25 +22,44 @@ const VetStepOne = () => {
   };
 
   return (
-    <Paper
-      sx={{
-        p: "2rem",
-        display: "flex",
-        borderRadius: "1rem",
-        flexDirection: "column",
-        justifyContent: "center",
-        height: "75vh",
-      }}
-      elevation={2}
-    >
-      <Box
+    <>
+      <Paper
         sx={{
+          p: "2rem",
           display: "flex",
+          borderRadius: "1rem",
           flexDirection: "column",
           justifyContent: "center",
-          flexGrow: 1,
+          height: "75vh",
         }}
+        elevation={2}
       >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            flexGrow: 1,
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              flexGrow: 1,
+            }}
+          >
+            <MedicationLiquidIcon
+              sx={{
+                fontSize: 30,
+                color: "#3f51b5",
+                display: "flex",
+                margin: "0 0.5rem",
+              }}
+            />
+            <Typography variant="body1">Tell us about you</Typography>
+          </Box>
+        </Box>
         <Box
           sx={{
             display: "flex",
@@ -48,230 +67,213 @@ const VetStepOne = () => {
             flexGrow: 1,
           }}
         >
-          <MedicationLiquidIcon
-            sx={{
-              fontSize: 30,
-              color: "#3f51b5",
-              display: "flex",
-              margin: "0 0.5rem",
-            }}
-          />
-          <Typography variant="body1">Tell us about you</Typography>
-        </Box>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          flexGrow: 1,
-        }}
-      >
-        <Typography variant="body1">
-          Please Enter your details. We will use this information to create your
-          profile and verify your license.
-        </Typography>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "left",
-          mt: 2,
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            m: 0.8,
-            justifyContent: "left",
-            flexGrow: 1,
-          }}
-        >
-          <EmailIcon />
-          <Box sx={{ mx: 1 }}>
-            <Typography
-              variant="body1"
-              sx={{
-                fontSize: 18,
-                fontWeight: "bold",
-              }}
-            >
-              Email Address
-            </Typography>
-          </Box>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-          }}
-        >
-          <Typography
-            variant="body2"
-            sx={{
-              fontSize: 16,
-              fontWeight: 450,
-            }}
-          >
-            {email}
+          <Typography variant="body1">
+            Please Enter your details. We will use this information to create
+            your profile and verify your license.
           </Typography>
-          <LockIcon sx={{ ml: 1, fontSize: 15, color: "#3f51b5" }} />
         </Box>
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
-            m: 1,
             justifyContent: "left",
-            flexGrow: 1,
+            mt: 2,
           }}
         >
           <Box
             sx={{
               display: "flex",
-              flexDirection: "column",
-              mt: 2,
+              m: 0.8,
+              justifyContent: "left",
               flexGrow: 1,
             }}
           >
+            <EmailIcon />
+            <Box sx={{ mx: 1 }}>
+              <Typography
+                variant="body1"
+                sx={{
+                  fontSize: 18,
+                  fontWeight: "bold",
+                }}
+              >
+                Email Address
+              </Typography>
+            </Box>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+            }}
+          >
             <Typography
-              component={"span"}
+              variant="body2"
               sx={{
-                fontSize: 18,
-                fontWeight: "bold",
-                color: "#42389D",
+                fontSize: 16,
+                fontWeight: 450,
               }}
             >
-              Full Name
+              {email}
             </Typography>
-            <TextField
-              sx={{
-                width: "50%",
-                height: "2rem",
-                mt: 1.5,
-              }}
-              placeholder={fullName}
-              disabled={true}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <AccountCircle />
-                  </InputAdornment>
-                ),
-              }}
-            />
+            <LockIcon sx={{ ml: 1, fontSize: 15, color: "#3f51b5" }} />
           </Box>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            m: 1,
-            justifyContent: "left",
-            flexGrow: 1,
-          }}
-        >
           <Box
             sx={{
               display: "flex",
               flexDirection: "column",
-              mt: 2,
+              m: 1,
+              justifyContent: "left",
               flexGrow: 1,
             }}
           >
-            <Typography
-              component={"span"}
+            <Box
               sx={{
-                fontSize: 18,
-                fontWeight: "bold",
-                color: "#42389D",
+                display: "flex",
+                flexDirection: "column",
+                mt: 2,
+                flexGrow: 1,
               }}
             >
-              Post-Nomial-Letters
-            </Typography>
-            <TextField
-              sx={{
-                width: "50%",
-                height: "2rem",
-                mt: 1.5,
-              }}
-              placeholder="e.g. DVM, MRCVS, MVB,"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <PersonIcon />
-                  </InputAdornment>
-                ),
-              }}
-              onChange={handlePostNominal}
-            />
+              <Typography
+                component={"span"}
+                sx={{
+                  fontSize: 18,
+                  fontWeight: "bold",
+                  color: "#42389D",
+                }}
+              >
+                Full Name
+              </Typography>
+              <TextField
+                sx={{
+                  width: "50%",
+                  height: "2rem",
+                  mt: 1.5,
+                }}
+                placeholder={fullName}
+                disabled={true}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <AccountCircle />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Box>
           </Box>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            m: 1,
-            justifyContent: "left",
-            flexGrow: 1,
-          }}
-        >
           <Box
             sx={{
               display: "flex",
               flexDirection: "column",
-              mt: 2,
+              m: 1,
+              justifyContent: "left",
               flexGrow: 1,
             }}
           >
-            <Typography
-              component={"span"}
+            <Box
               sx={{
-                fontSize: 18,
-                fontWeight: "bold",
-                color: "#42389D",
+                display: "flex",
+                flexDirection: "column",
+                mt: 2,
+                flexGrow: 1,
               }}
             >
-              Specialized Fields
-            </Typography>
-            <TextField
+              <Typography
+                component={"span"}
+                sx={{
+                  fontSize: 18,
+                  fontWeight: "bold",
+                  color: "#42389D",
+                }}
+              >
+                Post-Nomial-Letters
+              </Typography>
+              <TextField
+                sx={{
+                  width: "50%",
+                  height: "2rem",
+                  mt: 1.5,
+                }}
+                placeholder="e.g. DVM, MRCVS, MVB,"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <PersonIcon />
+                    </InputAdornment>
+                  ),
+                }}
+                onChange={handlePostNominal}
+              />
+            </Box>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              m: 1,
+              justifyContent: "left",
+              flexGrow: 1,
+            }}
+          >
+            <Box
               sx={{
-                width: "50%",
+                display: "flex",
+                flexDirection: "column",
+                mt: 2,
+                flexGrow: 1,
+              }}
+            >
+              <Typography
+                component={"span"}
+                sx={{
+                  fontSize: 18,
+                  fontWeight: "bold",
+                  color: "#42389D",
+                }}
+              >
+                Specialized Fields
+              </Typography>
+              <TextField
+                sx={{
+                  width: "50%",
+                  height: "2rem",
+                  mt: 1.5,
+                }}
+                onChange={handleSpecializedFields}
+                placeholder="e.g. Cat, Dog, Bird, etc."
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <PersonIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Box>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              m: 2,
+              justifyContent: "flex-end",
+              flexGrow: 1,
+            }}
+          >
+            <Button
+              sx={{
+                width: "20%",
                 height: "2rem",
-                mt: 1.5,
               }}
-              onChange={handleSpecializedFields}
-              placeholder="e.g. Cat, Dog, Bird, etc."
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <PersonIcon />
-                  </InputAdornment>
-                ),
-              }}
-            />
+              variant="outlined"
+              onClick={handleNext}
+            >
+              Next
+            </Button>
           </Box>
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            m: 2,
-            justifyContent: "flex-end",
-            flexGrow: 1,
-          }}
-        >
-          <Button
-            sx={{
-              width: "20%",
-              height: "2rem",
-            }}
-            variant="outlined"
-            onClick={handleNext}
-          >
-            Next
-          </Button>
-        </Box>
-      </Box>
-    </Paper>
+      </Paper>
+    </>
   );
 };
 

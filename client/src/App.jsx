@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, createContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Error from "./Pages/Error";
@@ -15,11 +15,13 @@ import Meet from "./Pages/Meet";
 import Success from "./componets/Success/Success";
 import VetSteps from "./componets/VetSteps/VetSteps";
 
+export const ImageContext = createContext(null);
+
 function App() {
-  const [count, setCount] = useState(0);
+  const [image, setImage] = useState("");
 
   return (
-    <>
+    <ImageContext.Provider value={{ image, setImage }}>
       <Routes>
         <Route path="/error" element={<Error />} />
         <Route path="/" element={<Home />} />
@@ -37,7 +39,7 @@ function App() {
         <Route path="/book-appointment" element={<Meet />} />
         <Route path="/success" element={<Success />} />
       </Routes>
-    </>
+    </ImageContext.Provider>
   );
 }
 

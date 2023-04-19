@@ -1,4 +1,4 @@
-import { useState, createContext, useEffect } from "react";
+import { useState, createContext, useEffect, useContext } from "react";
 import apiVet from "../../ApiServices/ApiVetServices";
 import { Box, Paper } from "@mui/material";
 import Stepper from "@mui/material/Stepper";
@@ -10,6 +10,7 @@ import VetStepOne from "../MultiStepForm/StepOne/VetStepOne";
 import "./VetSteps.css";
 import VetStepTwo from "../MultiStepForm/StepTwo/VetStepTwo";
 import VetStepThree from "../MultiStepForm/StepThree/VetStepThree";
+import { ImageContext } from "../../App";
 
 const steps = ["About", "Credentials", "Verification"];
 
@@ -18,6 +19,7 @@ const vetSteps = [<VetStepOne />, <VetStepTwo />, <VetStepThree />];
 export const VetStepsContext = createContext(null);
 
 const VetSteps = () => {
+  const { image } = useContext(ImageContext);
   const [activeStep, setActiveStep] = useState(0);
   const [postNominal, setPostNominal] = useState("");
   const [specializedField, setSpecializedFields] = useState([]);
@@ -44,6 +46,7 @@ const VetSteps = () => {
         education,
         year,
         phone,
+        vetProfile: image,
       };
       const response = apiVet.vetInfo(acessToken, vetInfo);
       console.log(response);

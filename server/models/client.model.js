@@ -20,8 +20,6 @@ const clientSchema = new Schema({
 
   profilePicture: {
     type: String,
-    default:
-      "https://res.cloudinary.com/dru7kzv3i/image/upload/v1681601995/dog-photo_znt6lo.jpg",
   },
 
   pets: {

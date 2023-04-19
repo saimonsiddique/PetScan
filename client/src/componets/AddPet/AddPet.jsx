@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import apiClient from "../../ApiServices/ApiClientService";
 import { useNavigate } from "react-router-dom";
 import {
@@ -13,8 +13,11 @@ import {
   FormGroup,
   FormControlLabel,
   Stack,
+  Typography,
 } from "@mui/material";
 import "./AddPet.css";
+import ImageUpload from "../ImageUpload/ImageUpload";
+import { ImageContext } from "../../App";
 
 const initialState = {
   petName: "",
@@ -33,6 +36,7 @@ const petSpecies = ["Dog", "Cat", "Bird", "Fish", "Farm Animal", "Other"];
 
 const PetInfo = () => {
   let navigate = useNavigate();
+  const { image } = useContext(ImageContext);
   const [state, setState] = useState(initialState);
   const [prevMed, setPrevMed] = useState(false);
   const [neutered, setNeutered] = useState(false);
@@ -73,7 +77,11 @@ const PetInfo = () => {
       petGender,
       previousMedicalHistory,
       neutered,
+      petPhoto: image,
     };
+
+    console.log(newPet);
+
     try {
       // get accessToken from local storage
       const token = localStorage.getItem("accessToken");
@@ -269,12 +277,16 @@ const PetInfo = () => {
             ) : null}
 
             <section className="prev-history">
-              <span>Upload a photo of your pet </span>
-              <Box>
-                <Button variant="contained" component="label">
-                  Upload
-                  <input hidden accept="image/*" multiple type="file" />
-                </Button>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "32vw",
+                  m: 1.25,
+                }}
+              >
+                <Typography variant="body2">Upload your pet photo</Typography>
+                <ImageUpload />
               </Box>
             </section>
 

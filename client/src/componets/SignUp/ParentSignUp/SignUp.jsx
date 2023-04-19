@@ -1,13 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { Stack, Button, Box, Divider, TextField } from "@mui/material";
+import {
+  Stack,
+  Button,
+  Box,
+  Divider,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { InputAdornment, IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import apiClient from "../../../ApiServices/ApiClientService";
 import userWithPet from "../../../assets/signup/user-with-pet.svg";
 import "./SignUp.css";
-const PASS_MIN_LENGTH = 8;
+import ImageUpload from "../../ImageUpload/ImageUpload";
+
+import { ImageContext } from "../../../App";
 
 const initialState = {
   firstName: "",
@@ -19,6 +28,7 @@ const initialState = {
 
 const SignUp = () => {
   let navigate = useNavigate();
+  const { image } = useContext(ImageContext);
   const [state, setState] = useState(initialState);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -43,7 +53,10 @@ const SignUp = () => {
       lastName,
       email,
       password,
+      profilePicture: image,
     };
+
+    console.log(newUser);
     // send the user data to the server
     try {
       const response = await apiClient.signup(newUser);
@@ -201,6 +214,27 @@ const SignUp = () => {
                   ),
                 }}
               />
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <Typography
+                variant="body2"
+                color="primary"
+                align="center"
+                sx={{
+                  mt: 1,
+                  mr: 1,
+                  ml: 1,
+                  fontWeight: "bold",
+                }}
+              >
+                Upload a profile picture
+              </Typography>
+              <ImageUpload />
             </Box>
           </div>
           <Box

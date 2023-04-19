@@ -36,7 +36,7 @@ const PetCard = (props) => {
           <CardMedia
             component="img"
             height="140"
-            image="https://res.cloudinary.com/dru7kzv3i/image/upload/v1681601995/dog-photo_znt6lo.jpg"
+            image={pet.petPhoto}
             alt="Your Pet"
           />
           <CardContent>
