@@ -249,6 +249,7 @@ const SignUp = () => {
               variant="contained"
               style={{ width: "52ch" }}
               onClick={createUser}
+              disabled={!image}
             >
               Create Account
             </Button>

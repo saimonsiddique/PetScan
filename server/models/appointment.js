@@ -6,13 +6,33 @@ const AppiontmentSchema = new Schema({
     ref: "Client",
     required: true,
   },
-  petName: {
+  vet: {
+    type: Schema.Types.ObjectId,
+    ref: "Vet",
+  },
+
+  pet: {
     type: String,
     required: true,
   },
   concern: {
     type: String,
     required: true,
+  },
+
+  date: {
+    type: Date,
+  },
+  time: {
+    type: String,
+  },
+  status: {
+    type: String,
+    default: "Pending",
+  },
+
+  calendly: {
+    type: String,
   },
 });
 

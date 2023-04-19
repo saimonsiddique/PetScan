@@ -194,6 +194,7 @@ const VetStepTwo = () => {
               type="submit"
               variant="contained"
               onClick={handleSubmit}
+              disabled={!image}
             >
               Add
             </Button>

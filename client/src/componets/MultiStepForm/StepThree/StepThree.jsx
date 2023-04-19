@@ -1,13 +1,11 @@
+import { useContext } from "react";
 import { Box, Paper } from "@mui/material";
 import { InlineWidget, useCalendlyEventListener } from "react-calendly";
+import VetCard from "../../VetCard/VetCard";
+import { InfomationContext } from "../../../Pages/Meet";
 
 const StepThree = () => {
-  useCalendlyEventListener({
-    onProfilePageViewed: (e) => console.log("onProfilePageViewed", e),
-    onDateAndTimeSelected: (e) => console.log("onDateAndTimeSelected", e),
-    onEventTypeViewed: (e) => console.log("onEventTypeViewed", e),
-    onEventScheduled: (e) => console.log(e.data.payload),
-  });
+  const { matchedVet } = useContext(InfomationContext);
   return (
     <Box
       sx={{
@@ -18,15 +16,9 @@ const StepThree = () => {
         height: "100%",
       }}
     >
-      <InlineWidget
-        url="https://calendly.com/saimonsiddiquee/30min"
-        styles={{
-          width: "60vw",
-          height: "50vh",
-          overflow: "hidden",
-          overflowY: "scroll",
-        }}
-      />
+      {matchedVet.map((vet) => {
+        return <VetCard key={vet._id} vet={vet} />;
+      })}
     </Box>
   );
 };

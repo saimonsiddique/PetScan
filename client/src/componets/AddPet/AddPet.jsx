@@ -79,15 +79,13 @@ const PetInfo = () => {
       neutered,
       petPhoto: image,
     };
-
-    console.log(newPet);
-
     try {
       // get accessToken from local storage
       const token = localStorage.getItem("accessToken");
 
       // send newPet to the backend
-      await apiClient.addPet(newPet, token);
+      const response_addPet = await apiClient.addPet(newPet, token);
+      console.log(response_addPet);
 
       // redirect to the ParentProfile page
       navigate("/dashboard");
@@ -301,6 +299,7 @@ const PetInfo = () => {
                 variant="contained"
                 style={{ marginTop: "1rem", marginLeft: "1rem", width: "20%" }}
                 onClick={handleSubmit}
+                disabled={!image}
               >
                 Next
               </Button>

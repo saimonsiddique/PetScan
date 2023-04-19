@@ -62,6 +62,21 @@ apiClient.petInfo = async (token) => {
   }
 };
 
+apiClient.findVet = async (accessToken, vet) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/vet/find`, vet, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    const { data } = response;
+    return data.msg;
+  }
+};
+
 apiClient.createAppointment = async (accessToken, appointment) => {
   try {
     const response = await axios.post(

@@ -1,7 +1,8 @@
 const Client = require("../models/client.model");
 const Pet = require("../models/pet.model");
 const Question = require("../models/question.model");
-const Booking = require("../models/appointment");
+const Appointment = require("../models/appointment");
+const Vet = require("../models/vet.model");
 const { generateToken } = require("../config/generateToken");
 const bcrypt = require("bcrypt");
 
@@ -133,18 +134,36 @@ authClient.petInfo = async (req, res) => {
   }
 };
 
+authClient.findVet = async (req, res) => {
+  console.log("I am here to find vet", req.body);
+  try {
+    const vet = await Vet.find({
+      specializedField: { $all: [req.body.pet.petSpecies] },
+      topRatedFor: { $all: [req.body.concern] },
+    });
+    res.status(200).send(vet);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error });
+  }
+};
+
 authClient.createAppointment = async (req, res) => {
   try {
-    console.log("Create new Booking", req.body);
-    const newBooking = new Booking({
+    console.log("Create new appointment", req.body);
+    const newAppointment = new Appointment({
       ...req.body,
       client: req.client.id,
     });
-    const savedBooking = await newBooking.save();
+    const savedAppointment = await newAppointment.save();
     const client = await Client.findById(req.client.id);
-    client.bookedAppointments.push(newBooking);
+    client.bookedAppointments.push(newAppointment);
     await client.save();
-    res.status(201).send(savedBooking);
+    // find the selected vet and push the appointment to the vet
+    const vet = await Vet.findById(req.body.vet);
+    vet.upcomingAppointments.push(newAppointment);
+    await vet.save();
+    res.status(201).send(savedAppointment);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error });

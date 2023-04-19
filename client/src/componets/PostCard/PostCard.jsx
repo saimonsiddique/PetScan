@@ -41,6 +41,7 @@ const PostCard = () => {
     // reset the form
     setQuestion("");
     setSuccess(true);
+    setCategorySelected(categoriesSelected);
   };
 
   return (
@@ -132,13 +133,7 @@ const PostCard = () => {
               label="General"
               color={categorySelected[4] ? "primary" : "default"}
               onClick={() => {
-                setCategorySelected([
-                  categorySelected[0],
-                  categorySelected[1],
-                  categorySelected[2],
-                  categorySelected[3],
-                  !categorySelected[4],
-                ]);
+                setCategorySelected([categorySelected.map]);
                 if (categorySelected[4]) {
                   setCategory(category.filter((item) => item !== "General"));
                 } else {

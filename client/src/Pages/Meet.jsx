@@ -23,21 +23,31 @@ export const InfomationContext = createContext(null);
 const steps = [
   "Who is this appointment for?",
   "What is your Concern?",
-  "Book an Appointment",
+  "Choose the vet you want to meet",
+  "Confirmed",
 ];
 
-const concerns = ["Vaccination", "Dental", "Skin", "Behavioral", "Other"];
+const concerns = [
+  "Vaccination",
+  "Dental",
+  "Skin",
+  "Behavioral",
+  "Grooming",
+  "Other",
+];
 
 const meetSteps = [<StepOne />, <StepTwo />, <StepThree />];
 
 const Meet = () => {
   let navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
+  const [matchedVet, setMatchedVet] = useState([]);
+  const [vetSelected, setVetSelected] = useState("");
   const [petInfo, setPetInfo] = useState([]);
   const [selectedConcern, setSelectedConcern] = useState([]);
   const [selectedPet, setSelectedPet] = useState("");
   const [loading, setLoading] = useState(true);
-  const [completed, setCompleted] = useState({});
+  const [completed, setCompleted] = useState(false);
 
   const totalSteps = () => {
     return steps.length;
@@ -82,7 +92,7 @@ const Meet = () => {
   };
 
   const handleSelectedPet = (pet) => {
-    setSelectedPet(pet.petName);
+    setSelectedPet(pet);
   };
 
   // Check if the user is logged in
@@ -108,11 +118,33 @@ const Meet = () => {
     getPetInfo(accessToken);
   }, []);
 
-  const handleSubmit = async (data) => {
+  const findVet = async () => {
+    const accessToken = localStorage.getItem("accessToken");
+    try {
+      const appointmentData = {
+        pet: selectedPet,
+        concern: selectedConcern,
+      };
+      console.log(appointmentData);
+      const vet = await apiClient.findVet(accessToken, appointmentData);
+      if (vet) {
+        setMatchedVet(vet);
+        handleNext();
+      } else {
+        alert("No suitable vet found");
+      }
+    } catch (error) {
+      console.log(error);
+      alert("Please select a pet and concern");
+    }
+  };
+
+  const handleSubmit = async () => {
     const accessToken = localStorage.getItem("accessToken");
     const appointmentData = {
-      petName: selectedPet,
+      pet: selectedPet,
       concern: selectedConcern,
+      vet: vetSelected,
     };
     console.log(appointmentData);
     try {
@@ -121,7 +153,7 @@ const Meet = () => {
         appointmentData
       );
       if (appointment) {
-        navigate("/success");
+        setCompleted(true);
       } else {
         alert("Something went wrong");
       }
@@ -136,7 +168,9 @@ const Meet = () => {
   }
 
   return (
-    <InfomationContext.Provider value={{ concerns }}>
+    <InfomationContext.Provider
+      value={{ matchedVet, concerns, handleSubmit, setVetSelected }}
+    >
       <section className="meet-container">
         <div className="meet-nav-bar">
           <ProfileNavBar />
@@ -220,7 +254,7 @@ const Meet = () => {
                                   padding: "0.5rem",
                                   borderRadius: "0.5rem",
                                   border:
-                                    selectedPet === pet.petName
+                                    selectedPet === pet
                                       ? "2px solid #1FC600"
                                       : "none",
                                 }}
@@ -248,16 +282,31 @@ const Meet = () => {
                       Back
                     </Button>
                     <Box sx={{ flex: "1 1 auto" }} />
-                    <Button onClick={handleNext} sx={{ mr: 1 }}>
-                      Next
-                    </Button>
-                    {activeStep === 2 && (
+                    {activeStep === 2 ? (
                       <Button
                         variant="contained"
-                        onClick={handleSubmit}
+                        onClick={() => navigate("/success")}
                         sx={{ mr: 1 }}
+                        disabled={!completed}
                       >
                         Submit
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={
+                          activeStep === 0
+                            ? handleNext
+                            : activeStep === 1
+                            ? findVet
+                            : activeStep === 2
+                            ? handleSubmit
+                            : activeStep === 3
+                            ? handleNext
+                            : navigate("/success")
+                        }
+                        sx={{ mr: 1 }}
+                      >
+                        Next
                       </Button>
                     )}
                   </Box>

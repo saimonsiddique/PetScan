@@ -11,19 +11,9 @@ import {
 import { UserContext } from "../../../../Pages/Dashboard";
 import petImg from "../../../../../public/PetInfo/pet-info-dog.jpg";
 
-const initialState = {
-  petName: "",
-  petSpecies: "",
-  petAge: "",
-  ageUnit: "",
-  petWeight: "",
-  weightUnit: "",
-};
-
 const PetCard = (props) => {
-  const [state, setState] = useState(initialState);
   const { pet } = props;
-  const { petName, petSpecies, petAge, ageUnit, petWeight, weightUnit } = pet;
+  const { petName, petSpecies, petPhoto } = pet;
 
   return (
     <section className="pet-card">
@@ -36,7 +26,7 @@ const PetCard = (props) => {
           <CardMedia
             component="img"
             height="140"
-            image={pet.petPhoto}
+            image={petPhoto ? petPhoto : petImg}
             alt="Your Pet"
           />
           <CardContent>

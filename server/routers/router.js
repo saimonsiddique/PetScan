@@ -22,6 +22,7 @@ router.post(
   clientController.postQuestion
 );
 router.post("/upvotes", clientController.postVote);
+router.post("/vet/find", clientController.findVet);
 
 // Common routes
 router.post("/signin", signInMiddleware);

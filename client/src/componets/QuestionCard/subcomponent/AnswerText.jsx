@@ -1,19 +1,38 @@
-import { useContext } from "react";
+import {
+  Box,
+  Paper,
+  IconButton,
+  Divider,
+  Stack,
+  Typography,
+} from "@mui/material";
 import "../subcomponent/AnswerText/AnswerText.css";
 
 const AnswerText = (props) => {
   const { answerText } = props;
   return (
-    <section className="answer-text-container">
-      <div className="answer-text">
-        <span>
-          <h4>
-            Answered by <strong>{answerText.vetName}</strong>
-          </h4>
-        </span>
-        <p align="justify">{answerText.answer}</p>
-      </div>
-    </section>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      {answerText.answer ? (
+        <Typography
+          variant="body2"
+          sx={{ mb: 1, fontSize: 17, color: "#001952" }}
+        >
+          {answerText.answer}
+        </Typography>
+      ) : (
+        <Typography
+          variant="body2"
+          sx={{ mb: 1, fontSize: 27, color: "#001952" }}
+        >
+          Not Answered Yet...
+        </Typography>
+      )}
+    </Box>
   );
 };
 

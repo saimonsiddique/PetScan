@@ -3,7 +3,7 @@ import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
 
 const StepTwo = (props) => {
   const { badgeValue, concern } = props;
-  console.log("StepTwo", badgeValue);
+
   return (
     <Stack direction="row" spacing={2}>
       <Paper

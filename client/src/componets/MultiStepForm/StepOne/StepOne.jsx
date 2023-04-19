@@ -1,7 +1,6 @@
-import { Avatar, Stack, Paper, Typography, Card, Badge } from "@mui/material";
-import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
+import { Avatar, Stack, Typography, Card } from "@mui/material";
 const StepOne = (props) => {
-  const { pet, badgeValue } = props;
+  const { pet } = props;
 
   return (
     <Stack direction="row" spacing={2}>
@@ -17,13 +16,11 @@ const StepOne = (props) => {
           height: "12vw",
         }}
       >
-        <Badge
-          badgeContent={
-            badgeValue === pet.petName ? <CheckCircleOutlinedIcon /> : ""
-          }
+        <Avatar
           sx={{ width: 80, height: 80 }}
+          alt={pet.petName}
+          src={pet.petPhoto}
         />
-        <Avatar sx={{ width: 80, height: 80 }} alt={pet.petName} />
         <Typography component={"span"} sx={{ mt: 2, mb: 2, py: 2 }}>
           <h6>{pet.petName.toUpperCase()}</h6>
         </Typography>

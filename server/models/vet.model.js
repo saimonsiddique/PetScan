@@ -57,6 +57,11 @@ const vetSchema = new Schema({
   appointments: {
     type: [Schema.Types.Object],
   },
+
+  upcomingAppointments: {
+    type: [Schema.Types.Object],
+  },
+
   answeredQuestions: {
     type: [Schema.Types.Object],
   },

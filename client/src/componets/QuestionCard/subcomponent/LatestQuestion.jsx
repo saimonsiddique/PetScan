@@ -1,15 +1,11 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import apiClient from "../../../ApiServices/ApiClientService";
 import {
   Box,
   Paper,
   Typography,
-  Button,
-  FormControl,
-  Checkbox,
-  ToggleButton,
-  Input,
   IconButton,
+  Stack,
   Divider,
 } from "@mui/material";
 import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
@@ -60,81 +56,131 @@ const LatestQuestion = () => {
     setDownVote(!downVote);
   };
 
-  const checkVoted = () => {
-    if (latestQuestion.votedClients.includes(userId)) {
-      setVoted(true);
-      setUpVote(true);
-    }
-  };
-
   return (
-    <section className="latest-question-card-container">
-      <div className="latest-question-card">
-        <Box sx={{ flexGrow: 1 }}>
-          <Paper
-            elevation={2}
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        flexGrow: 1,
+        mt: 0,
+      }}
+    >
+      <Stack spacing={1} sx={{ width: "100%" }}>
+        <Paper
+          sx={{
+            width: "35vw",
+            height: "79vh",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "left",
+            p: 2,
+          }}
+        >
+          <Typography variant="h5" sx={{ mb: 1 }}>
+            Question
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{ mb: 1, fontSize: 20, color: "#001952", fontWeight: "bold" }}
+          >
+            {latestQuestion.question}
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{ mb: 1, fontSize: 13, color: "#001979" }}
+          >
+            Asked by <strong>{latestQuestion.clientName}</strong>
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{ mb: 1, fontSize: 13, color: "#001979" }}
+          >
+            Posted on {date}
+          </Typography>
+          <Divider sx={{ width: "100%", my: 2 }} />
+          {answered && (
+            <>
+              <Typography
+                variant="body2"
+                sx={{ mb: 1, fontSize: 13, color: "#001979" }}
+              >
+                Answered by <strong>{latestQuestion.vetName}</strong>
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{ mb: 1, fontSize: 13, color: "#001979" }}
+              >
+                Answered on{" "}
+                <strong>
+                  {moment(latestQuestion.answerDate).format(
+                    "MMMM Do YYYY, h:mm a"
+                  )}{" "}
+                </strong>
+              </Typography>
+            </>
+          )}
+          <Box
             sx={{
-              p: 2,
               display: "flex",
-              flexDirection: "column",
-              width: "35vw",
-              height: "72vh",
+              alignItems: "left",
+              p: 2,
             }}
           >
-            <div className="latest-question-card-header">
-              <h2>Question</h2>
-              <h4>{latestQuestion.question}</h4>
-              <span>
-                Asked by <strong>{latestQuestion.clientName}</strong>
-              </span>
-              <span>
-                Posted on <strong>{date}</strong>
-              </span>
-            </div>
-            <Divider />
-            <div className="latest-answer-section">
-              <div className="latest-answerText">
-                {answered ? (
-                  <AnswerText answerText={latestQuestion} />
-                ) : (
-                  <h4>Not Answered Yet....</h4>
-                )}
-              </div>
-            </div>
-            <div className="latest-helpful-section">
-              <ThumbUpIcon />
-              <div className="people">
-                {latestQuestion.votedClients.length} people found this answer
-                helpful
-              </div>
-            </div>
-            <div className="latest-voting-section">
-              <div className="latest-voting">
-                <div>WAS THIS ANSWER HELPFUL?</div>
-                <div>
-                  <IconButton
-                    onClick={handleLatestUpVote}
-                    disabled={downVote ? true : false}
-                  >
-                    {upVote ? <ThumbUpIcon /> : <ThumbUpAltOutlinedIcon />}
-                  </IconButton>
-                  <IconButton
-                    onClick={handleLatestDownVote}
-                    disabled={upVote ? true : false}
-                  >
-                    {downVote ? (
-                      <ThumbDownIcon />
-                    ) : (
-                      <ThumbDownOffAltOutlinedIcon />
-                    )}
-                  </IconButton>
-                </div>
-              </div>
-            </div>
-          </Paper>
-        </Box>
-      </div>
-    </section>
+            <AnswerText answerText={latestQuestion} />
+          </Box>
+          <Divider sx={{ width: "100%", my: 2 }} />
+          <Stack direction="row" spacing={0.8} sx={{ mb: 1 }}>
+            <ThumbUpIcon />
+            <Typography variant="body2" sx={{ fontSize: 16, color: "#001952" }}>
+              <strong>{latestQuestion.votedClients.length}</strong> people found
+              this helpful
+            </Typography>
+          </Stack>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              p: 1,
+              backgroundColor: "#3A87AD",
+              color: "white",
+            }}
+          >
+            {answered ? (
+              <>
+                <Typography variant="body2" sx={{ fontSize: 14 }}>
+                  WAS THIS ANSWER HELPFUL?
+                </Typography>
+                <IconButton
+                  sx={{ ml: 1 }}
+                  aria-label="upvote"
+                  onClick={handleLatestUpVote}
+                  disabled={downVote}
+                >
+                  {upVote ? <ThumbUpIcon /> : <ThumbUpAltOutlinedIcon />}
+                </IconButton>
+                <IconButton
+                  sx={{ ml: 1 }}
+                  aria-label="downvote"
+                  onClick={handleLatestDownVote}
+                  disabled={upVote}
+                >
+                  {downVote ? (
+                    <ThumbDownIcon />
+                  ) : (
+                    <ThumbDownOffAltOutlinedIcon />
+                  )}
+                </IconButton>
+              </>
+            ) : (
+              <Typography variant="body2" sx={{ fontSize: 14 }}>
+                Helpful votes are not available for unanswered questions
+              </Typography>
+            )}
+          </Box>
+        </Paper>
+      </Stack>
+    </Box>
   );
 };
 
