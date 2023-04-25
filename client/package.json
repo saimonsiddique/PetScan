@@ -23,6 +23,7 @@
     "react-calendly": "^4.1.1",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0",
+    "react-swipeable-views": "^0.14.0",
     "react-toastify": "^9.1.2",
     "styled-components": "^5.3.9"
   },

@@ -21,7 +21,7 @@ import moment from "moment";
 const LatestQuestion = () => {
   const { latestQuestion, setLatestQuestion, setPrevQuestion } =
     useContext(NewsFeedContext);
-  if (!latestQuestion.votedClients) return <div>Loading...</div>;
+  // if (!latestQuestion.votedClients) return <div>Loading...</div>;
   const answered = latestQuestion.isAnswered;
   const date = moment(latestQuestion.postDate).format("MMMM Do YYYY, h:mm a");
   const [upVote, setUpVote] = useState(false);
@@ -69,7 +69,7 @@ const LatestQuestion = () => {
         <Paper
           sx={{
             width: "35vw",
-            height: "79vh",
+            height: "80vh",
             display: "flex",
             flexDirection: "column",
             alignItems: "left",
@@ -131,10 +131,15 @@ const LatestQuestion = () => {
           <Divider sx={{ width: "100%", my: 2 }} />
           <Stack direction="row" spacing={0.8} sx={{ mb: 1 }}>
             <ThumbUpIcon />
-            <Typography variant="body2" sx={{ fontSize: 16, color: "#001952" }}>
-              <strong>{latestQuestion.votedClients.length}</strong> people found
-              this helpful
-            </Typography>
+            {latestQuestion.votedClients ? (
+              <Typography
+                variant="body2"
+                sx={{ fontSize: 16, color: "#001952" }}
+              >
+                <strong>{latestQuestion.votedClients.length}</strong> people
+                found this helpful
+              </Typography>
+            ) : null}
           </Stack>
           <Box
             sx={{

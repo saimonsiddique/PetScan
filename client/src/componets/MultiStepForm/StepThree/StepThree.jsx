@@ -4,8 +4,7 @@ import { InlineWidget, useCalendlyEventListener } from "react-calendly";
 import VetCard from "../../VetCard/VetCard";
 import { InfomationContext } from "../../../Pages/Meet";
 
-const StepThree = () => {
-  const { matchedVet } = useContext(InfomationContext);
+const StepThree = ({ matchedVet, setVetSelected, handleSubmit }) => {
   return (
     <Box
       sx={{
@@ -17,7 +16,14 @@ const StepThree = () => {
       }}
     >
       {matchedVet.map((vet) => {
-        return <VetCard key={vet._id} vet={vet} />;
+        return (
+          <VetCard
+            key={vet._id}
+            vet={vet}
+            setVetSelected={setVetSelected}
+            handleSubmit={handleSubmit}
+          />
+        );
       })}
     </Box>
   );

@@ -1,17 +1,18 @@
+import { useState, useContext } from "react";
 import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { CardActionArea } from "@mui/material";
 import CardModal from "../CardModal/CardModal";
 import Rating from "@mui/material/Rating";
+import { InfomationContext } from "../../Pages/Meet";
 
-const VetCard = (props) => {
-  const { vet } = props;
+const VetCard = ({ vet, handleSubmit, setVetSelected }) => {
   return (
     <Card sx={{ maxWidth: 345, m: 1.5 }}>
       <CardActionArea>
         <CardMedia
           component="img"
           height="140"
-          sx={{ objectFit: "contain" }}
+          sx={{ objectFit: "contain", minWidth: "140" }}
           image={vet.vetProfile}
           alt="vet image"
         />
@@ -38,7 +39,12 @@ const VetCard = (props) => {
           precision={0.5}
           readOnly
         />
-        <CardModal vet={vet} />
+        <CardModal
+          key={vet._id}
+          vet={vet}
+          handleSubmit={handleSubmit}
+          setVetSelected={setVetSelected}
+        />
       </Box>
     </Card>
   );

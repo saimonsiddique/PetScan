@@ -4,7 +4,6 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 const QuestionLog = (props) => {
   const { question, index } = props;
   const answeredTrack = question.isAnswered;
-  console.log(question);
   return (
     <Box
       sx={{
@@ -19,22 +18,33 @@ const QuestionLog = (props) => {
       <List>
         <ListItemButton
           sx={{
-            borderRadius: "10px",
-            backgroundColor: question.isAnswered ? "#35A854" : "#ffffff",
+            display: "flex",
+            justifyContent: "space-between",
+            border: "none",
           }}
         >
           <ListItemText
             sx={{
               paddingLeft: "4%",
+              backgroundColor: question.isAnswered ? "#8BE78B" : "#FFFFFF",
             }}
             primaryTypographyProps={{
               fontSize: "1.2rem",
               fontFamily: "Roboto",
             }}
+            secondaryTypographyProps={{
+              fontSize: "1.2rem",
+              fontFamily: "Roboto",
+              color: question.isAnswered ? "#000000" : "red",
+            }}
             primary={`${index + 1}. ${question.question}`}
-            secondary={`Answer: ${question.answer}`}
+            secondary={answeredTrack ? question.answer : "Not Answered"}
           />
-          <DeleteForeverIcon />
+          <DeleteForeverIcon
+            sx={{
+              color: "red",
+            }}
+          />
         </ListItemButton>
       </List>
     </Box>

@@ -2,10 +2,9 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../Pages/Dashboard";
 import { Link } from "react-router-dom";
-import { Box, List, ListItemButton, ListItemText } from "@mui/material";
+import { List, ListItemButton, ListItemText } from "@mui/material";
 import LayersIcon from "@mui/icons-material/Layers";
 import PetsIcon from "@mui/icons-material/Pets";
-import MedicationRoundedIcon from "@mui/icons-material/MedicationRounded";
 import SettingsApplicationsSharpIcon from "@mui/icons-material/SettingsApplicationsSharp";
 import AddLocationSharpIcon from "@mui/icons-material/AddLocationSharp";
 import navLogo from "../../../../public/Homepage/parent-nav.jpg";
@@ -30,6 +29,7 @@ const ProfileSideBar = () => {
             sx={{
               borderRadius: "10px",
             }}
+            onClick={() => setQuestionQuery(!questionQuery)}
           >
             <LayersIcon />
             <ListItemText
@@ -43,46 +43,55 @@ const ProfileSideBar = () => {
               primary="Dashboard"
             />
           </ListItemButton>
-          <ListItemButton
-            sx={{
-              borderRadius: "10px",
-            }}
-            onClick={() => navigate("/pet/add")}
-          >
-            <PetsIcon />
-            <ListItemText
-              sx={{
-                paddingLeft: "4%",
-              }}
-              primaryTypographyProps={{
-                fontSize: "1.2rem",
-                fontFamily: "Roboto",
-              }}
-              primary="Pets"
-            />
-          </ListItemButton>
-          <ListItemButton
-            sx={{
-              borderRadius: "10px",
-            }}
-          >
-            <MedicationRoundedIcon />
-            <ListItemText
-              sx={{
-                paddingLeft: "4%",
-              }}
-              primaryTypographyProps={{
-                fontSize: "1.2rem",
-                fontFamily: "Roboto",
-              }}
-              primary="Appointments"
-            />
-          </ListItemButton>
-          <Link to="/book-appointment">
+          {user === "petParent" ? (
+            <>
+              <ListItemButton
+                sx={{
+                  borderRadius: "10px",
+                }}
+                onClick={() => navigate("/pet/add")}
+              >
+                <PetsIcon />
+                <ListItemText
+                  sx={{
+                    paddingLeft: "4%",
+                  }}
+                  primaryTypographyProps={{
+                    fontSize: "1.2rem",
+                    fontFamily: "Roboto",
+                  }}
+                  primary="Add Pet"
+                />
+              </ListItemButton>
+            </>
+          ) : null}
+
+          {user === "petParent" ? (
+            <Link to="/book-appointment">
+              <ListItemButton
+                sx={{
+                  borderRadius: "10px",
+                }}
+              >
+                <AddLocationSharpIcon />
+                <ListItemText
+                  sx={{
+                    paddingLeft: "4%",
+                  }}
+                  primaryTypographyProps={{
+                    fontSize: "1.2rem",
+                    fontFamily: "Roboto",
+                  }}
+                  primary={"Book an Appointment"}
+                />
+              </ListItemButton>
+            </Link>
+          ) : (
             <ListItemButton
               sx={{
                 borderRadius: "10px",
               }}
+              onClick={() => navigate("/form")}
             >
               <AddLocationSharpIcon />
               <ListItemText
@@ -93,14 +102,10 @@ const ProfileSideBar = () => {
                   fontSize: "1.2rem",
                   fontFamily: "Roboto",
                 }}
-                primary={
-                  user === "petParent"
-                    ? "Book Appointment"
-                    : "Previous Sessions"
-                }
+                primary={"Add Prescription"}
               />
             </ListItemButton>
-          </Link>
+          )}
           <ListItemButton onClick={handleClick}>
             <SettingsApplicationsSharpIcon />
             <ListItemText

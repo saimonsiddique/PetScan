@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 import {
   AppBar,
   Box,
@@ -6,13 +7,18 @@ import {
   IconButton,
   Tooltip,
   Avatar,
+  Button,
 } from "@mui/material";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import LogoutIcon from "@mui/icons-material/Logout";
 import "./ProfileNavBar.css";
+import { UserContext } from "../../../Pages/Dashboard";
 
 const ProfileNavBar = () => {
   const navigate = useNavigate();
+  const user = localStorage.getItem("userType");
+  console.log("navParent", parent);
   return (
     <section className="profile-app-bar">
       <Box>
@@ -45,12 +51,25 @@ const ProfileNavBar = () => {
                 color="inherit"
               >
                 <Avatar
-                  src="../../../../public/PetInfo/pet-info-dog.jpg"
+                  src={
+                    "https://res.cloudinary.com/dru7kzv3i/image/upload/v1681975309/vet5_eegd6u.jpg"
+                  }
                   sx={{
                     width: 40,
                     height: 40,
                   }}
                 />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Log Out">
+              <IconButton
+                size="large"
+                onClick={() => {
+                  localStorage.clear();
+                  navigate("/");
+                }}
+              >
+                <LogoutIcon style={{ color: "grey" }} />
               </IconButton>
             </Tooltip>
           </Toolbar>

@@ -92,11 +92,16 @@ const SignUp = () => {
           <div className="header">
             <img className="logo" src={userWithPet} alt="logo" />
             <h1>Create a Pet Parent Account</h1>
+            <p>
+              <b>Or</b>
+            </p>
             <span>
-              Or <Link to={"/signin"}>sign in to an existent account</Link>
+              <Link to={"/signin"}>
+                <strong> Sign in to an existent account </strong>
+              </Link>
             </span>
           </div>
-          <div className="auth-account">
+          {/* <div className="auth-account">
             <span>Create account with</span>
             <Box
               sx={{
@@ -113,8 +118,8 @@ const SignUp = () => {
                 </Button>
               </Stack>
             </Box>
-          </div>
-          <Divider />
+          </div> */}
+          <Divider sx={{ mt: 2 }} />
           <div className="form">
             <Box
               component="form"

@@ -12,6 +12,7 @@ const initialParentState = {
   firstName: "",
   lastName: "",
   email: "",
+  profilePicture: "",
   pets: [],
   prescriptions: [],
   appointments: [],
@@ -23,10 +24,12 @@ const initialVetState = {
   firstName: "",
   lastName: "",
   email: "",
-  specializedIn: [],
+  vetProfile: "",
+  specializedField: [],
   appointments: [],
   topRatedFor: [],
   answeredQuestions: [],
+  upcomingAppointments: [],
 };
 
 const Dashboard = () => {
@@ -50,6 +53,7 @@ const Dashboard = () => {
               firstName,
               lastName,
               email,
+              profilePicture,
               pets,
               prescriptions,
               appointments,
@@ -61,6 +65,7 @@ const Dashboard = () => {
               firstName,
               lastName,
               email,
+              profilePicture,
               pets,
               prescriptions,
               appointments,
@@ -90,20 +95,24 @@ const Dashboard = () => {
               firstName,
               lastName,
               email,
-              specializedIn,
+              vetProfile,
+              specializedField,
               appointments,
               topRatedFor,
               answeredQuestions,
+              upcomingAppointments,
             } = vetInfo;
             setVet((prevState) => ({
               ...prevState,
               firstName,
               lastName,
               email,
-              specializedIn,
+              vetProfile,
+              specializedField,
               appointments,
               topRatedFor,
               answeredQuestions,
+              upcomingAppointments,
             }));
             setLoading(false);
           } else {

@@ -33,4 +33,5 @@ router.post("/signup/vet", vetController.signUp);
 router.post("/vet/info", authMiddleware.vet, vetController.vetInfo);
 router.get("/profile/vet", authMiddleware.vet, vetController.profile);
 router.post("/vet/postAnswer", authMiddleware.vet, vetController.postAnswer);
+router.post("/prscription", vetController.sendPrescription);
 module.exports = router;

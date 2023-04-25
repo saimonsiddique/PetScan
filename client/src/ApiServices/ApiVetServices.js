@@ -60,4 +60,23 @@ apiVet.postAnswer = async (token, answer) => {
   }
 };
 
+apiVet.getInfo = async (token, appointmentInfo) => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/vet/getInfo`,
+      appointmentInfo,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    const { data } = response;
+    return data.msg;
+  }
+};
+
 export default apiVet;

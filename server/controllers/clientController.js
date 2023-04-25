@@ -2,6 +2,8 @@ const Client = require("../models/client.model");
 const Pet = require("../models/pet.model");
 const Question = require("../models/question.model");
 const Appointment = require("../models/appointment");
+const createMailOptions = require("../config/mailoptions");
+const transport = require("../config/nodemailer");
 const Vet = require("../models/vet.model");
 const { generateToken } = require("../config/generateToken");
 const bcrypt = require("bcrypt");
@@ -151,18 +153,47 @@ authClient.findVet = async (req, res) => {
 authClient.createAppointment = async (req, res) => {
   try {
     console.log("Create new appointment", req.body);
+    const client = await Client.findById(req.client.id);
+    const vet = await Vet.findById(req.body.vet);
+    // set clientName
+    const clientName = `${client.firstName} ${client.lastName}`;
+    const clientProfile = client.profilePicture;
+    const clientEmail = client.email;
+    // set vetName
+    const vetName = `${vet.firstName} ${vet.lastName}`;
+    const vetProfile = vet.vetProfile;
+
+    //
+
+    const mailoptions = createMailOptions(
+      "hello.petscan@gmail.com",
+      clientEmail,
+      "Your appointment has been scheduled",
+      "<h1>Thank for using petScan</h1>"
+    );
+
+    // create new appointment
     const newAppointment = new Appointment({
       ...req.body,
       client: req.client.id,
+      clientName,
+      vetName,
+      clientProfile,
+      vetProfile,
+      clientEmail,
     });
     const savedAppointment = await newAppointment.save();
-    const client = await Client.findById(req.client.id);
+    // push the appointment to the client
     client.bookedAppointments.push(newAppointment);
     await client.save();
     // find the selected vet and push the appointment to the vet
-    const vet = await Vet.findById(req.body.vet);
     vet.upcomingAppointments.push(newAppointment);
     await vet.save();
+
+    // invoke transport to send mail
+
+    transport(mailoptions);
+
     res.status(201).send(savedAppointment);
   } catch (error) {
     console.log(error);

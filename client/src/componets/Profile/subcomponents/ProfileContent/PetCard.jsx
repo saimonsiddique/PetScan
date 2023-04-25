@@ -10,10 +10,14 @@ import {
 } from "@mui/material";
 import { UserContext } from "../../../../Pages/Dashboard";
 import petImg from "../../../../../public/PetInfo/pet-info-dog.jpg";
+import PetModal from "../../../CardModal/PetModal";
 
 const PetCard = (props) => {
   const { pet } = props;
   const { petName, petSpecies, petPhoto } = pet;
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <section className="pet-card">
@@ -22,7 +26,7 @@ const PetCard = (props) => {
           minWidth: 250,
         }}
       >
-        <CardActionArea>
+        <CardActionArea onClick={handleOpen}>
           <CardMedia
             component="img"
             height="140"
@@ -53,6 +57,13 @@ const PetCard = (props) => {
             </Typography>
           </CardContent>
         </CardActionArea>
+        <PetModal
+          handleOpen={handleOpen}
+          handleClose={handleClose}
+          open={open}
+          setOpen={setOpen}
+          pet={pet}
+        />
       </Card>
     </section>
   );

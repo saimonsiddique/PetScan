@@ -11,13 +11,38 @@ const AppiontmentSchema = new Schema({
     ref: "Vet",
   },
 
+  clientName: {
+    type: String,
+  },
+
+  vetName: {
+    type: String,
+  },
+
   pet: {
     type: String,
     required: true,
   },
+
+  petName: {
+    type: String,
+  },
+
   concern: {
     type: String,
     required: true,
+  },
+
+  clientEmail: {
+    type: String,
+  },
+
+  clientProfile: {
+    type: String,
+  },
+
+  vetProfile: {
+    type: String,
   },
 
   date: {

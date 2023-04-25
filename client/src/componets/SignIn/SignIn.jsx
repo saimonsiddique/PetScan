@@ -23,6 +23,10 @@ const initialState = {
   password: "",
 };
 
+const Email_REGEX = /^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/;
+const Password_REGEX =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+
 const SignIn = () => {
   const navigate = useNavigate();
   const [state, setState] = useState(initialState);
@@ -83,11 +87,16 @@ const SignIn = () => {
           <div className="signin-header">
             <img className="logo" src={userWithPet} alt="logo" />
             <h1>Sign In to your account</h1>
+            <p>
+              <b>Or</b>
+            </p>
             <span>
-              Or <Link to={"/"}>Create a new account</Link>
+              <Link to={"/"}>
+                <strong>Create a new account</strong>
+              </Link>
             </span>
           </div>
-          <div className="auth-account">
+          {/* <div className="auth-account">
             <span>Sign In with</span>
             <Box
               sx={{
@@ -104,8 +113,8 @@ const SignIn = () => {
                 </Button>
               </Stack>
             </Box>
-          </div>
-          <Divider />
+          </div> */}
+          <Divider sx={{ mt: 2 }} />
           <div className="form">
             <Box
               component="form"
@@ -173,6 +182,7 @@ const SignIn = () => {
           <div className="forgot-password">
             <Link to={"/"}>Forgot Password?</Link>
           </div>
+          <Divider sx={{ mt: 2 }} />
         </div>
       </section>
     </>

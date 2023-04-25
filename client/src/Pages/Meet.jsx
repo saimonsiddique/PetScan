@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useCallback } from "react";
 import apiClient from "../ApiServices/ApiClientService";
 import { useNavigate } from "react-router-dom";
 import {
@@ -36,13 +36,11 @@ const concerns = [
   "Other",
 ];
 
-const meetSteps = [<StepOne />, <StepTwo />, <StepThree />];
-
 const Meet = () => {
   let navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
   const [matchedVet, setMatchedVet] = useState([]);
-  const [vetSelected, setVetSelected] = useState("");
+  const [vetSelected, setVetSelected] = useState([]);
   const [petInfo, setPetInfo] = useState([]);
   const [selectedConcern, setSelectedConcern] = useState([]);
   const [selectedPet, setSelectedPet] = useState("");
@@ -139,15 +137,15 @@ const Meet = () => {
     }
   };
 
-  const handleSubmit = async () => {
+  // Handle Submit Once the user has selected a vet
+  const handleSubmit = useCallback(async () => {
     const accessToken = localStorage.getItem("accessToken");
-    const appointmentData = {
-      pet: selectedPet,
-      concern: selectedConcern,
-      vet: vetSelected,
-    };
-    console.log(appointmentData);
     try {
+      const appointmentData = {
+        pet: selectedPet,
+        concern: selectedConcern,
+        vet: vetSelected,
+      };
       const appointment = await apiClient.createAppointment(
         accessToken,
         appointmentData
@@ -159,8 +157,12 @@ const Meet = () => {
       }
     } catch (error) {
       console.log(error);
-      alert("Not authorized");
+      alert("Something went wrong");
     }
+  }, [selectedPet, selectedConcern, vetSelected]);
+
+  const handleVetSelected = (vet) => {
+    setVetSelected(vet);
   };
 
   if (loading) {
@@ -168,9 +170,7 @@ const Meet = () => {
   }
 
   return (
-    <InfomationContext.Provider
-      value={{ matchedVet, concerns, handleSubmit, setVetSelected }}
-    >
+    <InfomationContext.Provider value={{ matchedVet, concerns }}>
       <section className="meet-container">
         <div className="meet-nav-bar">
           <ProfileNavBar />
@@ -226,50 +226,56 @@ const Meet = () => {
                         padding: "1rem",
                       }}
                     >
-                      {activeStep === 1
-                        ? concerns.map((concern, index) => {
-                            return (
-                              <IconButton
-                                sx={{
-                                  margin: "0.5rem",
-                                  padding: "0.5rem",
-                                  borderRadius: "0.5rem",
-                                }}
-                                onClick={() => handleConcern(concern)}
+                      {activeStep === 1 ? (
+                        concerns.map((concern, index) => {
+                          return (
+                            <IconButton
+                              sx={{
+                                margin: "0.5rem",
+                                padding: "0.5rem",
+                                borderRadius: "0.5rem",
+                              }}
+                              onClick={() => handleConcern(concern)}
+                              key={index}
+                            >
+                              <StepTwo
                                 key={index}
-                              >
-                                <StepTwo
-                                  key={index}
-                                  concern={concern}
-                                  badgeValue={selectedConcern}
-                                />{" "}
-                              </IconButton>
-                            );
-                          })
-                        : activeStep === 0
-                        ? petInfo.map((pet, index) => {
-                            return (
-                              <IconButton
-                                sx={{
-                                  padding: "0.5rem",
-                                  borderRadius: "0.5rem",
-                                  border:
-                                    selectedPet === pet
-                                      ? "2px solid #1FC600"
-                                      : "none",
-                                }}
-                                onClick={() => handleSelectedPet(pet)}
+                                concern={concern}
+                                badgeValue={selectedConcern}
+                              />{" "}
+                            </IconButton>
+                          );
+                        })
+                      ) : activeStep === 0 ? (
+                        petInfo.map((pet, index) => {
+                          return (
+                            <IconButton
+                              sx={{
+                                padding: "0.5rem",
+                                borderRadius: "0.5rem",
+                                border:
+                                  selectedPet === pet
+                                    ? "2px solid #1FC600"
+                                    : "none",
+                              }}
+                              onClick={() => handleSelectedPet(pet)}
+                              key={index}
+                            >
+                              <StepOne
                                 key={index}
-                              >
-                                <StepOne
-                                  key={index}
-                                  pet={pet}
-                                  badgeValue={selectedPet}
-                                />
-                              </IconButton>
-                            );
-                          })
-                        : meetSteps[activeStep]}
+                                pet={pet}
+                                badgeValue={selectedPet}
+                              />
+                            </IconButton>
+                          );
+                        })
+                      ) : activeStep === 2 ? (
+                        <StepThree
+                          matchedVet={matchedVet}
+                          setVetSelected={handleVetSelected}
+                          handleSubmit={handleSubmit}
+                        />
+                      ) : null}
                     </Typography>
                   </div>
                   <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>

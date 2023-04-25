@@ -38,6 +38,7 @@ const Home = () => {
             personalized and reliable care, available anytime, anywhere.
           </p>
         </h2>
+        <h3>Create an account to get started</h3>
         <Box sx={{ "& button": { m: 2 } }}>
           <Button
             variant="contained"

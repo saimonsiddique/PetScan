@@ -1,6 +1,8 @@
 const Vet = require("../models/vet.model");
 const Client = require("../models/client.model");
 const Question = require("../models/question.model");
+const createMailOptions = require("../config/mailoptions");
+const transport = require("../config/nodemailer");
 const { generateToken } = require("../config/generateToken");
 const bcrypt = require("bcrypt");
 
@@ -32,6 +34,14 @@ authVet.signUp = async (req, res) => {
 
     const savedVet = await newVet.save();
 
+    const mailoptions = createMailOptions(
+      "hello.petscan@gmail.com",
+      email,
+      "Your appointment has been scheduled",
+      "<h1>Thank for using petScan</h1>"
+    );
+
+    transport(mailoptions);
     // generate token
     const accessToken = generateToken(savedVet);
     const sendData = {
@@ -81,6 +91,7 @@ authVet.signIn = async (req, res) => {
 authVet.profile = async (req, res) => {
   try {
     const vetUser = await Vet.findById(req.vet.id).select("-password");
+    console.log(vetUser);
     res.status(200).send(vetUser);
   } catch (error) {
     console.log(error);
@@ -162,6 +173,19 @@ authVet.vetInfo = async (req, res) => {
     await addNewInfo.save();
     res.status(200).send(addNewInfo);
   } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Server error" });
+  }
+};
+
+authVet.sendPrescription = async (req, res) => {
+  try {
+    const { prescription, clientName, clientEmail } = req.body;
+    const vetId = req.vet.id;
+    if (!prescription) {
+      return res.status(400).json({ msg: "Missing Information" });
+    }
+  } catch {
     console.log(error);
     res.status(500).json({ msg: "Server error" });
   }

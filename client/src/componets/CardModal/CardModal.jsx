@@ -1,4 +1,5 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
+import { PopupWidget, useCalendlyEventListener } from "react-calendly";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -6,19 +7,32 @@ import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
-import { List, ListItem } from "@mui/material";
-import { InfomationContext } from "../../Pages/Meet";
 
-const CardModal = (props) => {
-  const { handleSubmit, setVetSelected } = useContext(InfomationContext);
-  const { vet } = props;
+const CardModal = ({ vet, handleSubmit, setVetSelected }) => {
+  // console.log("Card Model vet", vet);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  useCalendlyEventListener({
+    onProfilePageViewed: () => console.log("onProfilePageViewed"),
+    onDateAndTimeSelected: () => console.log("onDateAndTimeSelected"),
+    onEventTypeViewed: () => console.log("onEventTypeViewed"),
+    onEventScheduled: (e) => {
+      handleSubmit();
+      console.log("onEventScheduled", e);
+    },
+  });
+
+  const handleClick = () => {
+    // open the modal
+    handleOpen();
+    // set the vetSelcted
+    setVetSelected(vet);
+  };
 
   return (
-    <div>
-      <Button onClick={handleOpen}>Details</Button>
+    <>
+      <Button onClick={handleClick}>Details</Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -45,7 +59,7 @@ const CardModal = (props) => {
               <Avatar
                 alt={vet.firstName}
                 src={vet.vetProfile}
-                sx={{ mb: 1, objectFit: "cover" }}
+                sx={{ mb: 1, objectFit: "cover", width: 100, height: 100 }}
               />
               <Typography
                 id="transition-modal-title"
@@ -56,36 +70,35 @@ const CardModal = (props) => {
               </Typography>
             </Box>
             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              <Typography variant="body1" color="text.secondary">
-                Specialized in : {vet.specializedField.join(", ")}
-              </Typography>
-              <Typography variant="body1" color="text.secondary">
-                <Typography variant="body1" color="text.secondary">
-                  Top Services : {vet.topRatedFor.join(", ")}
-                </Typography>
-              </Typography>
+              Specialized in : {vet.specializedField.join(", ")}
+            </Typography>
+            <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
+              Top Services : {vet.topRatedFor.join(", ")}
             </Typography>
             <Box
               sx={{
                 display: "flex",
-                justifyContent: "center",
+                flexDirection: "column",
+                mt: 2,
               }}
             >
-              <Button
-                variant="contained"
-                sx={{ mt: 2, mr: 1 }}
-                onClick={() => {
-                  setVetSelected(vet._id);
-                  handleSubmit();
+              <PopupWidget
+                url="https://calendly.com/saimonsiddiquee/30-minute-meeting-clone"
+                text="Book an Appointment"
+                rootElement={document.getElementById("root")}
+                styles={{
+                  m: 2,
+                  height: "100%",
+                  width: "100%",
+                  minWidth: "400px",
+                  minHeight: "500px",
                 }}
-              >
-                Book Appointment
-              </Button>
+              />
             </Box>
           </Box>
         </Fade>
       </Modal>
-    </div>
+    </>
   );
 };
 
@@ -96,8 +109,10 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "25%",
+  width: "35%",
+  height: "50%",
   bgcolor: "background.paper",
   boxShadow: 24,
+  borderRadius: "10px",
   p: 4,
 };

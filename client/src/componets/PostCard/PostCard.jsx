@@ -6,9 +6,6 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
-import DoneIcon from "@mui/icons-material/Done";
-import DeleteIcon from "@mui/icons-material/Delete";
-
 import "./PostCard.css";
 import { NewsFeedContext } from "../NewsFeed/NewsFeed";
 
@@ -36,7 +33,7 @@ const PostCard = () => {
     const response = await apiClient.postQuestion(accessToken, newQuestion);
     console.log(response);
     // set prevQuestion
-    setPrevQuestion([latestQuestion, ...prevQuestion]);
+    setPrevQuestion([...prevQuestion, latestQuestion]);
     setLatestQuestion(response);
     // reset the form
     setQuestion("");
@@ -55,7 +52,7 @@ const PostCard = () => {
             flexDirection: "column",
             alignItems: "center",
             width: "22vw",
-            margin: "0.5rem 0",
+            mb: 2,
           }}
         >
           <h2>Post a Question</h2>

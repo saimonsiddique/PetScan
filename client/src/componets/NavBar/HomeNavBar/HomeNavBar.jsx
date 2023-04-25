@@ -10,28 +10,33 @@ import {
   Avatar,
   TextField,
 } from "@mui/material";
+import LogoutIcon from "@mui/icons-material/Logout";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import SearchIcon from "@mui/icons-material/Search";
-import "./HomeNavBar.css";
+import Autocomplete from "@mui/material/Autocomplete";
 
-const HomeNavBar = () => {
+const categories = ["Cat", "Dog", "Bird", "Fish", "General"];
+
+const HomeNavBar = ({ handleSelect, handleBlur }) => {
   const navigate = useNavigate();
 
   return (
-    <section className="profile-app-bar">
+    <>
       <Box>
         <AppBar
-          position="sticky"
           style={{
             backgroundColor: "#42389D",
             boxShadow: 0,
           }}
-          className="app-bar"
+          elevation={0}
         >
           <Toolbar>
             <Box sx={{ flexGrow: 1 }}>
-              <TextField
+              <Autocomplete
+                options={categories}
+                onSelect={handleSelect}
+                onBlur={handleBlur}
                 sx={{
                   width: 300,
                   backgroundColor: "white",
@@ -43,12 +48,9 @@ const HomeNavBar = () => {
                     borderColor: "white",
                   },
                 }}
-                label="Search"
-                variant="filled"
-                size="small"
-                InputProps={{
-                  endAdornment: <SearchIcon />,
-                }}
+                renderInput={(params) => (
+                  <TextField {...params} label="Search" variant="outlined" />
+                )}
               />
             </Box>
             <Tooltip title="News">
@@ -71,7 +73,7 @@ const HomeNavBar = () => {
                 onClick={() => navigate("/dashboard")}
               >
                 <Avatar
-                  src="../../../../public/PetInfo/pet-info-dog.jpg"
+                  src="https://res.cloudinary.com/dru7kzv3i/image/upload/v1681975309/vet5_eegd6u.jpg"
                   sx={{
                     width: 40,
                     height: 40,
@@ -79,10 +81,22 @@ const HomeNavBar = () => {
                 />
               </IconButton>
             </Tooltip>
+            <Tooltip title="Logout">
+              <IconButton
+                size="large"
+                color="inherit"
+                onClick={() => {
+                  localStorage.clear();
+                  navigate("/");
+                }}
+              >
+                <LogoutIcon style={{ color: "white" }} />
+              </IconButton>
+            </Tooltip>
           </Toolbar>
         </AppBar>
       </Box>
-    </section>
+    </>
   );
 };
 

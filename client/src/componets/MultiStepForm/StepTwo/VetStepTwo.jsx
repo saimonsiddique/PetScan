@@ -8,7 +8,7 @@ import { VetStepsContext } from "../../VetSteps/VetSteps";
 import ImageUpload from "../../ImageUpload/ImageUpload";
 
 const VetStepTwo = () => {
-  const { setImage } = useContext(ImageContext);
+  const { setImage, image } = useContext(ImageContext);
   const { setLicenseNumber, setEducation, setYear, setPhone, handleSubmit } =
     useContext(VetStepsContext);
 

@@ -20,7 +20,7 @@ const AnswerText = (props) => {
       {answerText.answer ? (
         <Typography
           variant="body2"
-          sx={{ mb: 1, fontSize: 17, color: "#001952" }}
+          sx={{ mb: 1, fontSize: 24, color: "#001952", textAlign: "justify" }}
         >
           {answerText.answer}
         </Typography>

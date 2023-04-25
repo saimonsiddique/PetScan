@@ -57,7 +57,7 @@ const VetStepOne = () => {
                 margin: "0 0.5rem",
               }}
             />
-            <Typography variant="body1">Tell us about you</Typography>
+            <p>Tell us about you</p>
           </Box>
         </Box>
         <Box
@@ -67,10 +67,10 @@ const VetStepOne = () => {
             flexGrow: 1,
           }}
         >
-          <Typography variant="body1">
+          <p>
             Please Enter your details. We will use this information to create
             your profile and verify your license.
-          </Typography>
+          </p>
         </Box>
         <Box
           sx={{
@@ -90,15 +90,14 @@ const VetStepOne = () => {
           >
             <EmailIcon />
             <Box sx={{ mx: 1 }}>
-              <Typography
-                variant="body1"
-                sx={{
+              <p
+                style={{
                   fontSize: 18,
                   fontWeight: "bold",
                 }}
               >
                 Email Address
-              </Typography>
+              </p>
             </Box>
           </Box>
           <Box
@@ -106,15 +105,14 @@ const VetStepOne = () => {
               display: "flex",
             }}
           >
-            <Typography
-              variant="body2"
-              sx={{
+            <p
+              style={{
                 fontSize: 16,
                 fontWeight: 450,
               }}
             >
               {email}
-            </Typography>
+            </p>
             <LockIcon sx={{ ml: 1, fontSize: 15, color: "#3f51b5" }} />
           </Box>
           <Box
@@ -134,16 +132,15 @@ const VetStepOne = () => {
                 flexGrow: 1,
               }}
             >
-              <Typography
-                component={"span"}
-                sx={{
+              <p
+                style={{
                   fontSize: 18,
                   fontWeight: "bold",
                   color: "#42389D",
                 }}
               >
                 Full Name
-              </Typography>
+              </p>
               <TextField
                 sx={{
                   width: "50%",
@@ -179,16 +176,15 @@ const VetStepOne = () => {
                 flexGrow: 1,
               }}
             >
-              <Typography
-                component={"span"}
-                sx={{
+              <p
+                style={{
                   fontSize: 18,
                   fontWeight: "bold",
                   color: "#42389D",
                 }}
               >
                 Post-Nomial-Letters
-              </Typography>
+              </p>
               <TextField
                 sx={{
                   width: "50%",
@@ -224,16 +220,16 @@ const VetStepOne = () => {
                 flexGrow: 1,
               }}
             >
-              <Typography
+              <p
                 component={"span"}
-                sx={{
+                style={{
                   fontSize: 18,
                   fontWeight: "bold",
                   color: "#42389D",
                 }}
               >
                 Specialized Fields
-              </Typography>
+              </p>
               <TextField
                 sx={{
                   width: "50%",

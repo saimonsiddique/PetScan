@@ -111,11 +111,7 @@ const VetSteps = () => {
                 </Box>
               </>
             ) : (
-              <>
-                <Typography sx={{ mt: 2, mb: 1 }}>
-                  {vetSteps[activeStep]}
-                </Typography>
-              </>
+              <>{vetSteps[activeStep]}</>
             )}
           </Box>
         </Paper>

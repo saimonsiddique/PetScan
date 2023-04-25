@@ -54,6 +54,17 @@ const vetSchema = new Schema({
     type: [String],
     // required: true,
   },
+
+  verified: {
+    type: Boolean,
+    default: false,
+  },
+
+  experience: {
+    type: Number,
+    // required: true,
+  },
+
   appointments: {
     type: [Schema.Types.Object],
   },

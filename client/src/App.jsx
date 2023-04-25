@@ -14,6 +14,9 @@ import Dashboard from "./Pages/Dashboard";
 import Meet from "./Pages/Meet";
 import Success from "./componets/Success/Success";
 import VetSteps from "./componets/VetSteps/VetSteps";
+import PrescriptionForm from "./componets/PrescriptionForm/PrescriptionForm";
+import UpcomingAppointment from "./componets/UpcomingAppointment/UpcomingAppointment";
+import Appointments from "./componets/Appointments/Appointments";
 
 export const ImageContext = createContext(null);
 
@@ -38,6 +41,7 @@ function App() {
         <Route path="/feed" element={<NewsFeed />} />
         <Route path="/book-appointment" element={<Meet />} />
         <Route path="/success" element={<Success />} />
+        <Route path="/form" element={<PrescriptionForm />} />
       </Routes>
     </ImageContext.Provider>
   );
