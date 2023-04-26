@@ -17,6 +17,7 @@ import StepTwo from "../componets/MultiStepForm/StepTwo/StepTwo";
 import StepThree from "../componets/MultiStepForm/StepThree/StepThree";
 import ProfileNavBar from "../componets/NavBar/ProfileNavBar/ProfileNavBar";
 import Success from "../componets/Success/Success";
+import HomeNavBar from "../componets/NavBar/HomeNavBar/HomeNavBar";
 
 export const InfomationContext = createContext(null);
 
@@ -24,7 +25,6 @@ const steps = [
   "Who is this appointment for?",
   "What is your Concern?",
   "Choose the vet you want to meet",
-  "Confirmed",
 ];
 
 const concerns = [
@@ -174,7 +174,7 @@ const Meet = () => {
     <InfomationContext.Provider value={{ matchedVet, concerns }}>
       <section className="meet-container">
         <div className="meet-nav-bar">
-          <ProfileNavBar />
+          <HomeNavBar />
         </div>
         <div className="meet-step-container">
           <Box sx={{ width: "75%", padding: "1.5rem" }}>

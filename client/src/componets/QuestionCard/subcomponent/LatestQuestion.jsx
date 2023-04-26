@@ -74,6 +74,11 @@ const LatestQuestion = () => {
             flexDirection: "column",
             alignItems: "left",
             p: 2,
+            ":hover": {
+              boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+              transform: "scale(1.05)",
+              transition: "all 0.3s ease-in-out",
+            },
           }}
         >
           <Typography variant="h5" sx={{ mb: 1 }}>

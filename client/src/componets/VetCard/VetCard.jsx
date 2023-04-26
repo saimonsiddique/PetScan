@@ -7,7 +7,17 @@ import { InfomationContext } from "../../Pages/Meet";
 
 const VetCard = ({ vet, handleSubmit, vetSelected, setVetSelected }) => {
   return (
-    <Card sx={{ maxWidth: 345, m: 1.5 }}>
+    <Card
+      sx={{
+        maxWidth: 345,
+        m: 1.5,
+        ":hover": {
+          boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+          transform: "scale(1.05)",
+          transition: "all 0.3s ease-in-out",
+        },
+      }}
+    >
       <CardActionArea>
         <CardMedia
           component="img"

@@ -1,5 +1,3 @@
-import { useContext } from "react";
-import { NewsFeedContext } from "../../NewsFeed/NewsFeed";
 import { useNavigate } from "react-router-dom";
 import {
   AppBar,
@@ -13,7 +11,6 @@ import {
 import LogoutIcon from "@mui/icons-material/Logout";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import SearchIcon from "@mui/icons-material/Search";
 import Autocomplete from "@mui/material/Autocomplete";
 
 const categories = ["Cat", "Dog", "Bird", "Fish", "General"];
@@ -49,7 +46,12 @@ const HomeNavBar = ({ handleSelect, handleBlur }) => {
                   },
                 }}
                 renderInput={(params) => (
-                  <TextField {...params} label="Search" variant="outlined" />
+                  <TextField
+                    {...params}
+                    label="Search"
+                    size="small"
+                    variant="outlined"
+                  />
                 )}
               />
             </Box>
@@ -77,6 +79,11 @@ const HomeNavBar = ({ handleSelect, handleBlur }) => {
                   sx={{
                     width: 40,
                     height: 40,
+                    ":hover": {
+                      boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                      transform: "scale(1.05)",
+                      transition: "all 0.3s ease-in-out",
+                    },
                   }}
                 />
               </IconButton>

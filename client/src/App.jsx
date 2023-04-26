@@ -17,6 +17,7 @@ import VetSteps from "./componets/VetSteps/VetSteps";
 import PrescriptionForm from "./componets/PrescriptionForm/PrescriptionForm";
 import UpcomingAppointment from "./componets/UpcomingAppointment/UpcomingAppointment";
 import Appointments from "./componets/Appointments/Appointments";
+import Land from "./Pages/Land";
 
 export const ImageContext = createContext(null);
 
@@ -27,7 +28,8 @@ function App() {
     <ImageContext.Provider value={{ image, setImage }}>
       <Routes>
         <Route path="/error" element={<Error />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Land />} />
+        <Route path="/register" element={<Home />} />
         <Route path="/signin" element={<SignIn />}></Route>
         <Route path="/signup">
           <Route path="petParent" element={<SignUp />} />

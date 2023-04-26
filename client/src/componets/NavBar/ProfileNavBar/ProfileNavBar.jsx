@@ -16,9 +16,9 @@ import "./ProfileNavBar.css";
 import { UserContext } from "../../../Pages/Dashboard";
 
 const ProfileNavBar = () => {
+  const { parent, vet } = useContext(UserContext);
   const navigate = useNavigate();
   const user = localStorage.getItem("userType");
-  console.log("navParent", parent);
   return (
     <section className="profile-app-bar">
       <Box>
@@ -52,7 +52,9 @@ const ProfileNavBar = () => {
               >
                 <Avatar
                   src={
-                    "https://res.cloudinary.com/dru7kzv3i/image/upload/v1681975309/vet5_eegd6u.jpg"
+                    user === "petParent"
+                      ? parent.profilePicture
+                      : vet.vetProfile
                   }
                   sx={{
                     width: 40,

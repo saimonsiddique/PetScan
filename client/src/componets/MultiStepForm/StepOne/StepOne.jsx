@@ -14,6 +14,11 @@ const StepOne = (props) => {
           alignItems: "center",
           width: "12vw",
           height: "12vw",
+          ":hover": {
+            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+            transform: "scale(1.05)",
+            transition: "all 0.3s ease-in-out",
+          },
         }}
       >
         <Avatar
