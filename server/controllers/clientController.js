@@ -2,7 +2,7 @@ const Client = require("../models/client.model");
 const Pet = require("../models/pet.model");
 const Question = require("../models/question.model");
 const Appointment = require("../models/appointment");
-const createMailOptions = require("../config/mailoptions");
+const { appointmentMail } = require("../config/mailoptions");
 const transport = require("../config/nodemailer");
 const Vet = require("../models/vet.model");
 const { generateToken } = require("../config/generateToken");
@@ -165,11 +165,11 @@ authClient.createAppointment = async (req, res) => {
 
     //
 
-    const mailoptions = createMailOptions(
+    const mailoptions = appointmentMail(
       "hello.petscan@gmail.com",
       clientEmail,
       "Your appointment has been scheduled",
-      "<h1>Thank for using petScan</h1>"
+      clientName
     );
 
     // create new appointment

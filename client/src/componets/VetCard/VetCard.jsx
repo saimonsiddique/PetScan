@@ -5,7 +5,7 @@ import CardModal from "../CardModal/CardModal";
 import Rating from "@mui/material/Rating";
 import { InfomationContext } from "../../Pages/Meet";
 
-const VetCard = ({ vet, handleSubmit, setVetSelected }) => {
+const VetCard = ({ vet, handleSubmit, vetSelected, setVetSelected }) => {
   return (
     <Card sx={{ maxWidth: 345, m: 1.5 }}>
       <CardActionArea>
@@ -43,6 +43,7 @@ const VetCard = ({ vet, handleSubmit, setVetSelected }) => {
           key={vet._id}
           vet={vet}
           handleSubmit={handleSubmit}
+          vetSelected={vetSelected}
           setVetSelected={setVetSelected}
         />
       </Box>

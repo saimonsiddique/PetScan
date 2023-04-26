@@ -1,15 +1,17 @@
 import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../Pages/Dashboard";
-import { Box, Paper, Typography, Divider } from "@mui/material";
+import { Box, Paper, Typography, Divider, TextField } from "@mui/material";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 import BookAppointment from "../Profile/subcomponents/ProfileContent/BookAppointment";
 import PetCard from "../Profile/subcomponents/ProfileContent/PetCard";
 import Appointments from "../Appointments/Appointments";
 import QuestionLog from "../Profile/subcomponents/ProfileContent/QuestionLog";
-import "./DashboardContainer.css";
-import UpcomingAppointment from "../UpcomingAppointment/UpcomingAppointment";
 import apiClient from "../../ApiServices/ApiClientService";
+import DataTable from "../DataTable/DataTable";
+import SearchIcon from "@mui/icons-material/Search";
+
+import "./DashboardContainer.css";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -17,11 +19,15 @@ const DashboardContainer = () => {
   const { parent, vet, questionQuery, setQuestionQuery } =
     useContext(UserContext);
   const [askedQuestion, setAskedQuestion] = useState([]);
+  const [search, setSearch] = useState("");
+  const [filterEmail, setFilterEmail] = useState([]);
+  const [upcomingAppointments, setUpcomingAppointments] = useState([]);
   const vetUpcomingAppointments = vet.upcomingAppointments.filter(
     (appointment) => {
       return appointment.status === "Pending";
     }
   );
+
   const userType = localStorage.getItem("userType");
 
   useEffect(() => {
@@ -29,6 +35,7 @@ const DashboardContainer = () => {
       setAskedQuestion(parent.askedQuestions);
     } else {
       setAskedQuestion(vet.answeredQuestions);
+      setUpcomingAppointments(vetUpcomingAppointments);
     }
   }, [parent, vet, userType]);
 
@@ -50,6 +57,17 @@ const DashboardContainer = () => {
     setAskedQuestion(newQuestionQuery);
 
     console.log("id", questionId);
+  };
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+    const filterData = vetUpcomingAppointments.filter((appointment) => {
+      return appointment.clientEmail
+        .toLowerCase()
+        .includes(search.toLowerCase());
+    });
+    setFilterEmail(filterData);
+    setUpcomingAppointments(filterData);
   };
 
   return (
@@ -81,59 +99,43 @@ const DashboardContainer = () => {
                 >
                   Upcoming Appointments
                 </Typography>
+                <Divider />
                 <Box
                   sx={{
                     display: "flex",
-                    mt: 1,
+                    justifyContent: "space-between",
                   }}
                 >
-                  <Typography
-                    variant="h5"
+                  <DataTable
+                    appointments={vetUpcomingAppointments}
+                    key={vetUpcomingAppointments._id}
+                  />
+                  {/* Search Field */}
+                  <TextField
+                    id="outlined-basic"
+                    label="Search"
+                    variant="outlined"
+                    size="medium"
                     sx={{
-                      mb: 1,
-                      color: "#42389D",
-                      fontWeight: "bold",
-                      fontSize: 17,
+                      width: "40%",
+                      height: "max-content",
+                      mb: 2,
+                      mt: "2rem",
+                      ml: 2,
                     }}
-                  >
-                    Pet Parent's Email
-                  </Typography>
-                  {/* <Typography
-                    variant="h5"
-                    sx={{
-                      mb: 1,
-                      color: "#42389D",
-                      fontWeight: "bold",
-                      fontSize: 17,
-                      ml: 10,
-                    }}
-                  >
-                    Pet Name
-                  </Typography> */}
-                  <Typography
-                    variant="h5"
-                    sx={{
-                      mb: 1,
-                      color: "#42389D",
-                      fontWeight: "bold",
-                      fontSize: 17,
-                      ml: 20,
-                    }}
-                  >
-                    Concern
-                  </Typography>
-                </Box>
-                <Divider sx={{ width: "100%", my: 2 }} />
-                {vetUpcomingAppointments.length > 0
-                  ? vetUpcomingAppointments.map((appointment) => {
-                      return (
-                        <UpcomingAppointment
-                          key={appointment._id}
-                          appointment={appointment}
+                    onChange={handleSearch}
+                    value={search}
+                    InputProps={{
+                      endAdornment: (
+                        <SearchIcon
+                          sx={{
+                            color: "#42389D",
+                          }}
                         />
-                      );
-                    })
-                  : null}
+                      ),
+                    }}
+                  />
+                </Box>
               </div>
             )}
           </div>
@@ -148,20 +150,21 @@ const DashboardContainer = () => {
               </span>
             </div>
             <div className="pet-card">
-              <AutoPlaySwipeableViews
-                interval={5000}
-                enableMouseEvents
-                style={{ width: "40%" }}
-              >
-                {parent.pets.length > 0
-                  ? parent.pets.map((pet) => {
-                      {
-                        console.log("map func", pet);
-                      }
+              {userType === "petParent" && (
+                <AutoPlaySwipeableViews
+                  interval={5000}
+                  enableMouseEvents
+                  style={{ width: "40%" }}
+                >
+                  {parent.pets.length > 0 ? (
+                    parent.pets.map((pet) => {
                       return <PetCard key={pet._id} pet={pet} />;
                     })
-                  : null}
-              </AutoPlaySwipeableViews>
+                  ) : (
+                    <h3>No pet found!</h3>
+                  )}
+                </AutoPlaySwipeableViews>
+              )}
             </div>
           </div>
           <div className="appointment-lists">
@@ -173,13 +176,15 @@ const DashboardContainer = () => {
               </div>
             ) : null}
             <div className="appointment-cards">
-              <AutoPlaySwipeableViews
-                interval={2500}
-                enableMouseEvents
-                style={{ width: "40%" }}
-              >
-                {parent.bookedAppointments.length > 0
-                  ? parent.bookedAppointments.map((appointment) => {
+              {userType === "petParent" && (
+                <AutoPlaySwipeableViews
+                  interval={2500}
+                  enableMouseEvents
+                  style={{ width: "40%" }}
+                  required={false}
+                >
+                  {parent.bookedAppointments.length > 0 ? (
+                    parent.bookedAppointments.map((appointment) => {
                       return (
                         <Appointments
                           key={appointment._id}
@@ -187,8 +192,11 @@ const DashboardContainer = () => {
                         />
                       );
                     })
-                  : null}
-              </AutoPlaySwipeableViews>
+                  ) : (
+                    <h3>No upcoming appointment!</h3>
+                  )}
+                </AutoPlaySwipeableViews>
+              )}
             </div>
           </div>
         </Paper>

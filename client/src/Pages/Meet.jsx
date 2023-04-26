@@ -40,7 +40,7 @@ const Meet = () => {
   let navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
   const [matchedVet, setMatchedVet] = useState([]);
-  const [vetSelected, setVetSelected] = useState([]);
+  const [vetSelected, setVetSelected] = useState(null);
   const [petInfo, setPetInfo] = useState([]);
   const [selectedConcern, setSelectedConcern] = useState([]);
   const [selectedPet, setSelectedPet] = useState("");
@@ -139,6 +139,7 @@ const Meet = () => {
 
   // Handle Submit Once the user has selected a vet
   const handleSubmit = useCallback(async () => {
+    console.log("In handle submit");
     const accessToken = localStorage.getItem("accessToken");
     try {
       const appointmentData = {
@@ -274,6 +275,7 @@ const Meet = () => {
                           matchedVet={matchedVet}
                           setVetSelected={handleVetSelected}
                           handleSubmit={handleSubmit}
+                          vetSelected={vetSelected}
                         />
                       ) : null}
                     </Typography>
@@ -288,33 +290,22 @@ const Meet = () => {
                       Back
                     </Button>
                     <Box sx={{ flex: "1 1 auto" }} />
-                    {activeStep === 2 ? (
-                      <Button
-                        variant="contained"
-                        onClick={() => navigate("/success")}
-                        sx={{ mr: 1 }}
-                        disabled={!completed}
-                      >
-                        Submit
-                      </Button>
-                    ) : (
-                      <Button
-                        onClick={
-                          activeStep === 0
-                            ? handleNext
-                            : activeStep === 1
-                            ? findVet
-                            : activeStep === 2
-                            ? handleSubmit
-                            : activeStep === 3
-                            ? handleNext
-                            : navigate("/success")
-                        }
-                        sx={{ mr: 1 }}
-                      >
-                        Next
-                      </Button>
-                    )}
+                    <Button
+                      onClick={
+                        activeStep === 0
+                          ? handleNext
+                          : activeStep === 1
+                          ? findVet
+                          : activeStep === 2
+                          ? handleSubmit
+                          : activeStep === 3
+                          ? handleNext
+                          : navigate("/success")
+                      }
+                      sx={{ mr: 1 }}
+                    >
+                      Next
+                    </Button>
                   </Box>
                 </>
               )}

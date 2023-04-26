@@ -8,20 +8,11 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 
-const CardModal = ({ vet, handleSubmit, setVetSelected }) => {
+const CardModal = ({ vet, handleSubmit, vetSelected, setVetSelected }) => {
   // console.log("Card Model vet", vet);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  useCalendlyEventListener({
-    onProfilePageViewed: () => console.log("onProfilePageViewed"),
-    onDateAndTimeSelected: () => console.log("onDateAndTimeSelected"),
-    onEventTypeViewed: () => console.log("onEventTypeViewed"),
-    onEventScheduled: (e) => {
-      handleSubmit();
-      console.log("onEventScheduled", e);
-    },
-  });
 
   const handleClick = () => {
     // open the modal
@@ -75,26 +66,28 @@ const CardModal = ({ vet, handleSubmit, setVetSelected }) => {
             <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
               Top Services : {vet.topRatedFor.join(", ")}
             </Typography>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                mt: 2,
-              }}
-            >
-              <PopupWidget
-                url="https://calendly.com/saimonsiddiquee/30-minute-meeting-clone"
-                text="Book an Appointment"
-                rootElement={document.getElementById("root")}
-                styles={{
-                  m: 2,
-                  height: "100%",
-                  width: "100%",
-                  minWidth: "400px",
-                  minHeight: "500px",
+            {vetSelected && vetSelected._id === vet._id ? (
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  mt: 2,
                 }}
-              />
-            </Box>
+              >
+                <PopupWidget
+                  url="https://calendly.com/saimonsiddiquee/30-minute-meeting-clone"
+                  text="Book an Appointment"
+                  rootElement={document.getElementById("root")}
+                  styles={{
+                    m: 2,
+                    height: "100%",
+                    width: "100%",
+                    minWidth: "400px",
+                    minHeight: "500px",
+                  }}
+                />
+              </Box>
+            ) : null}
           </Box>
         </Fade>
       </Modal>
