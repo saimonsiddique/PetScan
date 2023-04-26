@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../Pages/Dashboard";
 import { Box, Paper, Typography, Divider } from "@mui/material";
 import SwipeableViews from "react-swipeable-views";
@@ -9,19 +9,48 @@ import Appointments from "../Appointments/Appointments";
 import QuestionLog from "../Profile/subcomponents/ProfileContent/QuestionLog";
 import "./DashboardContainer.css";
 import UpcomingAppointment from "../UpcomingAppointment/UpcomingAppointment";
+import apiClient from "../../ApiServices/ApiClientService";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const DashboardContainer = () => {
   const { parent, vet, questionQuery, setQuestionQuery } =
     useContext(UserContext);
+  const [askedQuestion, setAskedQuestion] = useState([]);
   const vetUpcomingAppointments = vet.upcomingAppointments.filter(
     (appointment) => {
       return appointment.status === "Pending";
     }
   );
-  console.log("vet", vetUpcomingAppointments);
   const userType = localStorage.getItem("userType");
+
+  useEffect(() => {
+    if (userType === "petParent") {
+      setAskedQuestion(parent.askedQuestions);
+    } else {
+      setAskedQuestion(vet.answeredQuestions);
+    }
+  }, [parent, vet, userType]);
+
+  const handleDelete = (questionId) => {
+    const userId = localStorage.getItem("userId");
+
+    // call api to delete question
+
+    apiClient.deleteQuestion(userId, questionId).then((res) => {
+      console.log("res", res);
+    });
+
+    // filter out the question from the askedQuestion array
+    const newQuestionQuery = askedQuestion.filter((question) => {
+      return question._id !== questionId;
+    });
+
+    // set the new questionQuery
+    setAskedQuestion(newQuestionQuery);
+
+    console.log("id", questionId);
+  };
 
   return (
     <Box
@@ -171,11 +200,12 @@ const DashboardContainer = () => {
                 <div className="heading-question-list">
                   <h3>{parent.firstName}'s Questions</h3>
                 </div>
-                {parent.askedQuestions.map((question, index) => {
+                {askedQuestion.map((question, index) => {
                   return (
                     <QuestionLog
                       key={question._id}
                       question={question}
+                      handleDelete={handleDelete}
                       index={index}
                     />
                   );
@@ -186,7 +216,7 @@ const DashboardContainer = () => {
                 <div className="heading-question-list">
                   <h3>{vet.firstName}'s Answers</h3>
                 </div>
-                {vet.answeredQuestions.map((question, index) => {
+                {askedQuestion.map((question, index) => {
                   return (
                     <QuestionLog
                       key={question._id}

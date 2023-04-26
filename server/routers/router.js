@@ -21,6 +21,8 @@ router.post(
   authMiddleware.client,
   clientController.postQuestion
 );
+// delete question
+router.post("/question/:id", clientController.deleteQuestion);
 router.post("/upvotes", clientController.postVote);
 router.post("/vet/find", clientController.findVet);
 

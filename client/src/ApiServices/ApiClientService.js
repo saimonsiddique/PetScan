@@ -123,6 +123,19 @@ apiClient.getFeedQuestions = async () => {
   }
 };
 
+apiClient.deleteQuestion = async (userId, questionId) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/question/${questionId}`, {
+      userId,
+    });
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    const { data } = response;
+    return data.msg;
+  }
+};
+
 apiClient.upVoter = async (questionId, userId) => {
   try {
     const response = await axios.post(`${BASE_URL}/upvotes`, {

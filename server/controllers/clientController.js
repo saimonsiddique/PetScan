@@ -221,6 +221,31 @@ authClient.postQuestion = async (req, res) => {
   }
 };
 
+authClient.deleteQuestion = async (req, res) => {
+  console.log("I am here to delete question", req.body);
+  try {
+    // get the question id from url
+    const questionId = req.params.id;
+    console.log("questionId", questionId);
+    // find the question
+    const questionToDelete = await Question.find({ _id: questionId });
+    // find the client
+    const client = await Client.findById(req.body.userId);
+    // find the index of the question in the client's askedQuestions array
+    const index = client.askedQuestions.indexOf(questionId);
+    // remove the question from the client's askedQuestions array
+    client.askedQuestions.splice(index, 1);
+    // save the client
+    await client.save();
+    // remove the question from the database
+    await Question.findByIdAndDelete(questionId);
+    res.status(200).send(questionToDelete);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error });
+  }
+};
+
 authClient.feed = async (req, res) => {
   try {
     const allQuestions = await Question.find({}).sort({ postDate: "desc" });

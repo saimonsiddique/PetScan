@@ -2,7 +2,7 @@ import { Box, List, ListItemButton, ListItemText } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 const QuestionLog = (props) => {
-  const { question, index } = props;
+  const { question, index, handleDelete } = props;
   const answeredTrack = question.isAnswered;
   return (
     <Box
@@ -41,6 +41,7 @@ const QuestionLog = (props) => {
             secondary={answeredTrack ? question.answer : "Not Answered"}
           />
           <DeleteForeverIcon
+            onClick={() => handleDelete(question._id)}
             sx={{
               color: "red",
             }}
