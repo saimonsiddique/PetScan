@@ -79,4 +79,23 @@ apiVet.getInfo = async (token, appointmentInfo) => {
   }
 };
 
+apiVet.sendPrescription = async (token, prescription) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/prescription`,
+      prescription,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    const { data } = response;
+    return data.msg;
+  }
+};
+
 export default apiVet;

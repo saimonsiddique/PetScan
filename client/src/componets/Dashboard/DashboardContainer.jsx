@@ -152,19 +152,20 @@ const DashboardContainer = () => {
             </div>
             <div className="pet-card">
               {
-                userType === "petParent" &&
-                // <AutoPlaySwipeableViews
-                //   interval={5000}
-                //   enableMouseEvents
-                //   style={{ width: "40%" }}
-                // >
-                parent.pets.length > 0 ? (
-                  parent.pets.map((pet) => {
-                    return <PetCard key={pet._id} pet={pet} />;
-                  })
-                ) : (
-                  <h3>No pet found!</h3>
-                )
+                userType === "petParent" ? (
+                  // <AutoPlaySwipeableViews
+                  //   interval={5000}
+                  //   enableMouseEvents
+                  //   style={{ width: "40%" }}
+                  // >
+                  parent.pets.length > 0 ? (
+                    parent.pets.map((pet) => {
+                      return <PetCard key={pet._id} pet={pet} />;
+                    })
+                  ) : (
+                    <h3>No pet found!</h3>
+                  )
+                ) : null
                 // </AutoPlaySwipeableViews>
               }
             </div>
@@ -178,25 +179,26 @@ const DashboardContainer = () => {
               </div>
             ) : null}
             <div className="appointment-cards">
-              {userType === "petParent" &&
-                // <AutoPlaySwipeableViews
-                //   interval={2500}
-                //   enableMouseEvents
-                //   style={{ width: "40%" }}
-                //   required={false}
-                // >
-                (parent.bookedAppointments.length > 0 ? (
-                  parent.bookedAppointments.map((appointment) => {
-                    return (
-                      <Appointments
-                        key={appointment._id}
-                        appointment={appointment}
-                      />
-                    );
-                  })
-                ) : (
-                  <h3>No upcoming appointment!</h3>
-                ))
+              {
+                userType === "petParent" &&
+                  // <AutoPlaySwipeableViews
+                  //   interval={2500}
+                  //   enableMouseEvents
+                  //   style={{ width: "40%" }}
+                  //   required={false}
+                  // >
+                  (parent.bookedAppointments.length > 0 ? (
+                    parent.bookedAppointments.map((appointment) => {
+                      return (
+                        <Appointments
+                          key={appointment._id}
+                          appointment={appointment}
+                        />
+                      );
+                    })
+                  ) : (
+                    <h3>No upcoming appointment!</h3>
+                  ))
                 // </AutoPlaySwipeableViews>
               }
             </div>

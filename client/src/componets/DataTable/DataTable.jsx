@@ -10,7 +10,6 @@ import Paper from "@mui/material/Paper";
 import PrescriptionForm from "../PrescriptionForm/PrescriptionForm";
 
 const DataTable = ({ appointments }) => {
-  console.log("DataTable appointments", appointments);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -34,8 +33,8 @@ const DataTable = ({ appointments }) => {
       appointment.pet
     );
   });
-
   const [rows, setRows] = useState(OrginalRows);
+
   return (
     <>
       <TableContainer
@@ -50,10 +49,50 @@ const DataTable = ({ appointments }) => {
         <Table aria-label="collapsible table">
           <TableHead>
             <TableRow>
-              <TableCell>Pet Parent's Email</TableCell>
-              <TableCell align="center">Pet Name</TableCell>
-              <TableCell align="center">Concern</TableCell>
-              <TableCell align="center">Suggestions</TableCell>
+              <TableCell
+                sx={{
+                  backgroundColor: "#3BAFDA",
+                  color: "white",
+                  fontSize: "1rem",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
+                Pet Parent's Email
+              </TableCell>
+              <TableCell
+                sx={{
+                  backgroundColor: "#3BAFDA",
+                  color: "white",
+                  fontSize: "1rem",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
+                Pet Name
+              </TableCell>
+              <TableCell
+                sx={{
+                  backgroundColor: "#3BAFDA",
+                  color: "white",
+                  fontSize: "1rem",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
+                Concern
+              </TableCell>
+              <TableCell
+                sx={{
+                  backgroundColor: "#3BAFDA",
+                  color: "white",
+                  fontSize: "1rem",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
+                Suggestions
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

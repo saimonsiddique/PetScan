@@ -116,28 +116,35 @@ const PrescriptionForm = ({ handleClose, open, appointment }) => {
                 }}
               >
                 <Typography variant="body1" sx={{ mb: 0.5 }}>
-                  Name : <strong>Meaow</strong>
+                  Name : <strong>{appointment.petName}</strong>
                 </Typography>
                 <Typography variant="body1" sx={{ mb: 0.5 }}>
                   Species :{" "}
                   <strong>
-                    <em>Cat</em>
+                    <em>{appointment.pet.petSpecies}</em>
                   </strong>
                 </Typography>
                 <Typography variant="body1" sx={{ mb: 0.5 }}>
-                  Age : <strong>1 years</strong>
+                  Age :{" "}
+                  <strong>{`${appointment.pet.petAge} ${appointment.pet.ageUnit}`}</strong>
                 </Typography>
                 <Typography variant="body1" sx={{ mb: 0.5 }}>
-                  Weight : <strong>1 kg</strong>
+                  Weight :{" "}
+                  <strong>{`${appointment.pet.petWeight} ${appointment.pet.weightUnit}`}</strong>
                 </Typography>
                 <Typography variant="body1" sx={{ mb: 0.5 }}>
                   Neutered : <strong>No</strong>
                 </Typography>
                 <Typography variant="body1" sx={{ mb: 0.5 }}>
-                  Previous Medical History : <strong>None</strong>
+                  Previous Medical History :{" "}
+                  <strong>
+                    {appointment.pet.previousMedicalHistory !== ""
+                      ? "None"
+                      : appointment.pet.previousMedicalHistory}
+                  </strong>
                 </Typography>
                 <Typography variant="body1" sx={{ mb: 0.5 }}>
-                  Concern : <strong>None</strong>
+                  Concern : <strong>{appointment.concern}</strong>
                 </Typography>
                 <Divider sx={{ width: "100%", my: 2 }} />
                 <Box
@@ -175,12 +182,31 @@ const PrescriptionForm = ({ handleClose, open, appointment }) => {
                     rows={4}
                     placeholder="Enter your suggestion here"
                   />
-                  <Button
-                    sx={{ width: "20%", height: "20%", margin: "2rem" }}
-                    variant="contained"
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      width: "20%",
+                      height: "100%",
+                    }}
                   >
-                    Send
-                  </Button>
+                    <Button
+                      sx={{ width: "80%", height: "25%", m: 1 }}
+                      variant="contained"
+                    >
+                      Send
+                    </Button>
+                    <Button
+                      sx={{ width: "80%", height: "25%", m: 1, p: 1 }}
+                      variant="contained"
+                      color="error"
+                      onClick={handleClose}
+                    >
+                      Cancel
+                    </Button>
+                  </Box>
                 </Box>
               </Box>
             </Paper>

@@ -26,7 +26,7 @@ const PetCard = (props) => {
         <CardActionArea onClick={handleOpen}>
           <CardMedia
             component="img"
-            height="140"
+            height="145"
             image={petPhoto ? petPhoto : petImg}
             alt="Your Pet"
           />
