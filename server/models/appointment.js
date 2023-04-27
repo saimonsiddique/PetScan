@@ -20,7 +20,7 @@ const AppiontmentSchema = new Schema({
   },
 
   pet: {
-    type: String,
+    type: Schema.Types.Object,
     required: true,
   },
 

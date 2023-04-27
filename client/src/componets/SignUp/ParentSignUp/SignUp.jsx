@@ -17,6 +17,7 @@ import "./SignUp.css";
 import ImageUpload from "../../ImageUpload/ImageUpload";
 
 import { ImageContext } from "../../../App";
+import AnnonymousBar from "../../NavBar/AnnonymousBar/AnnonymousBar";
 
 const initialState = {
   firstName: "",
@@ -88,6 +89,7 @@ const SignUp = () => {
   return (
     <>
       <section className="container">
+        <AnnonymousBar />
         <div className="signup-form">
           <div className="header">
             <img className="logo" src={userWithPet} alt="logo" />
@@ -101,24 +103,6 @@ const SignUp = () => {
               </Link>
             </span>
           </div>
-          {/* <div className="auth-account">
-            <span>Create account with</span>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <Stack direction="row" spacing={3}>
-                <Button variant="contained" style={{ width: "25ch" }}>
-                  Facebook
-                </Button>
-                <Button variant="contained" style={{ width: "25ch" }}>
-                  Google
-                </Button>
-              </Stack>
-            </Box>
-          </div> */}
           <Divider sx={{ mt: 2 }} />
           <div className="form">
             <Box

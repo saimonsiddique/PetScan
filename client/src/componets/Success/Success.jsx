@@ -2,11 +2,12 @@ import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import "./Success.css";
 import ProfileNavBar from "../NavBar/ProfileNavBar/ProfileNavBar";
+import AnnonymousBar from "../NavBar/AnnonymousBar/AnnonymousBar";
 const Success = () => {
   return (
     <div className="success-container">
       <div className="success-nav-bar">
-        <ProfileNavBar />
+        <AnnonymousBar />
       </div>
       <div className="success-content">
         <div className="check-logo">

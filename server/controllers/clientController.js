@@ -162,8 +162,9 @@ authClient.createAppointment = async (req, res) => {
     // set vetName
     const vetName = `${vet.firstName} ${vet.lastName}`;
     const vetProfile = vet.vetProfile;
-
-    //
+    // find pet and set petName
+    const pet = await Pet.findById(req.body.pet);
+    const petName = pet.petName;
 
     const mailoptions = appointmentMail(
       "hello.petscan@gmail.com",
@@ -175,6 +176,8 @@ authClient.createAppointment = async (req, res) => {
     // create new appointment
     const newAppointment = new Appointment({
       ...req.body,
+      petName,
+      pet: pet,
       client: req.client.id,
       clientName,
       vetName,

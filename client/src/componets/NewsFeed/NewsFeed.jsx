@@ -7,6 +7,7 @@ import QuestionCard from "../QuestionCard/QuestionCard";
 import LatestQuestion from "../QuestionCard/subcomponent/LatestQuestion";
 import BookAppointment from "../Profile/subcomponents/ProfileContent/BookAppointment";
 import { Box } from "@mui/material";
+import AnnonymousBar from "../NavBar/AnnonymousBar/AnnonymousBar";
 
 export const NewsFeedContext = createContext();
 
@@ -19,13 +20,13 @@ const NewsFeed = () => {
   const [prevQuestion, setPrevQuestion] = useState([]);
   const [answerBox, setAnswerBox] = useState(false);
   const [postCard, setPostCard] = useState(false);
+  const user = localStorage.getItem("userType");
 
   useEffect(() => {
     (async () => await getAllQuestions())();
     // check if user is logged in
     if (localStorage.getItem("accessToken")) {
       // check if user is a vet or not
-      const user = localStorage.getItem("userType");
       if (user === "vet") {
         setAnswerBox(true);
       } else {
@@ -116,7 +117,11 @@ const NewsFeed = () => {
             m: "4rem",
           }}
         >
-          <HomeNavBar handleSelect={handleSelect} handleBlur={handleBlur} />
+          {user ? (
+            <HomeNavBar handleSelect={handleSelect} handleBlur={handleBlur} />
+          ) : (
+            <AnnonymousBar />
+          )}
         </Box>
         <Box
           sx={{

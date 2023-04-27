@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Box, Button } from "@mui/material";
+import AnnonymousBar from "../componets/NavBar/AnnonymousBar/AnnonymousBar";
 
 const Home = () => {
   let navigate = useNavigate();
@@ -29,6 +30,7 @@ const Home = () => {
 
   return (
     <section className="homepage-container">
+      <AnnonymousBar />
       <div className="page-content">
         <img src={"../../public/Homepage/logo.png"} className="title-logo" />
         <h2>

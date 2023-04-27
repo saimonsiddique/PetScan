@@ -130,6 +130,8 @@ const Dashboard = () => {
   if (loading) {
     return <CircularProgress />;
   }
+
+  console.log("First state vet", vet);
   return (
     <UserContext.Provider
       value={{ parent, vet, questionQuery, setQuestionQuery }}

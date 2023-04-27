@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PopupWidget, useCalendlyEventListener } from "react-calendly";
+import { PopupWidget } from "react-calendly";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 
-const CardModal = ({ vet, handleSubmit, vetSelected, setVetSelected }) => {
+const CardModal = ({ vet, vetSelected, setVetSelected }) => {
   // console.log("Card Model vet", vet);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -25,8 +25,6 @@ const CardModal = ({ vet, handleSubmit, vetSelected, setVetSelected }) => {
     <>
       <Button onClick={handleClick}>Details</Button>
       <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
         open={open}
         onClose={handleClose}
         closeAfterTransition

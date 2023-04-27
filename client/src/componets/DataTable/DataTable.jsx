@@ -7,21 +7,31 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import PrescriptionForm from "../PrescriptionForm/PrescriptionForm";
 
 const DataTable = ({ appointments }) => {
-  const createData = (email, petName, concern) => {
+  console.log("DataTable appointments", appointments);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const createData = (email, clientName, petName, concern, pet) => {
     return {
       email,
+      clientName,
       petName,
       concern,
+      pet: pet,
     };
   };
 
   const OrginalRows = appointments.map((appointment) => {
     return createData(
       appointment.clientEmail,
-      appointment.pet,
-      appointment.concern
+      appointment.clientName,
+      appointment.petName,
+      appointment.concern,
+      appointment.pet
     );
   });
 
@@ -47,13 +57,14 @@ const DataTable = ({ appointments }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.email}>
+            {rows.map((row, index) => (
+              <TableRow key={index}>
                 <TableCell>{row.email}</TableCell>
                 <TableCell align="center">{row.petName}</TableCell>
                 <TableCell align="center">{row.concern}</TableCell>
                 <TableCell align="center">
                   <Button
+                    onClick={handleOpen}
                     variant="contained"
                     sx={{
                       backgroundColor: "#42389D",
@@ -66,6 +77,12 @@ const DataTable = ({ appointments }) => {
                   >
                     Suggest
                   </Button>
+                  <PrescriptionForm
+                    open={open}
+                    handleClose={handleClose}
+                    handleOpen={handleOpen}
+                    appointment={row}
+                  />
                 </TableCell>
               </TableRow>
             ))}

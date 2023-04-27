@@ -31,6 +31,7 @@ const QuestionCard = (props) => {
   const [voted, setVoted] = useState(false);
   const answered = question.isAnswered;
   const userId = localStorage.getItem("userId");
+  const userType = localStorage.getItem("userType");
 
   const questionId = question._id;
 
@@ -226,7 +227,7 @@ const QuestionCard = (props) => {
               color: "white",
             }}
           >
-            {answered ? (
+            {answered && userId ? (
               <>
                 <Typography variant="body2" sx={{ fontSize: 14 }}>
                   WAS THIS ANSWER HELPFUL?
@@ -253,9 +254,17 @@ const QuestionCard = (props) => {
                 </IconButton>
               </>
             ) : (
-              <Typography variant="body2" sx={{ fontSize: 14 }}>
-                Helpful votes are not available for unanswered questions
-              </Typography>
+              <>
+                {userId ? (
+                  <Typography variant="body2" sx={{ fontSize: 14 }}>
+                    Helpful votes are not available for unanswered questions
+                  </Typography>
+                ) : (
+                  <Typography variant="body2" sx={{ fontSize: 14 }}>
+                    Please login to vote
+                  </Typography>
+                )}
+              </>
             )}
           </Box>
         </Paper>

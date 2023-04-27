@@ -7,6 +7,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import apiVet from "../../../ApiServices/ApiVetServices";
 import userWithPet from "../../../assets/signup/user-with-pet.svg";
 import "./VetSignUp.css";
+import AnnonymousBar from "../../NavBar/AnnonymousBar/AnnonymousBar";
 
 const PASS_MIN_LENGTH = 8;
 
@@ -75,6 +76,7 @@ const VetSignUp = () => {
   return (
     <>
       <section className="vet-container">
+        <AnnonymousBar />
         <div className="signup-form">
           <div className="vet-header">
             <img className="logo" src={userWithPet} alt="logo" />

@@ -7,7 +7,6 @@ import {
   IconButton,
   Tooltip,
   Avatar,
-  Button,
 } from "@mui/material";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import NotificationsIcon from "@mui/icons-material/Notifications";

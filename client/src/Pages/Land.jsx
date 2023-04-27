@@ -1,8 +1,12 @@
-import React from "react";
-import HomeNavBar from "../componets/NavBar/HomeNavBar/HomeNavBar";
-import { Box, Button, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { Box, Button, Divider, Typography } from "@mui/material";
 import VideocamOutlinedIcon from "@mui/icons-material/VideocamOutlined";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import ReviewCard from "../componets/ReviewCard/ReviewCard";
+import AnnonymousBar from "../componets/NavBar/AnnonymousBar/AnnonymousBar";
 
 const reviewers = [
   {
@@ -27,6 +31,7 @@ const reviewers = [
 ];
 
 const Land = () => {
+  const navigate = useNavigate();
   return (
     <Box
       sx={{
@@ -41,7 +46,7 @@ const Land = () => {
           height: "10%",
         }}
       >
-        <HomeNavBar />
+        <AnnonymousBar />
       </Box>
       <Box
         sx={{
@@ -101,13 +106,13 @@ const Land = () => {
           <Button
             variant="contained"
             sx={{
-              backgroundColor: "#8645B9",
+              backgroundColor: "#FF0789",
               color: "white",
-              fontSize: "14px",
-              width: "20%",
+              fontSize: "1rem",
+              width: "18%",
               height: "10%",
+              marginTop: "3%",
               marginLeft: "5%",
-              marginTop: "4%",
               borderRadius: "10px",
               ":hover": {
                 boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
@@ -116,6 +121,7 @@ const Land = () => {
               },
             }}
             startIcon={<VideocamOutlinedIcon />}
+            onClick={() => navigate("/book-appointment")}
           >
             Book an appointment
           </Button>
@@ -286,6 +292,228 @@ const Land = () => {
             {reviewers.map((review) => {
               return <ReviewCard review={review} />;
             })}
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-start",
+            height: "max-content",
+            background: "-webkit-linear-gradient(#2C59A5, #42389D)",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              width: "100%",
+              height: "100%",
+              padding: "2% 0 2% 0",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "flex-start",
+                width: "40%",
+                height: "100%",
+                ml: "1%",
+                mt: "2.5%",
+              }}
+            >
+              <img
+                src="/Homepage/petscan-removebg-preview.png"
+                alt="petscan"
+                style={{
+                  width: "20%",
+                  height: "20%",
+                }}
+              />
+              <Typography
+                variant="span"
+                sx={{
+                  color: "#ffffff",
+                  fontSize: "1.1rem",
+                  fontWeight: "525",
+                  textAlign: "center",
+                  width: "40%",
+                  mt: 1.5,
+                }}
+              >
+                <strong style={{ color: "white" }}>
+                  <em>We care for your pet</em>
+                </strong>{" "}
+                <p style={{ fontSize: "1rem" }}>&copy; 2023 Petscan</p>
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "flex-start",
+                alignItems: "left",
+                width: "30%",
+                height: "100%",
+              }}
+            >
+              <Typography
+                variant="body1"
+                sx={{
+                  color: "#ffffff",
+                  fontSize: "1rem",
+                  lineHeight: "2rem",
+                  fontWeight: "bold",
+                  marginTop: "1%",
+                }}
+              >
+                ABOUT
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{
+                  color: "#ffffff",
+                  fontSize: "1rem",
+                  lineHeight: "2rem",
+                  fontWeight: "bold",
+                  marginTop: "1%",
+                }}
+              >
+                Our Story
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{
+                  color: "#ffffff",
+                  fontSize: "1rem",
+                  lineHeight: "2rem",
+                  fontWeight: "bold",
+                  marginTop: "1%",
+                }}
+              >
+                How it works
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{
+                  color: "#ffffff",
+                  fontSize: "1rem",
+                  lineHeight: "2rem",
+                  fontWeight: "bold",
+                  marginTop: "1%",
+                }}
+              >
+                Blog
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "flex-start",
+                alignItems: "left",
+                width: "30%",
+                height: "100%",
+              }}
+            >
+              <Typography
+                variant="body1"
+                sx={{
+                  color: "#ffffff",
+                  fontSize: "1rem",
+                  lineHeight: "2rem",
+                  fontWeight: "bold",
+                  marginTop: "1%",
+                }}
+              >
+                SUPPORT
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{
+                  color: "#ffffff",
+                  fontSize: "1rem",
+                  lineHeight: "2rem",
+                  fontWeight: "bold",
+                  marginTop: "1%",
+                }}
+              >
+                Contuct Us
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{
+                  color: "#ffffff",
+                  fontSize: "1rem",
+                  lineHeight: "2rem",
+                  fontWeight: "bold",
+                  marginTop: "1%",
+                }}
+              >
+                FAQ
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{
+                  color: "#ffffff",
+                  fontSize: "1rem",
+                  lineHeight: "2rem",
+                  fontWeight: "bold",
+                  marginTop: "1%",
+                }}
+              >
+                Privacy Policy
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "flex-start",
+                alignItems: "center",
+                width: "30%",
+                height: "100%",
+                mt: "3%",
+              }}
+            >
+              <FacebookIcon
+                sx={{
+                  color: "#ffffff",
+                  fontSize: "3rem",
+                  lineHeight: "2rem",
+                  fontWeight: "bold",
+                  marginTop: "1%",
+                  mr: "4%",
+                }}
+              />
+              <TwitterIcon
+                sx={{
+                  color: "#ffffff",
+                  fontSize: "3rem",
+                  lineHeight: "2rem",
+                  fontWeight: "bold",
+                  marginTop: "1%",
+                  mr: "4%",
+                }}
+              />
+              <InstagramIcon
+                sx={{
+                  color: "#ffffff",
+                  fontSize: "3rem",
+                  lineHeight: "2rem",
+                  fontWeight: "bold",
+                  marginTop: "1%",
+                  mr: "4%",
+                }}
+              />
+              <LinkedInIcon
+                sx={{
+                  color: "#ffffff",
+                  fontSize: "3rem",
+                  lineHeight: "2rem",
+                  fontWeight: "bold",
+                  marginTop: "1%",
+                  mr: "1%",
+                }}
+              />
+            </Box>
           </Box>
         </Box>
       </Box>

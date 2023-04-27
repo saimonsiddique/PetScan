@@ -17,15 +17,12 @@ import {
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import userWithPet from "../../assets/signup/user-with-pet.svg";
 import "./SignIn.css";
+import AnnonymousBar from "../NavBar/AnnonymousBar/AnnonymousBar";
 
 const initialState = {
   email: "",
   password: "",
 };
-
-const Email_REGEX = /^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/;
-const Password_REGEX =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -43,10 +40,6 @@ const SignIn = () => {
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
-  };
-
-  const handleCheckbox = (e) => {
-    setChecked(!checked);
   };
 
   const LoginUser = async (e) => {
@@ -77,12 +70,10 @@ const SignIn = () => {
     }
   };
 
-  const validateForm = () => {
-    return state.email.length > 0 && state.password.length > 0;
-  };
   return (
     <>
       <section className="signin-container">
+        <AnnonymousBar />
         <div className="signin-form">
           <div className="signin-header">
             <img className="logo" src={userWithPet} alt="logo" />
@@ -91,29 +82,11 @@ const SignIn = () => {
               <b>Or</b>
             </p>
             <span>
-              <Link to={"/"}>
+              <Link to={"/register"}>
                 <strong>Create a new account</strong>
               </Link>
             </span>
           </div>
-          {/* <div className="auth-account">
-            <span>Sign In with</span>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <Stack direction="row" spacing={3}>
-                <Button variant="contained" style={{ width: "50%" }}>
-                  Facebook
-                </Button>
-                <Button variant="contained" style={{ width: "50%" }}>
-                  Google
-                </Button>
-              </Stack>
-            </Box>
-          </div> */}
           <Divider sx={{ mt: 2 }} />
           <div className="form">
             <Box
@@ -180,7 +153,7 @@ const SignIn = () => {
             </Button>
           </Box>
           <div className="forgot-password">
-            <Link to={"/"}>Forgot Password?</Link>
+            <Link to={"/register"}>Forgot Password?</Link>
           </div>
           <Divider sx={{ mt: 2 }} />
         </div>

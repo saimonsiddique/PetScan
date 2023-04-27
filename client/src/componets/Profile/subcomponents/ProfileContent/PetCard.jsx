@@ -1,14 +1,11 @@
-import { useState, useEffect, useContext } from "react";
+import { useState } from "react";
 import {
   Card,
   CardContent,
   CardMedia,
   Typography,
-  Button,
   CardActionArea,
-  CardActions,
 } from "@mui/material";
-import { UserContext } from "../../../../Pages/Dashboard";
 import petImg from "../../../../../public/PetInfo/pet-info-dog.jpg";
 import PetModal from "../../../CardModal/PetModal";
 
@@ -57,14 +54,14 @@ const PetCard = (props) => {
             </Typography>
           </CardContent>
         </CardActionArea>
-        <PetModal
-          handleOpen={handleOpen}
-          handleClose={handleClose}
-          open={open}
-          setOpen={setOpen}
-          pet={pet}
-        />
       </Card>
+      <PetModal
+        handleOpen={handleOpen}
+        handleClose={handleClose}
+        open={open}
+        setOpen={setOpen}
+        pet={pet}
+      />
     </section>
   );
 };
