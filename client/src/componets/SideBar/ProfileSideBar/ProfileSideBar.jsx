@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { List, ListItemButton, ListItemText } from "@mui/material";
 import LayersIcon from "@mui/icons-material/Layers";
 import PetsIcon from "@mui/icons-material/Pets";
+import GroupsIcon from "@mui/icons-material/Groups";
 import SettingsApplicationsSharpIcon from "@mui/icons-material/SettingsApplicationsSharp";
 import AddLocationSharpIcon from "@mui/icons-material/AddLocationSharp";
 import navLogo from "../../../../public/Homepage/parent-nav.jpg";
@@ -64,7 +65,21 @@ const ProfileSideBar = () => {
                 />
               </ListItemButton>
             </>
-          ) : null}
+          ) : (
+            <ListItemButton onClick={handleClick}>
+              <GroupsIcon />
+              <ListItemText
+                sx={{
+                  paddingLeft: "4%",
+                }}
+                primaryTypographyProps={{
+                  fontSize: "1.2rem",
+                  fontFamily: "Roboto",
+                }}
+                primary={"Consulted patients"}
+              />
+            </ListItemButton>
+          )}
 
           {user === "petParent" ? (
             <Link to="/book-appointment">
@@ -121,6 +136,27 @@ const ProfileSideBar = () => {
               }
             />
           </ListItemButton>
+          {user === "petParent" ? (
+            <Link to="/book-appointment">
+              <ListItemButton
+                sx={{
+                  borderRadius: "10px",
+                }}
+              >
+                <GroupsIcon />
+                <ListItemText
+                  sx={{
+                    paddingLeft: "4%",
+                  }}
+                  primaryTypographyProps={{
+                    fontSize: "1.2rem",
+                    fontFamily: "Roboto",
+                  }}
+                  primary={"Consulted Vets"}
+                />
+              </ListItemButton>
+            </Link>
+          ) : null}
         </List>
       </nav>
     </section>

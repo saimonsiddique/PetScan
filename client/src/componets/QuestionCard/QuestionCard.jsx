@@ -165,7 +165,7 @@ const QuestionCard = (props) => {
               >
                 <Avatar
                   alt={question.vetName}
-                  src={question.vetName}
+                  src={question.vetProfile}
                   sx={{ width: 38, height: 38, mr: 1 }}
                 />
                 <Box

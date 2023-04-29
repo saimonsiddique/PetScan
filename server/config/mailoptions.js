@@ -172,7 +172,7 @@ const prescriptionMail = (sender, receiver, subject, prescription, vetName) => {
                     "
                   >
                     <img
-                      src="https://res.cloudinary.com/dru7kzv3i/image/upload/v1682504569/vetster-vet-video-appt_afrnow.svg"
+                      src="https://res.cloudinary.com/dru7kzv3i/image/upload/v1681975750/logo_f5x3hk.png"
                       alt="Logo"
                       style="max-width: 100%; display: block; margin: 0 auto"
                     />

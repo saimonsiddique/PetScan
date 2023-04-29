@@ -14,8 +14,14 @@ import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Backdrop from "@mui/material/Backdrop";
 
-const PrescriptionForm = ({ handleClose, open, appointment }) => {
-  console.log("PrescriptionForm appointment", appointment);
+const PrescriptionForm = ({
+  handleClose,
+  open,
+  appointment,
+  setPrescription,
+  sendPrescriptionToClient,
+}) => {
+  // console.log("PrescriptionForm appointment", appointment);
   return (
     <>
       <Modal
@@ -181,6 +187,7 @@ const PrescriptionForm = ({ handleClose, open, appointment }) => {
                     multiline
                     rows={4}
                     placeholder="Enter your suggestion here"
+                    onChange={(e) => setPrescription(e.target.value)}
                   />
                   <Box
                     sx={{
@@ -195,6 +202,7 @@ const PrescriptionForm = ({ handleClose, open, appointment }) => {
                     <Button
                       sx={{ width: "80%", height: "25%", m: 1 }}
                       variant="contained"
+                      onClick={sendPrescriptionToClient}
                     >
                       Send
                     </Button>

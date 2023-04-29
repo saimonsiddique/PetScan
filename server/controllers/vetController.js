@@ -1,7 +1,8 @@
 const Vet = require("../models/vet.model");
 const Client = require("../models/client.model");
+const Pet = require("../models/pet.model");
 const Question = require("../models/question.model");
-const createMailOptions = require("../config/mailoptions");
+const { prescriptionMail } = require("../config/mailoptions");
 const transport = require("../config/nodemailer");
 const { generateToken } = require("../config/generateToken");
 const bcrypt = require("bcrypt");
@@ -179,13 +180,81 @@ authVet.vetInfo = async (req, res) => {
 };
 
 authVet.sendPrescription = async (req, res) => {
+  console.log("Send Prescription", req.body);
   try {
-    const { prescription, clientName, clientEmail } = req.body;
+    const { prescription } = req.body;
+    // pet info
+    const aboutPet = {
+      petName: req.body.pet.name,
+      concern: req.body.pet.concern,
+      petId: req.body.pet.petId,
+    };
+    // client info
+    const aboutClient = {
+      clientName: req.body.client.name,
+      clientEmail: req.body.client.email,
+    };
     const vetId = req.vet.id;
     if (!prescription) {
       return res.status(400).json({ msg: "Missing Information" });
     }
-  } catch {
+    // find vet and update appointment
+    const vet = await Vet.findById(vetId);
+    // find client and update appointment
+    const client = await Client.findOne({ email: aboutClient.clientEmail });
+    const clientSide = {
+      vetName: `${vet.firstName} ${vet.lastName}`,
+      vetEmail: vet.email,
+      petName: aboutPet.petName,
+      concern: aboutPet.concern,
+    };
+    // delete from upcoming appointments
+    const findAppointmentClient = client.bookedAppointments.findIndex(
+      (appointment) => appointment.vet === vetId
+    );
+    client.bookedAppointments.splice(findAppointmentClient, 1);
+    client.appointments.push(clientSide);
+    await client.save();
+
+    // delete from upcoming appointments
+    const findAppointmentVet = vet.upcomingAppointments.findIndex(
+      (appointment) => appointment.client === client._id
+    );
+    const vetSide = {
+      clientName: aboutClient.clientName,
+      clientEmail: aboutClient.clientEmail,
+      petName: aboutPet.petName,
+      concern: aboutPet.concern,
+    };
+    vet.upcomingAppointments.splice(findAppointmentVet, 1);
+    vet.appointments.push(vetSide);
+    await vet.save();
+
+    // find pet and update prescription
+    const pet = await Pet.findById(aboutPet.petId);
+    const petSide = {
+      vetName: `${vet.firstName} ${vet.lastName}`,
+      vetEmail: vet.email,
+      concern: aboutPet.concern,
+      prescription,
+    };
+    pet.previousMedicalHistory.push(petSide);
+    await pet.save();
+    // prepare email
+    const mailOptions = prescriptionMail(
+      "hello.petscan@gmail.com",
+      aboutClient.clientEmail,
+      "Your Prescription from PetScan",
+      prescription,
+      clientSide.vetName
+    );
+
+    // send email
+    transport(mailOptions);
+
+    // send Response
+    res.status(200).send("Prescription sent");
+  } catch (error) {
     console.log(error);
     res.status(500).json({ msg: "Server error" });
   }

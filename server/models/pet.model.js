@@ -31,7 +31,7 @@ const petSchema = new Schema({
     required: true,
   },
   previousMedicalHistory: {
-    type: [String],
+    type: [Schema.Types.Object],
   },
   neutered: {
     type: Boolean,

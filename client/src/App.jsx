@@ -43,7 +43,6 @@ function App() {
         <Route path="/feed" element={<NewsFeed />} />
         <Route path="/book-appointment" element={<Meet />} />
         <Route path="/success" element={<Success />} />
-        <Route path="/form" element={<PrescriptionForm />} />
       </Routes>
     </ImageContext.Provider>
   );

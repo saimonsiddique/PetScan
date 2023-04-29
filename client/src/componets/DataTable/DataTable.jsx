@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button } from "@mui/material";
+import apiVet from "../../ApiServices/ApiVetServices";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -11,7 +12,9 @@ import PrescriptionForm from "../PrescriptionForm/PrescriptionForm";
 
 const DataTable = ({ appointments }) => {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const [prescription, setPrescription] = useState([]);
+  const [client, setClient] = useState({});
+  const [pet, setPet] = useState({});
   const handleClose = () => setOpen(false);
 
   const createData = (email, clientName, petName, concern, pet) => {
@@ -34,6 +37,42 @@ const DataTable = ({ appointments }) => {
     );
   });
   const [rows, setRows] = useState(OrginalRows);
+  const accessToken = localStorage.getItem("accessToken");
+
+  const handleSelection = (appointment) => {
+    console.log("Appointment", appointment);
+    setClient({
+      name: appointment.clientName,
+      email: appointment.email,
+    });
+
+    setPet({
+      name: appointment.petName,
+      concern: appointment.concern,
+      petId: appointment.pet._id,
+    });
+    setOpen(true);
+  };
+
+  const sendPrescriptionToClient = () => {
+    console.log("New prescription with Data", prescription);
+    console.log("Client", client);
+    console.log("Pet", pet);
+
+    const data = {
+      client: client,
+      pet: pet,
+      prescription: prescription,
+    };
+    try {
+      const response = apiVet.sendPrescription(accessToken, data);
+      console.log("Response", response);
+    } catch (error) {
+      console.log("Error", error);
+      alert("Error sending prescription");
+    }
+    handleClose();
+  };
 
   return (
     <>
@@ -103,7 +142,7 @@ const DataTable = ({ appointments }) => {
                 <TableCell align="center">{row.concern}</TableCell>
                 <TableCell align="center">
                   <Button
-                    onClick={handleOpen}
+                    onClick={() => handleSelection(row)}
                     variant="contained"
                     sx={{
                       backgroundColor: "#42389D",
@@ -119,8 +158,10 @@ const DataTable = ({ appointments }) => {
                   <PrescriptionForm
                     open={open}
                     handleClose={handleClose}
-                    handleOpen={handleOpen}
+                    handleOpen={handleSelection}
                     appointment={row}
+                    setPrescription={setPrescription}
+                    sendPrescriptionToClient={sendPrescriptionToClient}
                   />
                 </TableCell>
               </TableRow>
