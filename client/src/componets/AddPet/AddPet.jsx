@@ -36,7 +36,7 @@ const petSpecies = ["Dog", "Cat", "Bird", "Fish", "Farm Animal", "Other"];
 
 const PetInfo = () => {
   let navigate = useNavigate();
-  const { image } = useContext(ImageContext);
+  const { image, setImage } = useContext(ImageContext);
   const [state, setState] = useState(initialState);
   const [prevMed, setPrevMed] = useState(false);
   const [neutered, setNeutered] = useState(false);
@@ -88,6 +88,7 @@ const PetInfo = () => {
       console.log(response_addPet);
 
       // redirect to the ParentProfile page
+      setImage("");
       navigate("/dashboard");
     } catch (error) {
       console.log(error);

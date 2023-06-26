@@ -290,7 +290,7 @@ const Land = () => {
             }}
           >
             {reviewers.map((review) => {
-              return <ReviewCard review={review} />;
+              return <ReviewCard key={review?.name} review={review} />;
             })}
           </Box>
         </Box>

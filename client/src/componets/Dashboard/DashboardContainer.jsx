@@ -1,8 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../Pages/Dashboard";
 import { Box, Paper, Typography, Divider, TextField } from "@mui/material";
-import SwipeableViews from "react-swipeable-views";
-import { autoPlay } from "react-swipeable-views-utils";
 import BookAppointment from "../Profile/subcomponents/ProfileContent/BookAppointment";
 import PetCard from "../Profile/subcomponents/ProfileContent/PetCard";
 import Appointments from "../Appointments/Appointments";
@@ -12,8 +10,6 @@ import DataTable from "../DataTable/DataTable";
 import SearchIcon from "@mui/icons-material/Search";
 
 import "./DashboardContainer.css";
-
-// const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const DashboardContainer = () => {
   const { parent, vet, questionQuery, setQuestionQuery } =
@@ -151,23 +147,15 @@ const DashboardContainer = () => {
               </span>
             </div>
             <div className="pet-card">
-              {
-                userType === "petParent" ? (
-                  // <AutoPlaySwipeableViews
-                  //   interval={5000}
-                  //   enableMouseEvents
-                  //   style={{ width: "40%" }}
-                  // >
-                  parent.pets.length > 0 ? (
-                    parent.pets.map((pet) => {
-                      return <PetCard key={pet._id} pet={pet} />;
-                    })
-                  ) : (
-                    <h3>No pet found!</h3>
-                  )
-                ) : null
-                // </AutoPlaySwipeableViews>
-              }
+              {userType === "petParent" ? (
+                parent.pets.length > 0 ? (
+                  parent.pets.map((pet) => {
+                    return <PetCard key={pet._id} pet={pet} />;
+                  })
+                ) : (
+                  <h3>No pet found!</h3>
+                )
+              ) : null}
             </div>
           </div>
           <div className="appointment-lists">
@@ -179,28 +167,19 @@ const DashboardContainer = () => {
               </div>
             ) : null}
             <div className="appointment-cards">
-              {
-                userType === "petParent" &&
-                  // <AutoPlaySwipeableViews
-                  //   interval={2500}
-                  //   enableMouseEvents
-                  //   style={{ width: "40%" }}
-                  //   required={false}
-                  // >
-                  (parent.bookedAppointments.length > 0 ? (
-                    parent.bookedAppointments.map((appointment) => {
-                      return (
-                        <Appointments
-                          key={appointment._id}
-                          appointment={appointment}
-                        />
-                      );
-                    })
-                  ) : (
-                    <h3>No upcoming appointment!</h3>
-                  ))
-                // </AutoPlaySwipeableViews>
-              }
+              {userType === "petParent" &&
+                (parent.bookedAppointments.length > 0 ? (
+                  parent.bookedAppointments.map((appointment) => {
+                    return (
+                      <Appointments
+                        key={appointment._id}
+                        appointment={appointment}
+                      />
+                    );
+                  })
+                ) : (
+                  <h3>No upcoming appointment!</h3>
+                ))}
             </div>
           </div>
         </Paper>

@@ -18,6 +18,7 @@ import ImageUpload from "../../ImageUpload/ImageUpload";
 
 import { ImageContext } from "../../../App";
 import AnnonymousBar from "../../NavBar/AnnonymousBar/AnnonymousBar";
+import toast from "react-hot-toast";
 
 const initialState = {
   firstName: "",
@@ -29,7 +30,7 @@ const initialState = {
 
 const SignUp = () => {
   let navigate = useNavigate();
-  const { image } = useContext(ImageContext);
+  const { image, setImage } = useContext(ImageContext);
   const [state, setState] = useState(initialState);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -48,7 +49,12 @@ const SignUp = () => {
   const createUser = async (e) => {
     e.preventDefault();
     // extract the user data from the state
-    const { firstName, lastName, email, password, confirmPassword } = state;
+    const validation = validateForm();
+    if (!validation) {
+      toast.error("Please fill all the fields!");
+      return;
+    }
+    const { firstName, lastName, email, password } = state;
     const newUser = {
       firstName,
       lastName,
@@ -67,12 +73,13 @@ const SignUp = () => {
       // save the token in the local storage
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("userType", user);
-
-      console.log("Now you can navigate to the pet info page");
       // redirect the user to the pet info page
+      toast.success("Registration successful!");
+      setImage("");
       navigate("/pet/add");
     } catch (error) {
       console.log(error);
+      toast.error("Registration failed!");
     }
   };
 
