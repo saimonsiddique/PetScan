@@ -22,14 +22,16 @@ const LatestQuestion = () => {
   const { latestQuestion, setLatestQuestion, setPrevQuestion } =
     useContext(NewsFeedContext);
   // if (!latestQuestion.votedClients) return <div>Loading...</div>;
-  const answered = latestQuestion.isAnswered;
-  const date = moment(latestQuestion.postDate).format("MMMM Do YYYY, h:mm a");
+  console.log(latestQuestion);
+
+  const answered = latestQuestion?.isAnswered;
+  const date = moment(latestQuestion?.postDate).format("MMMM Do YYYY, h:mm a");
   const [upVote, setUpVote] = useState(false);
   const [downVote, setDownVote] = useState(false);
   const [voted, setVoted] = useState(false);
 
   const userId = localStorage.getItem("userId");
-  const questionId = latestQuestion._id;
+  const questionId = latestQuestion?._id;
 
   const handleLatestUpVote = async (e) => {
     e.preventDefault();
@@ -41,8 +43,8 @@ const LatestQuestion = () => {
 
     setLatestQuestion(updatedVotedQuestions[0]);
     // sort the questions by the number of votes
-    const sortedQuestions = updatedVotedQuestions.slice(1).sort((a, b) => {
-      return b.votedClients.length - a.votedClients.length;
+    const sortedQuestions = updatedVotedQuestions?.slice(1).sort((a, b) => {
+      return b?.votedClients.length - a?.votedClients.length;
     });
 
     // set the sorted questions to the prevQuestions
@@ -88,13 +90,13 @@ const LatestQuestion = () => {
             variant="body1"
             sx={{ mb: 1, fontSize: 20, color: "#001952", fontWeight: "bold" }}
           >
-            {latestQuestion.question}
+            {latestQuestion?.question}
           </Typography>
           <Typography
             variant="body2"
             sx={{ mb: 1, fontSize: 13, color: "#001979" }}
           >
-            Asked by <strong>{latestQuestion.clientName}</strong>
+            Asked by <strong>{latestQuestion?.clientName}</strong>
           </Typography>
           <Typography
             variant="body2"
@@ -109,7 +111,7 @@ const LatestQuestion = () => {
                 variant="body2"
                 sx={{ mb: 1, fontSize: 13, color: "#001979" }}
               >
-                Answered by <strong>{latestQuestion.vetName}</strong>
+                Answered by <strong>{latestQuestion?.vetName}</strong>
               </Typography>
               <Typography
                 variant="body2"
@@ -117,7 +119,7 @@ const LatestQuestion = () => {
               >
                 Answered on{" "}
                 <strong>
-                  {moment(latestQuestion.answerDate).format(
+                  {moment(latestQuestion?.answerDate).format(
                     "MMMM Do YYYY, h:mm a"
                   )}{" "}
                 </strong>
@@ -136,12 +138,12 @@ const LatestQuestion = () => {
           <Divider sx={{ width: "100%", my: 2 }} />
           <Stack direction="row" spacing={0.8} sx={{ mb: 1 }}>
             <ThumbUpIcon />
-            {latestQuestion.votedClients ? (
+            {latestQuestion?.votedClients ? (
               <Typography
                 variant="body2"
                 sx={{ fontSize: 16, color: "#001952" }}
               >
-                <strong>{latestQuestion.votedClients.length}</strong> people
+                <strong>{latestQuestion?.votedClients?.length}</strong> people
                 found this helpful
               </Typography>
             ) : null}

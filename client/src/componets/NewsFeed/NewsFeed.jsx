@@ -1,4 +1,5 @@
 import { useState, useEffect, createContext } from "react";
+import { Card, Typography } from "@mui/material";
 import apiClient from "../../ApiServices/ApiClientService";
 import moment from "moment";
 import HomeNavBar from "../NavBar/HomeNavBar/HomeNavBar";
@@ -13,6 +14,7 @@ export const NewsFeedContext = createContext();
 
 const NewsFeed = () => {
   const [filteredQuestions, setFilteredQuestions] = useState([]);
+  const [allQuestionsfromDB, setAllQuestionsfromDB] = useState([]);
   const [allQuestions, setAllQuestions] = useState([]);
   const [filterCategory, setFilterCategory] = useState("");
   const [notAnsweredQuestions, setNotAnsweredQuestions] = useState([]);
@@ -36,10 +38,12 @@ const NewsFeed = () => {
   }, []);
 
   const getAllQuestions = async () => {
-    console.log("Inside getAllQuestions");
     // get all questions
-    const allQuestionsfromDB = await apiClient.getFeedQuestions();
-    // set latest question
+    const response = await apiClient.getFeedQuestions();
+    setAllQuestionsfromDB(response);
+  };
+
+  useEffect(() => {
     setLatestQuestion(allQuestionsfromDB[0]);
     // sort all questions by voteClients length
     let sortedQuestions = allQuestionsfromDB.slice(1).sort((a, b) => {
@@ -55,7 +59,7 @@ const NewsFeed = () => {
       (question) => question.isAnswered === false
     );
     setNotAnsweredQuestions(answrNotFound);
-  };
+  }, [allQuestionsfromDB]);
 
   const handleSelect = (e) => {
     e.preventDefault();
@@ -63,15 +67,15 @@ const NewsFeed = () => {
     console.log(e.target.value);
 
     // filter the questions by category
-    const filtered = allQuestions.filter(
-      (question) => question.category === e.target.value
+    const filtered = allQuestions?.filter(
+      (question) => question?.category === e.target.value
     );
 
     console.log(filtered);
 
     // sort the filtered questions by voteClients length
-    const sortedQuestions = filtered.sort((a, b) => {
-      return b.votedClients.length - a.votedClients.length;
+    const sortedQuestions = filtered?.sort((a, b) => {
+      return b?.votedClients?.length - a?.votedClients?.length;
     });
 
     console.log(sortedQuestions);
@@ -165,7 +169,18 @@ const NewsFeed = () => {
               }}
               className="latest-question"
             >
-              {!answerBox && <LatestQuestion />}
+              {
+                // check if allquestions is not empty
+                allQuestionsfromDB?.length > 0 ? (
+                  <LatestQuestion question={latestQuestion} />
+                ) : (
+                  <Card sx={{ p: "1rem", m: "1rem" }}>
+                    <Typography variant="h6" component="div">
+                      No Questions Asked Yet
+                    </Typography>
+                  </Card>
+                )
+              }
             </Box>
           </Box>
           <Box
@@ -183,16 +198,16 @@ const NewsFeed = () => {
             className="feed-questions"
           >
             {answerBox
-              ? notAnsweredQuestions.map((question) => (
+              ? notAnsweredQuestions?.map((question) => (
                   <QuestionCard
-                    key={question._id}
+                    key={question?._id}
                     question={question}
-                    date={moment(question.postDate).format(
+                    date={moment(question?.postDate).format(
                       "MMMM Do YYYY, h:mm a"
                     )}
                   />
                 ))
-              : prevQuestion.map((question) => (
+              : prevQuestion?.map((question) => (
                   <QuestionCard
                     key={question._id}
                     question={question}

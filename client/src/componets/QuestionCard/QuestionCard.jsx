@@ -59,7 +59,7 @@ const QuestionCard = (props) => {
   };
 
   const checkVoted = () => {
-    if (question.votedClients.includes(userId)) {
+    if (question?.votedClients.includes(userId)) {
       setVoted(true);
       setUpVote(true);
     }

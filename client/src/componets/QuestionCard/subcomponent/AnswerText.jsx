@@ -17,12 +17,12 @@ const AnswerText = (props) => {
         flexDirection: "column",
       }}
     >
-      {answerText.answer ? (
+      {answerText?.answer ? (
         <Typography
           variant="body2"
           sx={{ mb: 1, fontSize: 24, color: "#001952", textAlign: "justify" }}
         >
-          {answerText.answer}
+          {answerText?.answer}
         </Typography>
       ) : (
         <Typography
