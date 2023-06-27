@@ -7,6 +7,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import ReviewCard from "../componets/ReviewCard/ReviewCard";
 import AnnonymousBar from "../componets/NavBar/AnnonymousBar/AnnonymousBar";
+import heroImg from "../assets/signin/vetster-dog-bed.png";
 
 const reviewers = [
   {
@@ -63,9 +64,7 @@ const Land = () => {
             justifyContent: "flex-start",
             alignItems: "left",
             height: "100%",
-            backgroundImage: `url(
-              "https://res.cloudinary.com/dru7kzv3i/image/upload/v1687851076/vetster-dog-bed_ofdceb.jpg"
-            )`,
+            backgroundImage: `url(${heroImg})`,
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
           }}
