@@ -32,7 +32,12 @@ const Home = () => {
     <section className="homepage-container">
       <AnnonymousBar />
       <div className="page-content">
-        <img src={"../../public/Homepage/logo.png"} className="title-logo" />
+        <img
+          src={
+            "https://res.cloudinary.com/dru7kzv3i/image/upload/v1687851075/logo_lzbmqj.png"
+          }
+          className="title-logo"
+        />
         <h2>
           <p align={"justify"} className="title">
             Petscan is a professional pet healthcare platform that connects pet

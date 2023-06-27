@@ -8,7 +8,6 @@ import PetsIcon from "@mui/icons-material/Pets";
 import GroupsIcon from "@mui/icons-material/Groups";
 import SettingsApplicationsSharpIcon from "@mui/icons-material/SettingsApplicationsSharp";
 import AddLocationSharpIcon from "@mui/icons-material/AddLocationSharp";
-import navLogo from "../../../../public/Homepage/parent-nav.jpg";
 import "./ProfileSideBar.css";
 
 const ProfileSideBar = () => {
@@ -23,7 +22,11 @@ const ProfileSideBar = () => {
 
   return (
     <section className="side-bar">
-      <img src={navLogo} alt="" className="side-logo" />
+      <img
+        src={`https://res.cloudinary.com/dru7kzv3i/image/upload/v1687851076/parent-nav_yy60bb.jpg`}
+        alt=""
+        className="side-logo"
+      />
       <nav className="sidebar-content">
         <List>
           <ListItemButton

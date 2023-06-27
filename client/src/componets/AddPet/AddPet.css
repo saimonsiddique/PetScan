@@ -6,7 +6,7 @@
   height: 100vh;
   overflow: hidden;
   overflow-y: scroll;
-  background-image: url("../../../public/PetInfo/pet-info-dog.jpg");
+  background-image: url("https://res.cloudinary.com/dru7kzv3i/image/upload/v1687851370/pet-info-dog_qgsncw.jpg");
   background-repeat: no-repeat;
   background-size: 30% 80%;
   background-position: top left;

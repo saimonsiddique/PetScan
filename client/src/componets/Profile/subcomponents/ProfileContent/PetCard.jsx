@@ -6,7 +6,6 @@ import {
   Typography,
   CardActionArea,
 } from "@mui/material";
-import petImg from "../../../../../public/PetInfo/pet-info-dog.jpg";
 import PetModal from "../../../CardModal/PetModal";
 
 const PetCard = (props) => {
@@ -27,7 +26,11 @@ const PetCard = (props) => {
           <CardMedia
             component="img"
             height="145"
-            image={petPhoto ? petPhoto : petImg}
+            image={
+              petPhoto
+                ? petPhoto
+                : "https://res.cloudinary.com/dru7kzv3i/image/upload/v1687851370/pet-info-dog_qgsncw.jpg"
+            }
             alt="Your Pet"
           />
           <CardContent>

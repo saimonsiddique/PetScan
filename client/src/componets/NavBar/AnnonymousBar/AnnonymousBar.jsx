@@ -40,7 +40,7 @@ const AnnonymousBar = () => {
                 onClick={() => navigate("/")}
               >
                 <img
-                  src="../../../../public/Homepage/petscan-removebg-preview.png"
+                  src="../../../..//Homepage/petscan-removebg-preview.png"
                   alt="logo"
                   style={{
                     height: "100%",

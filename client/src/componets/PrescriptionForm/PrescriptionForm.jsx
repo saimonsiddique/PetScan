@@ -173,7 +173,9 @@ const PrescriptionForm = ({
                     }}
                   >
                     <img
-                      src={"../../../public/Homepage/logo.png"}
+                      src={
+                        "https://res.cloudinary.com/dru7kzv3i/image/upload/v1687851075/logo_lzbmqj.png"
+                      }
                       alt="pet"
                       style={{
                         width: "100%",
