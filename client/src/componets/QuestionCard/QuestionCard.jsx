@@ -1,6 +1,6 @@
-import { useState, useContext, useEffect } from "react";
-import { forwardRef } from "react";
-import apiClient from "../../ApiServices/ApiClientService";
+import { useState, useContext, useEffect } from 'react';
+import { forwardRef } from 'react';
+import apiClient from '../../ApiServices/ApiClientService';
 import {
   Box,
   Paper,
@@ -8,19 +8,19 @@ import {
   Divider,
   Stack,
   Typography,
-} from "@mui/material";
-import Avatar from "@mui/material/Avatar";
-import Chip from "@mui/material/Chip";
-import MuiAlert from "@mui/material/Alert";
-import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ThumbDownOffAltOutlinedIcon from "@mui/icons-material/ThumbDownOffAltOutlined";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
-import "./QuestionCard.css";
-import moment from "moment";
-import AnswerBox from "./subcomponent/AnswerBox";
-import AnswerText from "./subcomponent/AnswerText";
-import { NewsFeedContext } from "../NewsFeed/NewsFeed";
+} from '@mui/material';
+import Avatar from '@mui/material/Avatar';
+import Chip from '@mui/material/Chip';
+import MuiAlert from '@mui/material/Alert';
+import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownOffAltOutlinedIcon from '@mui/icons-material/ThumbDownOffAltOutlined';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import './QuestionCard.css';
+import moment from 'moment';
+import AnswerBox from './subcomponent/AnswerBox';
+import AnswerText from './subcomponent/AnswerText';
+import { NewsFeedContext } from '../NewsFeed/NewsFeed';
 
 const QuestionCard = (props) => {
   const { answerBox, setPrevQuestion, setLatestQuestion } =
@@ -30,8 +30,8 @@ const QuestionCard = (props) => {
   const [downVote, setDownVote] = useState(false);
   const [voted, setVoted] = useState(false);
   const answered = question.isAnswered;
-  const userId = localStorage.getItem("userId");
-  const userType = localStorage.getItem("userType");
+  const userId = localStorage.getItem('userId');
+  const userType = localStorage.getItem('userType');
 
   const questionId = question._id;
 
@@ -72,40 +72,40 @@ const QuestionCard = (props) => {
   return (
     <Box
       sx={{
-        display: "flex",
-        justifyContent: "center",
+        display: 'flex',
+        justifyContent: 'center',
         flexGrow: 1,
-        width: "100%",
+        width: '100%',
         mt: 1,
         ml: 2,
       }}
     >
-      <Stack spacing={1} sx={{ width: "100%" }}>
+      <Stack spacing={1} sx={{ width: '100%' }}>
         <Paper
           sx={{
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "left",
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'left',
             p: 2,
             mt: 2,
           }}
         >
-          <Typography variant="h5" sx={{ mb: 1 }}>
+          <Typography variant='h5' sx={{ mb: 1 }}>
             Question
             <Chip
               label={question.category}
-              variant="filled"
+              variant='filled'
               color={
-                question.category === "Cat"
-                  ? "success"
-                  : question.category === "Dog"
-                  ? "error"
-                  : question.category === "Bird"
-                  ? "warning"
-                  : question.category === "General"
-                  ? "primary"
-                  : "info"
+                question.category === 'Cat'
+                  ? 'success'
+                  : question.category === 'Dog'
+                    ? 'error'
+                    : question.category === 'Bird'
+                      ? 'warning'
+                      : question.category === 'General'
+                        ? 'primary'
+                        : 'info'
               }
               sx={{
                 ml: 1,
@@ -114,16 +114,16 @@ const QuestionCard = (props) => {
             />
           </Typography>
           <Typography
-            variant="body1"
-            sx={{ mb: 0.8, fontSize: 20, color: "#001952", fontWeight: "bold" }}
+            variant='body1'
+            sx={{ mb: 0.8, fontSize: 20, color: '#001952', fontWeight: 'bold' }}
           >
             {question.question}
           </Typography>
           <Box
             sx={{
-              display: "flex",
-              alignItems: "left",
-              justifyContent: "flex-start",
+              display: 'flex',
+              alignItems: 'left',
+              justifyContent: 'flex-start',
             }}
           >
             <Avatar
@@ -133,34 +133,34 @@ const QuestionCard = (props) => {
             />
             <Box
               sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "left",
-                justifyContent: "flex-start",
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'left',
+                justifyContent: 'flex-start',
               }}
             >
               <Typography
-                variant="body2"
-                sx={{ mb: 0.2, fontSize: 13, color: "#001979" }}
+                variant='body2'
+                sx={{ mb: 0.2, fontSize: 13, color: '#001979' }}
               >
                 Asked by <strong>{question.clientName}</strong>
               </Typography>
               <Typography
-                variant="body2"
-                sx={{ mb: 1, fontSize: 13, color: "#001979" }}
+                variant='body2'
+                sx={{ mb: 1, fontSize: 13, color: '#001979' }}
               >
                 Posted on <strong>{date}</strong>
               </Typography>
             </Box>
           </Box>
-          <Divider sx={{ width: "100%", my: 2 }} />
+          <Divider sx={{ width: '100%', my: 2 }} />
           {answered && (
             <>
               <Box
                 sx={{
-                  display: "flex",
-                  alignItems: "left",
-                  justifyContent: "flex-start",
+                  display: 'flex',
+                  alignItems: 'left',
+                  justifyContent: 'flex-start',
                 }}
               >
                 <Avatar
@@ -170,27 +170,27 @@ const QuestionCard = (props) => {
                 />
                 <Box
                   sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "left",
-                    justifyContent: "flex-start",
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'left',
+                    justifyContent: 'flex-start',
                   }}
                 >
                   <Typography
-                    variant="body2"
-                    sx={{ mb: 0.2, fontSize: 13, color: "#001979" }}
+                    variant='body2'
+                    sx={{ mb: 0.2, fontSize: 13, color: '#001979' }}
                   >
                     Answered by <strong>{question.vetName}</strong>
                   </Typography>
                   <Typography
-                    variant="body2"
-                    sx={{ mb: 1, fontSize: 13, color: "#001979" }}
+                    variant='body2'
+                    sx={{ mb: 1, fontSize: 13, color: '#001979' }}
                   >
-                    Answered on{" "}
+                    Answered on{' '}
                     <strong>
                       {moment(question.answerDate).format(
-                        "MMMM Do YYYY, h:mm a"
-                      )}{" "}
+                        'MMMM Do YYYY, h:mm a'
+                      )}{' '}
                     </strong>
                   </Typography>
                 </Box>
@@ -199,8 +199,8 @@ const QuestionCard = (props) => {
           )}
           <Box
             sx={{
-              display: "flex",
-              alignItems: "left",
+              display: 'flex',
+              alignItems: 'left',
               p: 2,
             }}
           >
@@ -210,31 +210,31 @@ const QuestionCard = (props) => {
               <AnswerText answerText={question} />
             )}
           </Box>
-          <Divider sx={{ width: "100%", my: 2 }} />
-          <Stack direction="row" spacing={0.8} sx={{ mb: 1 }}>
+          <Divider sx={{ width: '100%', my: 2 }} />
+          <Stack direction='row' spacing={0.8} sx={{ mb: 1 }}>
             <ThumbUpIcon />
-            <Typography variant="body2" sx={{ fontSize: 16, color: "#001952" }}>
+            <Typography variant='body2' sx={{ fontSize: 16, color: '#001952' }}>
               <strong>{question.votedClients.length}</strong> people found this
               helpful
             </Typography>
           </Stack>
           <Box
             sx={{
-              display: "flex",
-              alignItems: "center",
+              display: 'flex',
+              alignItems: 'center',
               p: 1,
-              backgroundColor: "#3A87AD",
-              color: "white",
+              backgroundColor: '#3A87AD',
+              color: 'white',
             }}
           >
             {answered && userId ? (
               <>
-                <Typography variant="body2" sx={{ fontSize: 14 }}>
+                <Typography variant='body2' sx={{ fontSize: 14 }}>
                   WAS THIS ANSWER HELPFUL?
                 </Typography>
                 <IconButton
                   sx={{ ml: 1 }}
-                  aria-label="upvote"
+                  aria-label='upvote'
                   onClick={handleUpVote}
                   disabled={downVote ? true : false}
                 >
@@ -242,7 +242,7 @@ const QuestionCard = (props) => {
                 </IconButton>
                 <IconButton
                   sx={{ ml: 1 }}
-                  aria-label="downvote"
+                  aria-label='downvote'
                   onClick={handleDownVote}
                   disabled={upVote ? true : false}
                 >
@@ -256,11 +256,11 @@ const QuestionCard = (props) => {
             ) : (
               <>
                 {userId ? (
-                  <Typography variant="body2" sx={{ fontSize: 14 }}>
+                  <Typography variant='body2' sx={{ fontSize: 14 }}>
                     Helpful votes are not available for unanswered questions
                   </Typography>
                 ) : (
-                  <Typography variant="body2" sx={{ fontSize: 14 }}>
+                  <Typography variant='body2' sx={{ fontSize: 14 }}>
                     Please login to vote
                   </Typography>
                 )}
@@ -276,5 +276,5 @@ const QuestionCard = (props) => {
 export default QuestionCard;
 
 const Alert = forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
 });

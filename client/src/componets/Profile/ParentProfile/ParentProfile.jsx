@@ -1,21 +1,21 @@
-import { useState, useEffect, useContext } from "react";
-import { UserContext } from "../../../Pages/Dashboard";
-import ProfileSideBar from "../../SideBar/ProfileSideBar/ProfileSideBar";
-import ProfileNavBar from "../../NavBar/ProfileNavBar/ProfileNavBar";
-import "./ParentProfile.css";
-import DashboardContainer from "../../Dashboard/DashboardContainer";
+import { useState, useEffect } from 'react'; // Removed useContext
+import useUserStore from '../../../store/userStore'; // Import useUserStore
+import ProfileSideBar from '../../SideBar/ProfileSideBar/ProfileSideBar';
+import ProfileNavBar from '../../NavBar/ProfileNavBar/ProfileNavBar';
+import './ParentProfile.css';
+import DashboardContainer from '../../Dashboard/DashboardContainer';
 
 const ParentProfile = () => {
   return (
-    <section className="parent-profile">
-      <div className="sidebar">
+    <section className='parent-profile'>
+      <div className='sidebar'>
         <ProfileSideBar />
       </div>
-      <div className="main-content">
-        <div className="profile-nav-bar">
+      <div className='main-content'>
+        <div className='profile-nav-bar'>
           <ProfileNavBar />
         </div>
-        <div className="profile-dashboard">
+        <div className='profile-dashboard'>
           <DashboardContainer />
         </div>
       </div>

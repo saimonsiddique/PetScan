@@ -4,7 +4,7 @@ import {
   CardContent,
   CardMedia,
   Typography,
-} from "@mui/material";
+} from '@mui/material';
 
 const Appointments = (props) => {
   const { appointment } = props;
@@ -19,34 +19,34 @@ const Appointments = (props) => {
     >
       <CardActionArea>
         <CardMedia
-          component="img"
-          height="140"
+          component='img'
+          height='140'
           image={appointment.vetProfile ? appointment.vetProfile : null}
-          alt="Your Vet Profile"
+          alt='Your Vet Profile'
         />
         <CardContent>
           <Typography
             gutterBottom
-            variant="h6"
-            component="div"
+            variant='h6'
+            component='div'
             sx={{
-              display: "flex",
-              justifyContent: "center",
+              display: 'flex',
+              justifyContent: 'center',
             }}
           >
             {appointment.vetName ? appointment.vetName : appointment.status}
           </Typography>
           <Typography
-            variant="body2"
-            color="text.secondary"
+            variant='body2'
+            color='text.secondary'
             sx={{
-              display: "flex",
-              justifyContent: "center",
+              display: 'flex',
+              justifyContent: 'center',
             }}
           >
             {appointment.concern
               ? appointment.concern
-              : "For the concern of..."}
+              : 'For the concern of...'}
           </Typography>
         </CardContent>
       </CardActionArea>

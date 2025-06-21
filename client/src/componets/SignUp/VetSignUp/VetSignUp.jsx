@@ -1,22 +1,22 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { Stack, Button, Box, Divider, TextField } from "@mui/material";
-import { InputAdornment, IconButton } from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
-import apiVet from "../../../ApiServices/ApiVetServices";
-import userWithPet from "../../../assets/signup/user-with-pet.svg";
-import "./VetSignUp.css";
-import AnnonymousBar from "../../NavBar/AnnonymousBar/AnnonymousBar";
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Stack, Button, Box, Divider, TextField } from '@mui/material';
+import { InputAdornment, IconButton } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import apiVet from '../../../ApiServices/ApiVetServices';
+import userWithPet from '../../../assets/signup/user-with-pet.svg';
+import './VetSignUp.css';
+import AnnonymousBar from '../../NavBar/AnnonymousBar/AnnonymousBar';
 
 const PASS_MIN_LENGTH = 8;
 
 const initialState = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
 };
 
 const VetSignUp = () => {
@@ -52,12 +52,12 @@ const VetSignUp = () => {
       const response = await apiVet.signup(newVet);
       // save the token in the local storage
       const { accessToken, fullName, email, user } = response;
-      localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("userType", user);
-      localStorage.setItem("fullName", fullName);
-      localStorage.setItem("email", email);
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('userType', user);
+      localStorage.setItem('fullName', fullName);
+      localStorage.setItem('email', email);
       // navigate to the dashboard
-      navigate("/vet/details");
+      navigate('/vet/details');
     } catch (error) {
       console.log(error);
     }
@@ -75,17 +75,17 @@ const VetSignUp = () => {
 
   return (
     <>
-      <section className="vet-container">
+      <section className='vet-container'>
         <AnnonymousBar />
-        <div className="signup-form">
-          <div className="vet-header">
-            <img className="logo" src={userWithPet} alt="logo" />
+        <div className='signup-form'>
+          <div className='vet-header'>
+            <img className='logo' src={userWithPet} alt='logo' />
             <h1>Create a Vet account</h1>
             <p>
               <b>Or</b>
             </p>
             <span>
-              <Link to={"/signin"}>
+              <Link to={'/signin'}>
                 <strong>Sign in to an existent account</strong>
               </Link>
             </span>
@@ -109,68 +109,68 @@ const VetSignUp = () => {
             </Box>
           </div> */}
           <Divider sx={{ mt: 2 }} />
-          <div className="form">
+          <div className='form'>
             <Box
-              component="form"
+              component='form'
               sx={{
-                "& .MuiTextField-root": { m: 1, width: "25ch" },
+                '& .MuiTextField-root': { m: 1, width: '25ch' },
               }}
               noValidate
-              autoComplete="off"
+              autoComplete='off'
             >
               <TextField
                 required
-                name="firstName"
-                label="First Name"
-                variant="outlined"
+                name='firstName'
+                label='First Name'
+                variant='outlined'
                 onChange={handleChange}
               />
               <TextField
                 required
-                name="lastName"
-                label="Last Name"
-                variant="outlined"
-                onChange={handleChange}
-              />
-            </Box>
-            <Box
-              component="form"
-              sx={{
-                "& .MuiTextField-root": { m: 1, width: "52ch" },
-              }}
-              noValidate
-              autoComplete="off"
-            >
-              <TextField
-                required
-                name="email"
-                label="Email"
-                variant="outlined"
+                name='lastName'
+                label='Last Name'
+                variant='outlined'
                 onChange={handleChange}
               />
             </Box>
             <Box
-              component="form"
+              component='form'
               sx={{
-                "& .MuiTextField-root": { m: 1, width: "52ch" },
+                '& .MuiTextField-root': { m: 1, width: '52ch' },
               }}
               noValidate
-              autoComplete="off"
+              autoComplete='off'
             >
               <TextField
                 required
-                name="password"
-                label="Password"
-                variant="outlined"
+                name='email'
+                label='Email'
+                variant='outlined'
                 onChange={handleChange}
-                type={showPassword ? "text" : "password"}
+              />
+            </Box>
+            <Box
+              component='form'
+              sx={{
+                '& .MuiTextField-root': { m: 1, width: '52ch' },
+              }}
+              noValidate
+              autoComplete='off'
+            >
+              <TextField
+                required
+                name='password'
+                label='Password'
+                variant='outlined'
+                onChange={handleChange}
+                type={showPassword ? 'text' : 'password'}
                 InputProps={{
                   endAdornment: (
-                    <InputAdornment position="end">
+                    <InputAdornment position='end'>
                       <IconButton
-                        aria-label="toggle password visibility"
+                        aria-label='toggle password visibility'
                         onClick={handleClickShowPassword}
-                        edge="end"
+                        edge='end'
                       >
                         {showPassword ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
@@ -180,27 +180,27 @@ const VetSignUp = () => {
               />
             </Box>
             <Box
-              component="form"
+              component='form'
               sx={{
-                "& .MuiTextField-root": { m: 1, width: "52ch" },
+                '& .MuiTextField-root': { m: 1, width: '52ch' },
               }}
               noValidate
-              autoComplete="off"
+              autoComplete='off'
             >
               <TextField
                 required
-                name="confirmPassword"
-                label="Confirm Password"
-                variant="outlined"
+                name='confirmPassword'
+                label='Confirm Password'
+                variant='outlined'
                 onChange={handleChange}
-                type={showPassword ? "text" : "password"}
+                type={showPassword ? 'text' : 'password'}
                 InputProps={{
                   endAdornment: (
-                    <InputAdornment position="end">
+                    <InputAdornment position='end'>
                       <IconButton
-                        aria-label="toggle password visibility"
+                        aria-label='toggle password visibility'
                         onClick={handleClickShowPassword}
-                        edge="end"
+                        edge='end'
                       >
                         {showPassword ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
@@ -212,15 +212,15 @@ const VetSignUp = () => {
           </div>
           <Box
             sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
               m: 1,
             }}
           >
             <Button
-              variant="contained"
-              style={{ width: "52ch" }}
+              variant='contained'
+              style={{ width: '52ch' }}
               onClick={createUser}
             >
               Create Account

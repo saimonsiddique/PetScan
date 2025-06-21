@@ -1,14 +1,14 @@
-import { useState, useEffect, createContext } from "react";
-import { Card, Typography } from "@mui/material";
-import apiClient from "../../ApiServices/ApiClientService";
-import moment from "moment";
-import HomeNavBar from "../NavBar/HomeNavBar/HomeNavBar";
-import PostCard from "../PostCard/PostCard";
-import QuestionCard from "../QuestionCard/QuestionCard";
-import LatestQuestion from "../QuestionCard/subcomponent/LatestQuestion";
-import BookAppointment from "../Profile/subcomponents/ProfileContent/BookAppointment";
-import { Box } from "@mui/material";
-import AnnonymousBar from "../NavBar/AnnonymousBar/AnnonymousBar";
+import { useState, useEffect, createContext } from 'react';
+import { Card, Typography } from '@mui/material';
+import apiClient from '../../ApiServices/ApiClientService';
+import moment from 'moment';
+import HomeNavBar from '../NavBar/HomeNavBar/HomeNavBar';
+import PostCard from '../PostCard/PostCard';
+import QuestionCard from '../QuestionCard/QuestionCard';
+import LatestQuestion from '../QuestionCard/subcomponent/LatestQuestion';
+import BookAppointment from '../Profile/subcomponents/ProfileContent/BookAppointment';
+import { Box } from '@mui/material';
+import AnnonymousBar from '../NavBar/AnnonymousBar/AnnonymousBar';
 
 export const NewsFeedContext = createContext();
 
@@ -16,20 +16,20 @@ const NewsFeed = () => {
   const [filteredQuestions, setFilteredQuestions] = useState([]);
   const [allQuestionsfromDB, setAllQuestionsfromDB] = useState([]);
   const [allQuestions, setAllQuestions] = useState([]);
-  const [filterCategory, setFilterCategory] = useState("");
+  const [filterCategory, setFilterCategory] = useState('');
   const [notAnsweredQuestions, setNotAnsweredQuestions] = useState([]);
   const [latestQuestion, setLatestQuestion] = useState([]);
   const [prevQuestion, setPrevQuestion] = useState([]);
   const [answerBox, setAnswerBox] = useState(false);
   const [postCard, setPostCard] = useState(false);
-  const user = localStorage.getItem("userType");
+  const user = localStorage.getItem('userType');
 
   useEffect(() => {
     (async () => await getAllQuestions())();
     // check if user is logged in
-    if (localStorage.getItem("accessToken")) {
+    if (localStorage.getItem('accessToken')) {
       // check if user is a vet or not
-      if (user === "vet") {
+      if (user === 'vet') {
         setAnswerBox(true);
       } else {
         setPostCard(true);
@@ -89,7 +89,7 @@ const NewsFeed = () => {
 
   const handleBlur = (e) => {
     e.preventDefault();
-    setFilterCategory("");
+    setFilterCategory('');
     setFilteredQuestions([]);
     setPrevQuestion(allQuestions);
   };
@@ -109,16 +109,16 @@ const NewsFeed = () => {
     >
       <Box
         sx={{
-          backgroundColor: "#F1F3F6",
-          minHeight: "100%",
+          backgroundColor: '#F1F3F6',
+          minHeight: '100%',
         }}
       >
         <Box
           sx={{
-            backgroundColor: "#42389D",
-            minHeight: "80%",
-            position: "relative",
-            m: "4rem",
+            backgroundColor: '#42389D',
+            minHeight: '80%',
+            position: 'relative',
+            m: '4rem',
           }}
         >
           {user ? (
@@ -129,53 +129,53 @@ const NewsFeed = () => {
         </Box>
         <Box
           sx={{
-            backgroundColor: "#F1F3F6",
-            minHeight: "100%",
-            position: "relative",
+            backgroundColor: '#F1F3F6',
+            minHeight: '100%',
+            position: 'relative',
           }}
-          className="feed-content-container"
+          className='feed-content-container'
         >
           <Box
             sx={{
-              display: "flex",
-              backgroundColor: "#F1F3F6",
-              minHeight: "100%",
-              maxWidth: "80%",
-              alignItems: "center",
-              justifyContent: "center",
-              margin: "auto",
+              display: 'flex',
+              backgroundColor: '#F1F3F6',
+              minHeight: '100%',
+              maxWidth: '80%',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: 'auto',
             }}
-            className="feed-post"
+            className='feed-post'
           >
             <Box
               sx={{
-                display: "flex",
-                flexDirection: "column",
-                backgroundColor: "#F1F3F6",
-                minHeight: "100%",
-                m: "1rem",
+                display: 'flex',
+                flexDirection: 'column',
+                backgroundColor: '#F1F3F6',
+                minHeight: '100%',
+                m: '1rem',
               }}
-              className="post-card"
+              className='post-card'
             >
               {postCard && <PostCard />}
               {!answerBox && <BookAppointment />}
             </Box>
             <Box
               sx={{
-                display: "flex",
-                flexDirection: "column",
-                backgroundColor: "#F1F3F6",
-                minHeight: "100%",
+                display: 'flex',
+                flexDirection: 'column',
+                backgroundColor: '#F1F3F6',
+                minHeight: '100%',
               }}
-              className="latest-question"
+              className='latest-question'
             >
               {
                 // check if allquestions is not empty
                 allQuestionsfromDB?.length > 0 ? (
                   <LatestQuestion question={latestQuestion} />
                 ) : (
-                  <Card sx={{ p: "1rem", m: "1rem" }}>
-                    <Typography variant="h6" component="div">
+                  <Card sx={{ p: '1rem', m: '1rem' }}>
+                    <Typography variant='h6' component='div'>
                       No Questions Asked Yet
                     </Typography>
                   </Card>
@@ -185,17 +185,17 @@ const NewsFeed = () => {
           </Box>
           <Box
             sx={{
-              display: "flex",
-              flexDirection: "column",
-              backgroundColor: "#F1F3F6",
-              minHeight: "100%",
-              maxWidth: "59%",
-              alignItems: "center",
-              justifyContent: "center",
-              margin: "auto",
-              position: "relative",
+              display: 'flex',
+              flexDirection: 'column',
+              backgroundColor: '#F1F3F6',
+              minHeight: '100%',
+              maxWidth: '59%',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: 'auto',
+              position: 'relative',
             }}
-            className="feed-questions"
+            className='feed-questions'
           >
             {answerBox
               ? notAnsweredQuestions?.map((question) => (
@@ -203,7 +203,7 @@ const NewsFeed = () => {
                     key={question?._id}
                     question={question}
                     date={moment(question?.postDate).format(
-                      "MMMM Do YYYY, h:mm a"
+                      'MMMM Do YYYY, h:mm a'
                     )}
                   />
                 ))
@@ -212,7 +212,7 @@ const NewsFeed = () => {
                     key={question._id}
                     question={question}
                     date={moment(question.postDate).format(
-                      "MMMM Do YYYY, h:mm a"
+                      'MMMM Do YYYY, h:mm a'
                     )}
                   />
                 ))}

@@ -1,5 +1,5 @@
-import { Box, Button, Typography, Divider } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Box, Button, Typography, Divider } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 const UpcomingAppointment = (props) => {
   const { appointment } = props;
   // console.log("appointment", appointment);
@@ -7,24 +7,24 @@ const UpcomingAppointment = (props) => {
   return (
     <Box
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "flex-start",
-        alignItems: "left",
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'left',
       }}
     >
       <Box
         sx={{
-          display: "flex",
-          width: "50vw",
-          height: "max-content",
+          display: 'flex',
+          width: '50vw',
+          height: 'max-content',
         }}
       >
         <Typography
-          variant="body1"
+          variant='body1'
           sx={{
             mb: 1,
-            color: "#42389D",
+            color: '#42389D',
             fontSize: 15,
             ml: 1,
           }}
@@ -43,10 +43,10 @@ const UpcomingAppointment = (props) => {
           {appointment.petName}
         </Typography> */}
         <Typography
-          variant="body1"
+          variant='body1'
           sx={{
             mb: 1,
-            color: "#42389D",
+            color: '#42389D',
             fontSize: 15,
             ml: 12,
           }}
@@ -54,7 +54,7 @@ const UpcomingAppointment = (props) => {
           {appointment.concern}
         </Typography>
         <Button
-          variant="contained"
+          variant='contained'
           sx={{
             mb: 1,
             fontSize: 15,
@@ -65,7 +65,7 @@ const UpcomingAppointment = (props) => {
           Add Prescription
         </Button>
       </Box>
-      <Divider sx={{ width: "100%", my: 2 }} />
+      <Divider sx={{ width: '100%', my: 2 }} />
     </Box>
   );
 };

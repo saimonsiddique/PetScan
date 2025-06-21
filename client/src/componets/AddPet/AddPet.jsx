@@ -1,6 +1,6 @@
-import { useContext, useState } from "react";
-import apiClient from "../../ApiServices/ApiClientService";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react'; // Removed useContext
+import apiClient from '../../ApiServices/ApiClientService';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   TextField,
@@ -14,29 +14,29 @@ import {
   FormControlLabel,
   Stack,
   Typography,
-} from "@mui/material";
-import "./AddPet.css";
-import ImageUpload from "../ImageUpload/ImageUpload";
-import { ImageContext } from "../../App";
+} from '@mui/material';
+import './AddPet.css';
+import ImageUpload from '../ImageUpload/ImageUpload';
+import useImageStore from '../../store/imageStore'; // Import useImageStore
 
 const initialState = {
-  petName: "",
-  petSpecies: "",
-  petAge: "",
-  ageUnit: "years",
-  petWeight: "",
-  weightUnit: "kg",
-  petGender: "",
+  petName: '',
+  petSpecies: '',
+  petAge: '',
+  ageUnit: 'years',
+  petWeight: '',
+  weightUnit: 'kg',
+  petGender: '',
   neutered: false,
-  previousMedicalHistory: "",
-  petPhoto: "",
+  previousMedicalHistory: '',
+  petPhoto: '',
 };
 
-const petSpecies = ["Dog", "Cat", "Bird", "Fish", "Farm Animal", "Other"];
+const petSpecies = ['Dog', 'Cat', 'Bird', 'Fish', 'Farm Animal', 'Other'];
 
 const PetInfo = () => {
   let navigate = useNavigate();
-  const { image, setImage } = useContext(ImageContext);
+  const { image, clearImage } = useImageStore(); // Use useImageStore
   const [state, setState] = useState(initialState);
   const [prevMed, setPrevMed] = useState(false);
   const [neutered, setNeutered] = useState(false);
@@ -77,58 +77,58 @@ const PetInfo = () => {
       petGender,
       previousMedicalHistory,
       neutered,
-      petPhoto: image,
+      petPhoto: image, // image from useImageStore
     };
     try {
       // get accessToken from local storage
-      const token = localStorage.getItem("accessToken");
+      const token = localStorage.getItem('accessToken');
 
       // send newPet to the backend
       const response_addPet = await apiClient.addPet(newPet, token);
       console.log(response_addPet);
 
       // redirect to the ParentProfile page
-      setImage("");
-      navigate("/dashboard");
+      clearImage(); // Use clearImage from the store
+      navigate('/dashboard');
     } catch (error) {
       console.log(error);
-      alert("Something went wrong");
+      alert('Something went wrong');
     }
   };
 
   return (
     <>
-      <section className="pet-container">
-        <div className="pet-info">
+      <section className='pet-container'>
+        <div className='pet-info'>
           <h3>Tell us about your pet</h3>
           <p>
             We are all present for that reason, after all. We want to meet your
             pet.
           </p>
 
-          <div className="pet-form">
+          <div className='pet-form'>
             <Box
-              component="form"
+              component='form'
               sx={{
-                "& .MuiTextField-root": { m: 1, width: "90%" },
+                '& .MuiTextField-root': { m: 1, width: '90%' },
               }}
               noValidate
             >
               <TextField
                 required
-                name="petName"
-                label="Pet Name"
-                variant="outlined"
+                name='petName'
+                label='Pet Name'
+                variant='outlined'
                 onChange={handleChange}
               />
             </Box>
-            <Box sx={{ m: 1, width: "90%" }}>
+            <Box sx={{ m: 1, width: '90%' }}>
               <FormControl fullWidth>
                 <InputLabel>Species</InputLabel>
                 <Select
-                  name="petSpecies"
+                  name='petSpecies'
                   value={state.petSpecies}
-                  label="Species"
+                  label='Species'
                   onChange={handleChange}
                 >
                   {petSpecies.map((species) => (
@@ -140,167 +140,167 @@ const PetInfo = () => {
               </FormControl>
             </Box>
             <Box
-              component="form"
+              component='form'
               sx={{
-                "& .MuiTextField-root": { m: 1, width: "70%" },
+                '& .MuiTextField-root': { m: 1, width: '70%' },
               }}
               noValidate
             >
               <TextField
                 required
-                name="petAge"
-                label="Pet Age"
-                variant="outlined"
+                name='petAge'
+                label='Pet Age'
+                variant='outlined'
                 onChange={handleChange}
               />
-              <FormControl sx={{ m: 1, width: "18%" }}>
+              <FormControl sx={{ m: 1, width: '18%' }}>
                 <InputLabel>Age in</InputLabel>
                 <Select
-                  name="ageUnit"
+                  name='ageUnit'
                   value={state.ageUnit}
                   onChange={handleChange}
                   autoWidth
-                  label="Age unit"
+                  label='Age unit'
                 >
-                  <MenuItem value={"years"}>years</MenuItem>
-                  <MenuItem value={"months"}>months</MenuItem>
+                  <MenuItem value={'years'}>years</MenuItem>
+                  <MenuItem value={'months'}>months</MenuItem>
                 </Select>
               </FormControl>
             </Box>
             <Box
-              component="form"
+              component='form'
               sx={{
-                "& .MuiTextField-root": { m: 1, width: "70%" },
+                '& .MuiTextField-root': { m: 1, width: '70%' },
               }}
               noValidate
             >
               <TextField
                 required
-                name="petWeight"
-                label="Pet Weight"
-                variant="outlined"
+                name='petWeight'
+                label='Pet Weight'
+                variant='outlined'
                 onChange={handleChange}
               />
-              <FormControl sx={{ m: 1, width: "18%" }}>
+              <FormControl sx={{ m: 1, width: '18%' }}>
                 <InputLabel>Unit</InputLabel>
                 <Select
-                  name="weightUnit"
+                  name='weightUnit'
                   value={state.weightUnit}
                   onChange={handleChange}
                   autoWidth
-                  label="Weight Unit"
+                  label='Weight Unit'
                 >
-                  <MenuItem value={"kg"}>kg</MenuItem>
-                  <MenuItem value={"lbs"}>lbs</MenuItem>
+                  <MenuItem value={'kg'}>kg</MenuItem>
+                  <MenuItem value={'lbs'}>lbs</MenuItem>
                 </Select>
               </FormControl>
             </Box>
             <Box
-              component="form"
+              component='form'
               sx={{
-                "& .MuiTextField-root": { m: 1, width: "80%" },
+                '& .MuiTextField-root': { m: 1, width: '80%' },
               }}
               noValidate
             >
-              <FormControl sx={{ m: 1, width: "70%" }}>
+              <FormControl sx={{ m: 1, width: '70%' }}>
                 <InputLabel>Gender</InputLabel>
                 <Select
-                  name="petGender"
+                  name='petGender'
                   value={state.petGender}
-                  label="Gender"
+                  label='Gender'
                   onChange={handleChange}
                 >
-                  <MenuItem value={"male"}>Male</MenuItem>
-                  <MenuItem value={"female"}>Female</MenuItem>
+                  <MenuItem value={'male'}>Male</MenuItem>
+                  <MenuItem value={'female'}>Female</MenuItem>
                 </Select>
               </FormControl>
             </Box>
-            <span style={{ marginTop: "1rem", marginLeft: "1rem" }}>
+            <span style={{ marginTop: '1rem', marginLeft: '1rem' }}>
               Is your pet spayed or neutered?
             </span>
             <Box
-              component="form"
+              component='form'
               sx={{
-                "& .MuiTextField-root": { m: 1, width: "10%" },
+                '& .MuiTextField-root': { m: 1, width: '10%' },
               }}
               noValidate
             >
               <Button
                 value={neutered}
                 onClick={() => setNeutered(!neutered)}
-                variant={neutered ? "contained" : "outlined"}
-                style={{ width: "1ch", marginTop: "1rem", marginLeft: "1rem" }}
+                variant={neutered ? 'contained' : 'outlined'}
+                style={{ width: '1ch', marginTop: '1rem', marginLeft: '1rem' }}
               >
                 Yes
               </Button>
               <Button
                 value={neutered}
                 onClick={() => setNeutered(!neutered)}
-                variant={neutered ? "outlined" : "contained"}
+                variant={neutered ? 'outlined' : 'contained'}
                 style={{
-                  width: "1ch",
-                  marginTop: "1rem",
-                  marginLeft: "1rem",
+                  width: '1ch',
+                  marginTop: '1rem',
+                  marginLeft: '1rem',
                 }}
               >
                 No
               </Button>
             </Box>
-            <section className="prev-history">
+            <section className='prev-history'>
               <span>Does your pet have any previous medical history?</span>
               <FormGroup>
                 <FormControlLabel
                   control={
                     <Checkbox checked={prevMed} onChange={handleCheckbox} />
                   }
-                  label="Check if yes"
+                  label='Check if yes'
                 />
               </FormGroup>
             </section>
 
             {prevMed ? (
               <Box
-                component="form"
+                component='form'
                 sx={{
-                  "& .MuiTextField-root": { m: 1, width: "90%" },
+                  '& .MuiTextField-root': { m: 1, width: '90%' },
                 }}
                 noValidate
               >
                 <TextField
-                  name="previousMedicalHistory"
-                  label="Previous Medical History"
-                  variant="outlined"
+                  name='previousMedicalHistory'
+                  label='Previous Medical History'
+                  variant='outlined'
                   onChange={handleChange}
                 />
               </Box>
             ) : null}
 
-            <section className="prev-history">
+            <section className='prev-history'>
               <Box
                 sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  width: "32vw",
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  width: '32vw',
                   m: 1.25,
                 }}
               >
-                <Typography variant="body2">Upload your pet photo</Typography>
+                <Typography variant='body2'>Upload your pet photo</Typography>
                 <ImageUpload />
               </Box>
             </section>
 
             <Box
-              component="form"
+              component='form'
               sx={{
-                "& .MuiTextField-root": { m: 1, width: "90%" },
+                '& .MuiTextField-root': { m: 1, width: '90%' },
               }}
               noValidate
             >
               <Button
-                variant="contained"
-                style={{ marginTop: "1rem", marginLeft: "1rem", width: "20%" }}
+                variant='contained'
+                style={{ marginTop: '1rem', marginLeft: '1rem', width: '20%' }}
                 onClick={handleSubmit}
-                disabled={!image}
+                disabled={!image} // image from useImageStore
               >
                 Next
               </Button>

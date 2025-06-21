@@ -1,18 +1,16 @@
-import { useState, useEffect } from "react";
-import { createContext } from "react";
-import { CircularProgress } from "@mui/material";
-import apiClient from "../ApiServices/ApiClientService";
-import apiVet from "../ApiServices/ApiVetServices";
-import ParentProfile from "../componets/Profile/ParentProfile/ParentProfile";
-import VetProfile from "../componets/Profile/VetProfile/VetProfile";
-
-export const UserContext = createContext(null);
+import { useState, useEffect } from 'react';
+import { CircularProgress } from '@mui/material';
+import apiClient from '../ApiServices/ApiClientService';
+import apiVet from '../ApiServices/ApiVetServices';
+import ParentProfile from '../componets/Profile/ParentProfile/ParentProfile';
+import VetProfile from '../componets/Profile/VetProfile/VetProfile';
+import useUserStore from '../store/userStore'; // Import useUserStore
 
 const initialParentState = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  profilePicture: "",
+  firstName: '',
+  lastName: '',
+  email: '',
+  profilePicture: '',
   pets: [],
   prescriptions: [],
   appointments: [],
@@ -21,10 +19,10 @@ const initialParentState = {
 };
 
 const initialVetState = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  vetProfile: "",
+  firstName: '',
+  lastName: '',
+  email: '',
+  vetProfile: '',
   specializedField: [],
   appointments: [],
   topRatedFor: [],
@@ -35,110 +33,70 @@ const initialVetState = {
 const Dashboard = () => {
   const [parent, setParent] = useState(initialParentState);
   const [vet, setVet] = useState(initialVetState);
-  const [questionQuery, setQuestionQuery] = useState(false);
+  // questionQuery and setQuestionQuery are removed from context.
+  // If needed by children, pass as props or use a separate store.
+  // const [questionQuery, setQuestionQuery] = useState(false);
   const [loading, setLoading] = useState(true);
-  const userType = localStorage.getItem("userType");
+  const userType = localStorage.getItem('userType');
+  const { setUser } = useUserStore(); // Get setUser from the store
 
   useEffect(() => {
-    // get accessToken and userType from local storage
-    const accessToken = localStorage.getItem("accessToken");
-    // if the user is a parent
-    if (userType === "petParent") {
-      // get the parent profile
+    const accessToken = localStorage.getItem('accessToken');
+    if (userType === 'petParent') {
       const getParent = async () => {
         try {
           const parentInfo = await apiClient.profile(accessToken);
           if (parentInfo) {
-            const {
-              firstName,
-              lastName,
-              email,
-              profilePicture,
-              pets,
-              prescriptions,
-              appointments,
-              bookedAppointments,
-              askedQuestions,
-            } = parentInfo;
-            setParent((prevState) => ({
-              ...prevState,
-              firstName,
-              lastName,
-              email,
-              profilePicture,
-              pets,
-              prescriptions,
-              appointments,
-              bookedAppointments,
-              askedQuestions,
-            }));
+            setParent(parentInfo); // Set local state
+            setUser(parentInfo); // Update Zustand store
             setLoading(false);
           } else {
-            alert("Something went wrong");
+            alert('Something went wrong');
+            setLoading(false);
           }
         } catch (error) {
           console.log(error);
-          alert("Not authorized");
+          alert('Not authorized');
+          setLoading(false);
         }
       };
-      getParent(accessToken);
+      getParent();
     }
 
-    // if the user is a vet
-    if (userType === "vet") {
-      // get the vet profile
+    if (userType === 'vet') {
       const getVet = async () => {
         try {
           const vetInfo = await apiVet.profile(accessToken);
           if (vetInfo) {
-            const {
-              firstName,
-              lastName,
-              email,
-              vetProfile,
-              specializedField,
-              appointments,
-              topRatedFor,
-              answeredQuestions,
-              upcomingAppointments,
-            } = vetInfo;
-            setVet((prevState) => ({
-              ...prevState,
-              firstName,
-              lastName,
-              email,
-              vetProfile,
-              specializedField,
-              appointments,
-              topRatedFor,
-              answeredQuestions,
-              upcomingAppointments,
-            }));
+            setVet(vetInfo); // Set local state
+            setUser(vetInfo); // Update Zustand store
             setLoading(false);
           } else {
-            alert("Something went wrong");
+            alert('Something went wrong');
+            setLoading(false);
           }
         } catch (error) {
           console.log(error);
-          alert("Not authorized");
+          alert('Not authorized');
+          setLoading(false);
         }
       };
-      getVet(accessToken);
+      getVet();
     }
-  }, []);
+  }, [userType, setUser]); // Add setUser to dependency array
 
   if (loading) {
     return <CircularProgress />;
   }
 
-  console.log("First state vet", vet);
+  // console.log("First state vet", vet); // vet state is local, user is in store
+  // console.log("User from store", useUserStore.getState().user);
+
   return (
-    <UserContext.Provider
-      value={{ parent, vet, questionQuery, setQuestionQuery }}
-    >
-      {userType === "petParent" && <ParentProfile />}
-      {userType === "vet" && <VetProfile />}
-    </UserContext.Provider>
+    <>
+      {userType === 'petParent' && <ParentProfile />}
+      {userType === 'vet' && <VetProfile />}
+    </>
   );
 };
 

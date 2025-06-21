@@ -1,48 +1,48 @@
-import { useContext, useState, useEffect } from "react";
-import { UserContext } from "../../Pages/Dashboard";
-import { Box, Paper, Typography, Divider, TextField } from "@mui/material";
-import BookAppointment from "../Profile/subcomponents/ProfileContent/BookAppointment";
-import PetCard from "../Profile/subcomponents/ProfileContent/PetCard";
-import Appointments from "../Appointments/Appointments";
-import QuestionLog from "../Profile/subcomponents/ProfileContent/QuestionLog";
-import apiClient from "../../ApiServices/ApiClientService";
-import DataTable from "../DataTable/DataTable";
-import SearchIcon from "@mui/icons-material/Search";
+import { useContext, useState, useEffect } from 'react';
+import { UserContext } from '../../Pages/Dashboard';
+import { Box, Paper, Typography, Divider, TextField } from '@mui/material';
+import BookAppointment from '../Profile/subcomponents/ProfileContent/BookAppointment';
+import PetCard from '../Profile/subcomponents/ProfileContent/PetCard';
+import Appointments from '../Appointments/Appointments';
+import QuestionLog from '../Profile/subcomponents/ProfileContent/QuestionLog';
+import apiClient from '../../ApiServices/ApiClientService';
+import DataTable from '../DataTable/DataTable';
+import SearchIcon from '@mui/icons-material/Search';
 
-import "./DashboardContainer.css";
+import './DashboardContainer.css';
 
 const DashboardContainer = () => {
   const { parent, vet, questionQuery, setQuestionQuery } =
     useContext(UserContext);
   const [askedQuestion, setAskedQuestion] = useState([]);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [filterEmail, setFilterEmail] = useState([]);
   const [upcomingAppointments, setUpcomingAppointments] = useState([]);
   const vetUpcomingAppointments = vet.upcomingAppointments.filter(
     (appointment) => {
-      return appointment.status === "Pending";
+      return appointment.status === 'Pending';
     }
   );
 
-  const userType = localStorage.getItem("userType");
+  const userType = localStorage.getItem('userType');
 
   useEffect(() => {
-    if (userType === "petParent") {
+    if (userType === 'petParent') {
       setAskedQuestion(parent.askedQuestions);
     } else {
       setAskedQuestion(vet.answeredQuestions);
       setUpcomingAppointments(vetUpcomingAppointments);
-      console.log("vetUpcomingAppointments", vet.upcomingAppointments);
+      console.log('vetUpcomingAppointments', vet.upcomingAppointments);
     }
   }, [parent, vet, userType]);
 
   const handleDelete = (questionId) => {
-    const userId = localStorage.getItem("userId");
+    const userId = localStorage.getItem('userId');
 
     // call api to delete question
 
     apiClient.deleteQuestion(userId, questionId).then((res) => {
-      console.log("res", res);
+      console.log('res', res);
     });
 
     // filter out the question from the askedQuestion array
@@ -53,7 +53,7 @@ const DashboardContainer = () => {
     // set the new questionQuery
     setAskedQuestion(newQuestionQuery);
 
-    console.log("id", questionId);
+    console.log('id', questionId);
   };
 
   const handleSearch = (e) => {
@@ -70,27 +70,27 @@ const DashboardContainer = () => {
   return (
     <Box
       sx={{
-        display: "flex",
-        "& > :not(style)": {
+        display: 'flex',
+        '& > :not(style)': {
           m: 0,
-          width: "100%",
-          height: "100%",
+          width: '100%',
+          height: '100%',
         },
       }}
     >
       {!questionQuery ? (
         <Paper elevation={2}>
-          <div className="appointment">
-            {userType === "petParent" ? (
+          <div className='appointment'>
+            {userType === 'petParent' ? (
               <BookAppointment />
             ) : (
-              <div className="upcoming-appointments">
+              <div className='upcoming-appointments'>
                 <Typography
-                  variant="h5"
+                  variant='h5'
                   sx={{
                     mb: 2,
-                    color: "#42389D",
-                    fontWeight: "bold",
+                    color: '#42389D',
+                    fontWeight: 'bold',
                     fontSize: 30,
                   }}
                 >
@@ -99,8 +99,8 @@ const DashboardContainer = () => {
                 <Divider />
                 <Box
                   sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
+                    display: 'flex',
+                    justifyContent: 'space-between',
                   }}
                 >
                   <DataTable
@@ -109,15 +109,15 @@ const DashboardContainer = () => {
                   />
                   {/* Search Field */}
                   <TextField
-                    id="outlined-basic"
-                    label="Search"
-                    variant="outlined"
-                    size="medium"
+                    id='outlined-basic'
+                    label='Search'
+                    variant='outlined'
+                    size='medium'
                     sx={{
-                      width: "40%",
-                      height: "max-content",
+                      width: '40%',
+                      height: 'max-content',
                       mb: 2,
-                      mt: "2rem",
+                      mt: '2rem',
                       ml: 2,
                     }}
                     onChange={handleSearch}
@@ -126,7 +126,7 @@ const DashboardContainer = () => {
                       endAdornment: (
                         <SearchIcon
                           sx={{
-                            color: "#42389D",
+                            color: '#42389D',
                           }}
                         />
                       ),
@@ -136,18 +136,18 @@ const DashboardContainer = () => {
               </div>
             )}
           </div>
-          <div className="my-pets">
+          <div className='my-pets'>
             <div>
               <span>
                 <h3>
-                  {userType === "petParent"
+                  {userType === 'petParent'
                     ? `${parent.firstName}'s Pets`
                     : null}
                 </h3>
               </span>
             </div>
-            <div className="pet-card">
-              {userType === "petParent" ? (
+            <div className='pet-card'>
+              {userType === 'petParent' ? (
                 parent.pets.length > 0 ? (
                   parent.pets.map((pet) => {
                     return <PetCard key={pet._id} pet={pet} />;
@@ -158,16 +158,16 @@ const DashboardContainer = () => {
               ) : null}
             </div>
           </div>
-          <div className="appointment-lists">
-            {userType === "petParent" ? (
+          <div className='appointment-lists'>
+            {userType === 'petParent' ? (
               <div>
                 <span>
                   <h3>Upcoming Appointments</h3>
                 </span>
               </div>
             ) : null}
-            <div className="appointment-cards">
-              {userType === "petParent" &&
+            <div className='appointment-cards'>
+              {userType === 'petParent' &&
                 (parent.bookedAppointments.length > 0 ? (
                   parent.bookedAppointments.map((appointment) => {
                     return (
@@ -185,10 +185,10 @@ const DashboardContainer = () => {
         </Paper>
       ) : (
         <Paper elevation={2}>
-          <div className="list-of-question-query">
-            {userType === "petParent" ? (
+          <div className='list-of-question-query'>
+            {userType === 'petParent' ? (
               <>
-                <div className="heading-question-list">
+                <div className='heading-question-list'>
                   <h3>{parent.firstName}'s Questions</h3>
                 </div>
                 {askedQuestion.map((question, index) => {
@@ -204,7 +204,7 @@ const DashboardContainer = () => {
               </>
             ) : (
               <>
-                <div className="heading-question-list">
+                <div className='heading-question-list'>
                   <h3>{vet.firstName}'s Answers</h3>
                 </div>
                 {askedQuestion.map((question, index) => {

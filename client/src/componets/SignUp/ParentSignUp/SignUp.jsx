@@ -1,6 +1,6 @@
-import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react'; // Removed useContext
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   Stack,
   Button,
@@ -8,29 +8,28 @@ import {
   Divider,
   TextField,
   Typography,
-} from "@mui/material";
-import { InputAdornment, IconButton } from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
-import apiClient from "../../../ApiServices/ApiClientService";
-import userWithPet from "../../../assets/signup/user-with-pet.svg";
-import "./SignUp.css";
-import ImageUpload from "../../ImageUpload/ImageUpload";
-
-import { ImageContext } from "../../../App";
-import AnnonymousBar from "../../NavBar/AnnonymousBar/AnnonymousBar";
-import toast from "react-hot-toast";
+} from '@mui/material';
+import { InputAdornment, IconButton } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import apiClient from '../../../ApiServices/ApiClientService';
+import userWithPet from '../../../assets/signup/user-with-pet.svg';
+import './SignUp.css';
+import ImageUpload from '../../ImageUpload/ImageUpload';
+import useImageStore from '../../../store/imageStore'; // Import useImageStore
+import AnnonymousBar from '../../NavBar/AnnonymousBar/AnnonymousBar';
+import toast from 'react-hot-toast';
 
 const initialState = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
 };
 
 const SignUp = () => {
   let navigate = useNavigate();
-  const { image, setImage } = useContext(ImageContext);
+  const { image, clearImage } = useImageStore(); // Use useImageStore, no need for setImage directly if only clearing
   const [state, setState] = useState(initialState);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -51,7 +50,7 @@ const SignUp = () => {
     // extract the user data from the state
     const validation = validateForm();
     if (!validation) {
-      toast.error("Please fill all the fields!");
+      toast.error('Please fill all the fields!');
       return;
     }
     const { firstName, lastName, email, password } = state;
@@ -60,26 +59,26 @@ const SignUp = () => {
       lastName,
       email,
       password,
-      profilePicture: image,
+      profilePicture: image, // image comes from useImageStore()
     };
 
     console.log(newUser);
     // send the user data to the server
     try {
       const response = await apiClient.signup(newUser);
-      console.log("response", response);
+      console.log('response', response);
       // extract the token from the response
       const { accessToken, user } = response;
       // save the token in the local storage
-      localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("userType", user);
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('userType', user);
       // redirect the user to the pet info page
-      toast.success("Registration successful!");
-      setImage("");
-      navigate("/pet/add");
+      toast.success('Registration successful!');
+      clearImage(); // Use clearImage from the store
+      navigate('/pet/add');
     } catch (error) {
       console.log(error);
-      toast.error("Registration failed!");
+      toast.error('Registration failed!');
     }
   };
 
@@ -95,84 +94,84 @@ const SignUp = () => {
 
   return (
     <>
-      <section className="container">
+      <section className='container'>
         <AnnonymousBar />
-        <div className="signup-form">
-          <div className="header">
-            <img className="logo" src={userWithPet} alt="logo" />
+        <div className='signup-form'>
+          <div className='header'>
+            <img className='logo' src={userWithPet} alt='logo' />
             <h1>Create a Pet Parent Account</h1>
             <p>
               <b>Or</b>
             </p>
             <span>
-              <Link to={"/signin"}>
+              <Link to={'/signin'}>
                 <strong> Sign in to an existent account </strong>
               </Link>
             </span>
           </div>
           <Divider sx={{ mt: 2 }} />
-          <div className="form">
+          <div className='form'>
             <Box
-              component="form"
+              component='form'
               sx={{
-                "& .MuiTextField-root": { m: 1, width: "25ch" },
+                '& .MuiTextField-root': { m: 1, width: '25ch' },
               }}
               noValidate
-              autoComplete="off"
+              autoComplete='off'
             >
               <TextField
                 required
-                name="firstName"
-                label="First Name"
-                variant="outlined"
+                name='firstName'
+                label='First Name'
+                variant='outlined'
                 onChange={handleChange}
               />
               <TextField
                 required
-                name="lastName"
-                label="Last Name"
-                variant="outlined"
-                onChange={handleChange}
-              />
-            </Box>
-            <Box
-              component="form"
-              sx={{
-                "& .MuiTextField-root": { m: 1, width: "52ch" },
-              }}
-              noValidate
-              autoComplete="off"
-            >
-              <TextField
-                required
-                name="email"
-                label="Email"
-                variant="outlined"
+                name='lastName'
+                label='Last Name'
+                variant='outlined'
                 onChange={handleChange}
               />
             </Box>
             <Box
-              component="form"
+              component='form'
               sx={{
-                "& .MuiTextField-root": { m: 1, width: "52ch" },
+                '& .MuiTextField-root': { m: 1, width: '52ch' },
               }}
               noValidate
-              autoComplete="off"
+              autoComplete='off'
             >
               <TextField
                 required
-                name="password"
-                label="Password"
-                variant="outlined"
+                name='email'
+                label='Email'
+                variant='outlined'
                 onChange={handleChange}
-                type={showPassword ? "text" : "password"}
+              />
+            </Box>
+            <Box
+              component='form'
+              sx={{
+                '& .MuiTextField-root': { m: 1, width: '52ch' },
+              }}
+              noValidate
+              autoComplete='off'
+            >
+              <TextField
+                required
+                name='password'
+                label='Password'
+                variant='outlined'
+                onChange={handleChange}
+                type={showPassword ? 'text' : 'password'}
                 InputProps={{
                   endAdornment: (
-                    <InputAdornment position="end">
+                    <InputAdornment position='end'>
                       <IconButton
-                        aria-label="toggle password visibility"
+                        aria-label='toggle password visibility'
                         onClick={handleClickShowPassword}
-                        edge="end"
+                        edge='end'
                       >
                         {showPassword ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
@@ -182,27 +181,27 @@ const SignUp = () => {
               />
             </Box>
             <Box
-              component="form"
+              component='form'
               sx={{
-                "& .MuiTextField-root": { m: 1, width: "52ch" },
+                '& .MuiTextField-root': { m: 1, width: '52ch' },
               }}
               noValidate
-              autoComplete="off"
+              autoComplete='off'
             >
               <TextField
                 required
-                name="confirmPassword"
-                label="Confirm Password"
-                variant="outlined"
+                name='confirmPassword'
+                label='Confirm Password'
+                variant='outlined'
                 onChange={handleChange}
-                type={showPassword ? "text" : "password"}
+                type={showPassword ? 'text' : 'password'}
                 InputProps={{
                   endAdornment: (
-                    <InputAdornment position="end">
+                    <InputAdornment position='end'>
                       <IconButton
-                        aria-label="toggle password visibility"
+                        aria-label='toggle password visibility'
                         onClick={handleClickShowPassword}
-                        edge="end"
+                        edge='end'
                       >
                         {showPassword ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
@@ -213,19 +212,19 @@ const SignUp = () => {
             </Box>
             <Box
               sx={{
-                display: "flex",
-                justifyContent: "center",
+                display: 'flex',
+                justifyContent: 'center',
               }}
             >
               <Typography
-                variant="body2"
-                color="primary"
-                align="center"
+                variant='body2'
+                color='primary'
+                align='center'
                 sx={{
                   mt: 1,
                   mr: 1,
                   ml: 1,
-                  fontWeight: "bold",
+                  fontWeight: 'bold',
                 }}
               >
                 Upload a profile picture
@@ -235,15 +234,15 @@ const SignUp = () => {
           </div>
           <Box
             sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
               m: 1,
             }}
           >
             <Button
-              variant="contained"
-              style={{ width: "52ch" }}
+              variant='contained'
+              style={{ width: '52ch' }}
               onClick={createUser}
               disabled={!image}
             >

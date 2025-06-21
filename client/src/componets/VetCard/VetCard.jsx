@@ -1,9 +1,9 @@
-import { useState, useContext } from "react";
-import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
-import { CardActionArea } from "@mui/material";
-import CardModal from "../CardModal/CardModal";
-import Rating from "@mui/material/Rating";
-import { InfomationContext } from "../../Pages/Meet";
+import { useState, useContext } from 'react';
+import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { CardActionArea } from '@mui/material';
+import CardModal from '../CardModal/CardModal';
+import Rating from '@mui/material/Rating';
+import { InfomationContext } from '../../Pages/Meet';
 
 const VetCard = ({ vet, handleSubmit, vetSelected, setVetSelected }) => {
   return (
@@ -11,40 +11,40 @@ const VetCard = ({ vet, handleSubmit, vetSelected, setVetSelected }) => {
       sx={{
         maxWidth: 345,
         m: 1.5,
-        ":hover": {
-          boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-          transform: "scale(1.05)",
-          transition: "all 0.3s ease-in-out",
+        ':hover': {
+          boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+          transform: 'scale(1.05)',
+          transition: 'all 0.3s ease-in-out',
         },
       }}
     >
       <CardActionArea>
         <CardMedia
-          component="img"
-          height="140"
-          sx={{ objectFit: "contain", minWidth: "140" }}
+          component='img'
+          height='140'
+          sx={{ objectFit: 'contain', minWidth: '140' }}
           image={vet.vetProfile}
-          alt="vet image"
+          alt='vet image'
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {vet.firstName + " " + vet.lastName}
+          <Typography gutterBottom variant='h5' component='div'>
+            {vet.firstName + ' ' + vet.lastName}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Specialized in : {vet.specializedField.join(", ")}
+          <Typography variant='body2' color='text.secondary'>
+            Specialized in : {vet.specializedField.join(', ')}
           </Typography>
         </CardContent>
       </CardActionArea>
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
           p: 2,
         }}
       >
         <Rating
-          name="half-rating-read"
+          name='half-rating-read'
           defaultValue={3.5}
           precision={0.5}
           readOnly

@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useState } from 'react';
 import {
   Card,
   CardContent,
   CardMedia,
   Typography,
   CardActionArea,
-} from "@mui/material";
-import PetModal from "../../../CardModal/PetModal";
+} from '@mui/material';
+import PetModal from '../../../CardModal/PetModal';
 
 const PetCard = (props) => {
   const { pet } = props;
@@ -16,7 +16,7 @@ const PetCard = (props) => {
   const handleClose = () => setOpen(false);
 
   return (
-    <section className="pet-card">
+    <section className='pet-card'>
       <Card
         sx={{
           minWidth: 250,
@@ -24,36 +24,36 @@ const PetCard = (props) => {
       >
         <CardActionArea onClick={handleOpen}>
           <CardMedia
-            component="img"
-            height="145"
+            component='img'
+            height='145'
             image={
               petPhoto
                 ? petPhoto
-                : "https://res.cloudinary.com/dru7kzv3i/image/upload/v1687851370/pet-info-dog_qgsncw.jpg"
+                : 'https://res.cloudinary.com/dru7kzv3i/image/upload/v1687851370/pet-info-dog_qgsncw.jpg'
             }
-            alt="Your Pet"
+            alt='Your Pet'
           />
           <CardContent>
             <Typography
               gutterBottom
-              variant="h6"
-              component="div"
+              variant='h6'
+              component='div'
               sx={{
-                display: "flex",
-                justifyContent: "center",
+                display: 'flex',
+                justifyContent: 'center',
               }}
             >
-              {petName ? petName : "Your Pet Name"}
+              {petName ? petName : 'Your Pet Name'}
             </Typography>
             <Typography
-              variant="body2"
-              color="text.secondary"
+              variant='body2'
+              color='text.secondary'
               sx={{
-                display: "flex",
-                justifyContent: "center",
+                display: 'flex',
+                justifyContent: 'center',
               }}
             >
-              {petSpecies ? petSpecies : "Your Pet Species"}
+              {petSpecies ? petSpecies : 'Your Pet Species'}
             </Typography>
           </CardContent>
         </CardActionArea>

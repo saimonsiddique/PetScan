@@ -1,14 +1,14 @@
-import { useContext } from "react";
-import { Box, Paper, Typography, TextField, Button } from "@mui/material";
-import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
-import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
-import InputAdornment from "@mui/material/InputAdornment";
-import { ImageContext } from "../../../App";
-import { VetStepsContext } from "../../VetSteps/VetSteps";
-import ImageUpload from "../../ImageUpload/ImageUpload";
+import { useContext } from 'react'; // Keep useContext for VetStepsContext
+import { Box, Paper, Typography, TextField, Button } from '@mui/material';
+import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
+import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
+import InputAdornment from '@mui/material/InputAdornment';
+import useImageStore from '../../../store/imageStore'; // Import useImageStore
+import { VetStepsContext } from '../../VetSteps/VetSteps';
+import ImageUpload from '../../ImageUpload/ImageUpload';
 
 const VetStepTwo = () => {
-  const { setImage, image } = useContext(ImageContext);
+  const { image, setImage } = useImageStore(); // Use useImageStore
   const { setLicenseNumber, setEducation, setYear, setPhone, handleSubmit } =
     useContext(VetStepsContext);
 
@@ -32,79 +32,79 @@ const VetStepTwo = () => {
     <>
       <Paper
         sx={{
-          p: "2rem",
-          display: "flex",
-          borderRadius: "1rem",
-          flexDirection: "column",
-          justifyContent: "left",
-          height: "max-content",
+          p: '2rem',
+          display: 'flex',
+          borderRadius: '1rem',
+          flexDirection: 'column',
+          justifyContent: 'left',
+          height: 'max-content',
         }}
         elevation={2}
       >
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "left",
+            display: 'flex',
+            justifyContent: 'left',
           }}
         >
           <AssignmentTurnedInIcon
             sx={{
               fontSize: 30,
-              color: "#3f51b5",
-              display: "flex",
-              margin: "0",
+              color: '#3f51b5',
+              display: 'flex',
+              margin: '0',
             }}
           />
-          <Typography variant="h5">Add your licenses</Typography>
+          <Typography variant='h5'>Add your licenses</Typography>
         </Box>
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "left",
+            display: 'flex',
+            justifyContent: 'left',
           }}
         >
-          <Typography variant="body1">
+          <Typography variant='body1'>
             Please Enter your details. We will use this information to create
             your profile and verify your license.
           </Typography>
         </Box>
         <Box
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "left",
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'left',
             mt: 2,
           }}
         >
           <Typography
-            variant="body1"
+            variant='body1'
             sx={{
-              display: "flex",
+              display: 'flex',
               mb: 1,
             }}
           >
             Enter Your License Number
           </Typography>
           <TextField
-            sx={{ width: "40%" }}
-            label="License Number"
-            variant="outlined"
+            sx={{ width: '40%' }}
+            label='License Number'
+            variant='outlined'
             onChange={handleLicenseNumber}
             required
           />
         </Box>
         <Box
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "left",
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'left',
             mt: 2,
           }}
         >
           <Typography
-            variant="body1"
+            variant='body1'
             sx={{
-              display: "flex",
+              display: 'flex',
               mb: 1,
             }}
           >
@@ -112,38 +112,38 @@ const VetStepTwo = () => {
           </Typography>
           <Box
             sx={{
-              display: "flex",
+              display: 'flex',
             }}
           >
             <TextField
-              sx={{ width: "40%" }}
-              label="Education"
-              variant="outlined"
+              sx={{ width: '40%' }}
+              label='Education'
+              variant='outlined'
               onChange={handleEducation}
               required
             />
             <TextField
               sx={{
-                width: "40%",
+                width: '40%',
                 ml: 2,
               }}
               onChange={handleYear}
-              type="number"
-              label="Passing Year"
-              variant="outlined"
+              type='number'
+              label='Passing Year'
+              variant='outlined'
               required
             />
           </Box>
           <Box
             sx={{
-              display: "flex",
-              flexDirection: "column",
+              display: 'flex',
+              flexDirection: 'column',
             }}
           >
             <Typography
-              variant="body1"
+              variant='body1'
               sx={{
-                display: "flex",
+                display: 'flex',
                 mt: 2,
                 mr: 2,
               }}
@@ -152,26 +152,26 @@ const VetStepTwo = () => {
             </Typography>
             <TextField
               sx={{
-                width: "40%",
+                width: '40%',
                 mt: 2,
               }}
-              label="Phone Number"
-              variant="outlined"
+              label='Phone Number'
+              variant='outlined'
               onChange={handlePhone}
               required
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
+                  <InputAdornment position='start'>
                     <PhoneIphoneIcon />
                   </InputAdornment>
                 ),
               }}
             />
             <Typography
-              variant="h6"
+              variant='h6'
               sx={{
                 mt: 2,
-                color: "#3f51b5",
+                color: '#3f51b5',
               }}
             >
               Upload your photo
@@ -180,21 +180,21 @@ const VetStepTwo = () => {
           </Box>
           <Box
             sx={{
-              display: "flex",
+              display: 'flex',
               m: 2,
-              justifyContent: "flex-end",
+              justifyContent: 'flex-end',
             }}
           >
             <Button
               sx={{
-                width: "10%",
+                width: '10%',
                 mt: 2,
                 mr: 2,
               }}
-              type="submit"
-              variant="contained"
+              type='submit'
+              variant='contained'
               onClick={handleSubmit}
-              disabled={!image}
+              disabled={!image} // image comes from useImageStore
             >
               Add
             </Button>

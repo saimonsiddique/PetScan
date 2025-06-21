@@ -1,5 +1,5 @@
-import { useState, useContext } from "react";
-import apiClient from "../../../ApiServices/ApiClientService";
+import { useState, useContext } from 'react';
+import apiClient from '../../../ApiServices/ApiClientService';
 import {
   Box,
   Paper,
@@ -7,16 +7,16 @@ import {
   IconButton,
   Stack,
   Divider,
-} from "@mui/material";
-import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ThumbDownOffAltOutlinedIcon from "@mui/icons-material/ThumbDownOffAltOutlined";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
-import AnswerBox from "./AnswerBox";
-import "./LatestQuestion/LatestQuestion.css";
-import AnswerText from "./AnswerText";
-import { NewsFeedContext } from "../../NewsFeed/NewsFeed";
-import moment from "moment";
+} from '@mui/material';
+import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownOffAltOutlinedIcon from '@mui/icons-material/ThumbDownOffAltOutlined';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import AnswerBox from './AnswerBox';
+import './LatestQuestion/LatestQuestion.css';
+import AnswerText from './AnswerText';
+import { NewsFeedContext } from '../../NewsFeed/NewsFeed';
+import moment from 'moment';
 
 const LatestQuestion = () => {
   const { latestQuestion, setLatestQuestion, setPrevQuestion } =
@@ -25,12 +25,12 @@ const LatestQuestion = () => {
   console.log(latestQuestion);
 
   const answered = latestQuestion?.isAnswered;
-  const date = moment(latestQuestion?.postDate).format("MMMM Do YYYY, h:mm a");
+  const date = moment(latestQuestion?.postDate).format('MMMM Do YYYY, h:mm a');
   const [upVote, setUpVote] = useState(false);
   const [downVote, setDownVote] = useState(false);
   const [voted, setVoted] = useState(false);
 
-  const userId = localStorage.getItem("userId");
+  const userId = localStorage.getItem('userId');
   const questionId = latestQuestion?._id;
 
   const handleLatestUpVote = async (e) => {
@@ -61,87 +61,87 @@ const LatestQuestion = () => {
   return (
     <Box
       sx={{
-        display: "flex",
-        justifyContent: "center",
+        display: 'flex',
+        justifyContent: 'center',
         flexGrow: 1,
         mt: 0,
       }}
     >
-      <Stack spacing={1} sx={{ width: "100%" }}>
+      <Stack spacing={1} sx={{ width: '100%' }}>
         <Paper
           sx={{
-            width: "35vw",
-            height: "80vh",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "left",
+            width: '35vw',
+            height: '80vh',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'left',
             p: 2,
-            ":hover": {
-              boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-              transform: "scale(1.05)",
-              transition: "all 0.3s ease-in-out",
+            ':hover': {
+              boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+              transform: 'scale(1.05)',
+              transition: 'all 0.3s ease-in-out',
             },
           }}
         >
-          <Typography variant="h5" sx={{ mb: 1 }}>
+          <Typography variant='h5' sx={{ mb: 1 }}>
             Question
           </Typography>
           <Typography
-            variant="body1"
-            sx={{ mb: 1, fontSize: 20, color: "#001952", fontWeight: "bold" }}
+            variant='body1'
+            sx={{ mb: 1, fontSize: 20, color: '#001952', fontWeight: 'bold' }}
           >
             {latestQuestion?.question}
           </Typography>
           <Typography
-            variant="body2"
-            sx={{ mb: 1, fontSize: 13, color: "#001979" }}
+            variant='body2'
+            sx={{ mb: 1, fontSize: 13, color: '#001979' }}
           >
             Asked by <strong>{latestQuestion?.clientName}</strong>
           </Typography>
           <Typography
-            variant="body2"
-            sx={{ mb: 1, fontSize: 13, color: "#001979" }}
+            variant='body2'
+            sx={{ mb: 1, fontSize: 13, color: '#001979' }}
           >
             Posted on {date}
           </Typography>
-          <Divider sx={{ width: "100%", my: 2 }} />
+          <Divider sx={{ width: '100%', my: 2 }} />
           {answered && (
             <>
               <Typography
-                variant="body2"
-                sx={{ mb: 1, fontSize: 13, color: "#001979" }}
+                variant='body2'
+                sx={{ mb: 1, fontSize: 13, color: '#001979' }}
               >
                 Answered by <strong>{latestQuestion?.vetName}</strong>
               </Typography>
               <Typography
-                variant="body2"
-                sx={{ mb: 1, fontSize: 13, color: "#001979" }}
+                variant='body2'
+                sx={{ mb: 1, fontSize: 13, color: '#001979' }}
               >
-                Answered on{" "}
+                Answered on{' '}
                 <strong>
                   {moment(latestQuestion?.answerDate).format(
-                    "MMMM Do YYYY, h:mm a"
-                  )}{" "}
+                    'MMMM Do YYYY, h:mm a'
+                  )}{' '}
                 </strong>
               </Typography>
             </>
           )}
           <Box
             sx={{
-              display: "flex",
-              alignItems: "left",
+              display: 'flex',
+              alignItems: 'left',
               p: 2,
             }}
           >
             <AnswerText answerText={latestQuestion} />
           </Box>
-          <Divider sx={{ width: "100%", my: 2 }} />
-          <Stack direction="row" spacing={0.8} sx={{ mb: 1 }}>
+          <Divider sx={{ width: '100%', my: 2 }} />
+          <Stack direction='row' spacing={0.8} sx={{ mb: 1 }}>
             <ThumbUpIcon />
             {latestQuestion?.votedClients ? (
               <Typography
-                variant="body2"
-                sx={{ fontSize: 16, color: "#001952" }}
+                variant='body2'
+                sx={{ fontSize: 16, color: '#001952' }}
               >
                 <strong>{latestQuestion?.votedClients?.length}</strong> people
                 found this helpful
@@ -150,22 +150,22 @@ const LatestQuestion = () => {
           </Stack>
           <Box
             sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
               p: 1,
-              backgroundColor: "#3A87AD",
-              color: "white",
+              backgroundColor: '#3A87AD',
+              color: 'white',
             }}
           >
             {answered ? (
               <>
-                <Typography variant="body2" sx={{ fontSize: 14 }}>
+                <Typography variant='body2' sx={{ fontSize: 14 }}>
                   WAS THIS ANSWER HELPFUL?
                 </Typography>
                 <IconButton
                   sx={{ ml: 1 }}
-                  aria-label="upvote"
+                  aria-label='upvote'
                   onClick={handleLatestUpVote}
                   disabled={downVote}
                 >
@@ -173,7 +173,7 @@ const LatestQuestion = () => {
                 </IconButton>
                 <IconButton
                   sx={{ ml: 1 }}
-                  aria-label="downvote"
+                  aria-label='downvote'
                   onClick={handleLatestDownVote}
                   disabled={upVote}
                 >
@@ -185,7 +185,7 @@ const LatestQuestion = () => {
                 </IconButton>
               </>
             ) : (
-              <Typography variant="body2" sx={{ fontSize: 14 }}>
+              <Typography variant='body2' sx={{ fontSize: 14 }}>
                 Helpful votes are not available for unanswered questions
               </Typography>
             )}

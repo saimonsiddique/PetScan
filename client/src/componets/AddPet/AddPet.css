@@ -6,7 +6,7 @@
   height: 100vh;
   overflow: hidden;
   overflow-y: scroll;
-  background-image: url("https://res.cloudinary.com/dru7kzv3i/image/upload/v1687851370/pet-info-dog_qgsncw.jpg");
+  background-image: url('https://res.cloudinary.com/dru7kzv3i/image/upload/v1687851370/pet-info-dog_qgsncw.jpg');
   background-repeat: no-repeat;
   background-size: 30% 80%;
   background-position: top left;
@@ -22,7 +22,7 @@
   margin: 1rem 0;
   padding: 2rem 0rem 2rem 0rem;
   background-color: #ffffff;
-  background-image: url("../../assets/signup/user-with-pet.svg");
+  background-image: url('../../assets/signup/user-with-pet.svg');
   background-repeat: no-repeat;
   background-position: right;
   background-size: 15%;

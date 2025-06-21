@@ -1,101 +1,56 @@
-import axios from "axios";
-
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+import apiClientInstance from '../api/axiosInstance';
 
 const apiVet = {};
 
 apiVet.signup = async (user) => {
-  try {
-    const response = await axios.post(`${BASE_URL}/signup/vet`, user);
-    return response.data;
-  } catch (error) {
-    console.log(error);
-    const { data } = response;
-    return data.msg;
-  }
+  // console.log(error) was here
+  return apiClientInstance.post('/signup/vet', user);
 };
 
 apiVet.vetInfo = async (accessToken, vetInfo) => {
-  try {
-    const response = await axios.post(`${BASE_URL}/vet/info`, vetInfo, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    const { data } = response;
-    return data.msg;
-  }
+  return apiClientInstance.post('/vet/info', vetInfo, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
 };
 
 apiVet.profile = async (token) => {
-  try {
-    const response = await axios.get(`${BASE_URL}/profile/vet`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    const { data } = response;
-    return data.msg;
-  }
+  return apiClientInstance.get('/profile/vet', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
 
 apiVet.postAnswer = async (token, answer) => {
-  try {
-    const response = await axios.post(`${BASE_URL}/vet/postAnswer`, answer, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    const { data } = response;
-    return data.msg;
-  }
+  return apiClientInstance.post('/vet/postAnswer', answer, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
 
 apiVet.getInfo = async (token, appointmentInfo) => {
-  try {
-    const response = await axios.get(
-      `${BASE_URL}/vet/getInfo`,
-      appointmentInfo,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    const { data } = response;
-    return data.msg;
-  }
+  // For GET requests, parameters are usually sent as query params, not in the body.
+  // Assuming appointmentInfo should be query parameters.
+  // If appointmentInfo is large or sensitive, the backend API might expect a POST or have a different GET structure.
+  // For now, passing it as config.params which is typical for GET requests with axios.
+  return apiClientInstance.get('/vet/getInfo', {
+    params: appointmentInfo, // Changed from direct second argument to params object
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
 
 apiVet.sendPrescription = async (token, prescription) => {
-  try {
-    const response = await axios.post(
-      `${BASE_URL}/prescription`,
-      prescription,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-  } catch (error) {
-    console.log(error);
-    const { data } = response;
-    return data.msg;
-  }
+  // console.log(error) was here
+  return apiClientInstance.post('/prescription', prescription, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
 
 export default apiVet;

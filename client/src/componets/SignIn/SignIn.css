@@ -9,7 +9,7 @@
 .signin-container {
   height: 100vh;
   overflow: hidden;
-  background-image: url("../../assets/signin/signinpg.jpg");
+  background-image: url('../../assets/signin/signinpg.jpg');
   background-repeat: no-repeat;
   background-size: 60vw 100vh;
   background-position: right;

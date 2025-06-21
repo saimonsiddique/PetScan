@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { PopupWidget } from "react-calendly";
-import Backdrop from "@mui/material/Backdrop";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import Fade from "@mui/material/Fade";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Avatar from "@mui/material/Avatar";
+import { useState } from 'react';
+import { PopupWidget } from 'react-calendly';
+import Backdrop from '@mui/material/Backdrop';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Avatar from '@mui/material/Avatar';
 
 const CardModal = ({ vet, vetSelected, setVetSelected }) => {
   // console.log("Card Model vet", vet);
@@ -39,49 +39,49 @@ const CardModal = ({ vet, vetSelected, setVetSelected }) => {
           <Box sx={style}>
             <Box
               sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
               }}
             >
               <Avatar
                 alt={vet.firstName}
                 src={vet.vetProfile}
-                sx={{ mb: 1, objectFit: "cover", width: 100, height: 100 }}
+                sx={{ mb: 1, objectFit: 'cover', width: 100, height: 100 }}
               />
               <Typography
-                id="transition-modal-title"
-                variant="h6"
-                component="h2"
+                id='transition-modal-title'
+                variant='h6'
+                component='h2'
               >
-                {vet.firstName + " " + vet.lastName}
+                {vet.firstName + ' ' + vet.lastName}
               </Typography>
             </Box>
-            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              Specialized in : {vet.specializedField.join(", ")}
+            <Typography id='transition-modal-description' sx={{ mt: 2 }}>
+              Specialized in : {vet.specializedField.join(', ')}
             </Typography>
-            <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
-              Top Services : {vet.topRatedFor.join(", ")}
+            <Typography variant='body1' color='text.secondary' sx={{ mb: 2 }}>
+              Top Services : {vet.topRatedFor.join(', ')}
             </Typography>
             {vetSelected && vetSelected._id === vet._id ? (
               <Box
                 sx={{
-                  display: "flex",
-                  flexDirection: "column",
+                  display: 'flex',
+                  flexDirection: 'column',
                   mt: 2,
                 }}
               >
                 <PopupWidget
-                  url="https://calendly.com/saimonsiddiquee/30-minute-meeting-clone"
-                  text="Book an Appointment"
-                  rootElement={document.getElementById("root")}
+                  url='https://calendly.com/saimonsiddiquee/30-minute-meeting-clone'
+                  text='Book an Appointment'
+                  rootElement={document.getElementById('root')}
                   styles={{
                     m: 2,
-                    height: "100%",
-                    width: "100%",
-                    minWidth: "400px",
-                    minHeight: "500px",
+                    height: '100%',
+                    width: '100%',
+                    minWidth: '400px',
+                    minHeight: '500px',
                   }}
                 />
               </Box>
@@ -96,14 +96,14 @@ const CardModal = ({ vet, vetSelected, setVetSelected }) => {
 export default CardModal;
 
 const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "35%",
-  height: "50%",
-  bgcolor: "background.paper",
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '35%',
+  height: '50%',
+  bgcolor: 'background.paper',
   boxShadow: 24,
-  borderRadius: "10px",
+  borderRadius: '10px',
   p: 4,
 };

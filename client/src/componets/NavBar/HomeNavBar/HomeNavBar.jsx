@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import {
   AppBar,
   Box,
@@ -7,13 +7,13 @@ import {
   Tooltip,
   Avatar,
   TextField,
-} from "@mui/material";
-import LogoutIcon from "@mui/icons-material/Logout";
-import NewspaperIcon from "@mui/icons-material/Newspaper";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import Autocomplete from "@mui/material/Autocomplete";
+} from '@mui/material';
+import LogoutIcon from '@mui/icons-material/Logout';
+import NewspaperIcon from '@mui/icons-material/Newspaper';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import Autocomplete from '@mui/material/Autocomplete';
 
-const categories = ["Cat", "Dog", "Bird", "Fish", "General"];
+const categories = ['Cat', 'Dog', 'Bird', 'Fish', 'General'];
 
 const HomeNavBar = ({ handleSelect, handleBlur }) => {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const HomeNavBar = ({ handleSelect, handleBlur }) => {
       <Box>
         <AppBar
           style={{
-            backgroundColor: "#42389D",
+            backgroundColor: '#42389D',
             boxShadow: 0,
           }}
           elevation={0}
@@ -36,68 +36,68 @@ const HomeNavBar = ({ handleSelect, handleBlur }) => {
                 onBlur={handleBlur}
                 sx={{
                   width: 300,
-                  backgroundColor: "white",
-                  borderRadius: "10px",
-                  "& label.Mui-focused": {
-                    color: "black",
+                  backgroundColor: 'white',
+                  borderRadius: '10px',
+                  '& label.Mui-focused': {
+                    color: 'black',
                   },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "white",
+                  '&.Mui-focused fieldset': {
+                    borderColor: 'white',
                   },
                 }}
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    label="Search"
-                    size="small"
-                    variant="outlined"
+                    label='Search'
+                    size='small'
+                    variant='outlined'
                   />
                 )}
               />
             </Box>
-            <Tooltip title="News">
-              <IconButton size="larger" onClick={() => navigate("/feed")}>
-                <NewspaperIcon style={{ color: "white" }} />
+            <Tooltip title='News'>
+              <IconButton size='larger' onClick={() => navigate('/feed')}>
+                <NewspaperIcon style={{ color: 'white' }} />
               </IconButton>
             </Tooltip>
-            <Tooltip title="Notifications">
-              <IconButton size="large">
-                <NotificationsIcon style={{ color: "white" }} />
+            <Tooltip title='Notifications'>
+              <IconButton size='large'>
+                <NotificationsIcon style={{ color: 'white' }} />
               </IconButton>
             </Tooltip>
-            <Tooltip title="Profile">
+            <Tooltip title='Profile'>
               <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                color="inherit"
-                onClick={() => navigate("/dashboard")}
+                size='large'
+                aria-label='account of current user'
+                aria-controls='menu-appbar'
+                aria-haspopup='true'
+                color='inherit'
+                onClick={() => navigate('/dashboard')}
               >
                 <Avatar
-                  src="https://res.cloudinary.com/dru7kzv3i/image/upload/v1681975309/vet5_eegd6u.jpg"
+                  src='https://res.cloudinary.com/dru7kzv3i/image/upload/v1681975309/vet5_eegd6u.jpg'
                   sx={{
                     width: 40,
                     height: 40,
-                    ":hover": {
-                      boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-                      transform: "scale(1.05)",
-                      transition: "all 0.3s ease-in-out",
+                    ':hover': {
+                      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+                      transform: 'scale(1.05)',
+                      transition: 'all 0.3s ease-in-out',
                     },
                   }}
                 />
               </IconButton>
             </Tooltip>
-            <Tooltip title="Logout">
+            <Tooltip title='Logout'>
               <IconButton
-                size="large"
-                color="inherit"
+                size='large'
+                color='inherit'
                 onClick={() => {
                   localStorage.clear();
-                  navigate("/");
+                  navigate('/');
                 }}
               >
-                <LogoutIcon style={{ color: "white" }} />
+                <LogoutIcon style={{ color: 'white' }} />
               </IconButton>
             </Tooltip>
           </Toolbar>

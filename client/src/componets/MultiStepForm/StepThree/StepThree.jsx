@@ -1,7 +1,7 @@
-import { PopupWidget, useCalendlyEventListener } from "react-calendly";
-import { useNavigate } from "react-router-dom";
-import { Box } from "@mui/material";
-import VetCard from "../../VetCard/VetCard";
+import { PopupWidget, useCalendlyEventListener } from 'react-calendly';
+import { useNavigate } from 'react-router-dom';
+import { Box } from '@mui/material';
+import VetCard from '../../VetCard/VetCard';
 
 const StepThree = ({
   matchedVet,
@@ -12,12 +12,12 @@ const StepThree = ({
   const navigate = useNavigate();
   useCalendlyEventListener({
     // onProfilePageViewed: () => console.log("onProfilePageViewed"),
-    onDateAndTimeSelected: () => console.log("onDateAndTimeSelected"),
-    onEventTypeViewed: () => console.log("onEventTypeViewed"),
+    onDateAndTimeSelected: () => console.log('onDateAndTimeSelected'),
+    onEventTypeViewed: () => console.log('onEventTypeViewed'),
     onEventScheduled: (e) => {
       handleSubmit();
-      navigate("/success");
-      console.log("onEventScheduled", e);
+      navigate('/success');
+      console.log('onEventScheduled', e);
     },
   });
 
@@ -25,11 +25,11 @@ const StepThree = ({
     <>
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100%",
-          height: "100%",
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+          height: '100%',
         }}
       >
         {matchedVet.map((vet) => {
